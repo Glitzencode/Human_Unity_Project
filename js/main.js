@@ -39,29 +39,6 @@ if (counterEl) {
   }, 3500);
 }
 
-// ── EMAIL SIGNUP ──
-function initSignup(formId, successId) {
-  const form = document.getElementById(formId);
-  const success = document.getElementById(successId);
-  if (!form) return;
-
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = form.querySelector('input[type="email"]').value;
-    if (!email || !email.includes('@')) return;
-
-    // Store locally + simulate submission
-    const signups = JSON.parse(localStorage.getItem('hu_signups') || '[]');
-    signups.push({ email, date: new Date().toISOString() });
-    localStorage.setItem('hu_signups', JSON.stringify(signups));
-
-    form.style.display = 'none';
-    if (success) success.style.display = 'flex';
-  });
-}
-
-initSignup('signup-form-main', 'signup-success-main');
-initSignup('signup-form-footer', 'signup-success-footer');
 
 // ── CHAPTER FINDER ──
 const CHAPTERS = [
