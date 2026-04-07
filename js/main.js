@@ -29,34 +29,14 @@ if (mobileToggle && navLinksEl) {
 // ── LIVE MEMBER COUNTER ──
 const counterEl = document.getElementById('counter-num');
 if (counterEl) {
-  let count = 4217 + Math.floor(Math.random() * 80);
+  let count = 1;
   counterEl.textContent = count.toLocaleString();
-  setInterval(() => {
-    if (Math.random() > 0.55) {
-      count += Math.floor(Math.random() * 3) + 1;
-      counterEl.textContent = count.toLocaleString();
-    }
-  }, 3500);
 }
 
 
 // ── CHAPTER FINDER ──
 const CHAPTERS = [
-  { city: 'Austin', state: 'TX', members: 34, status: 'active', focus: 'Community building' },
-  { city: 'Portland', state: 'OR', members: 21, status: 'active', focus: 'Conflict resolution' },
-  { city: 'Detroit', state: 'MI', members: 12, status: 'forming', focus: 'Local leadership' },
-  { city: 'Nashville', state: 'TN', members: 8, status: 'forming', focus: 'Community building' },
-  { city: 'Denver', state: 'CO', members: 27, status: 'active', focus: 'All initiatives' },
-  { city: 'Philadelphia', state: 'PA', members: 19, status: 'active', focus: 'Conflict resolution' },
-  { city: 'Minneapolis', state: 'MN', members: 5, status: 'new', focus: 'Community building' },
-  { city: 'Tucson', state: 'AZ', members: 11, status: 'forming', focus: 'Local leadership' },
-  { city: 'Pittsburgh', state: 'PA', members: 16, status: 'active', focus: 'All initiatives' },
-  { city: 'Richmond', state: 'VA', members: 9, status: 'forming', focus: 'Community building' },
-  { city: 'Salt Lake City', state: 'UT', members: 7, status: 'new', focus: 'Local leadership' },
-  { city: 'New Orleans', state: 'LA', members: 22, status: 'active', focus: 'Cultural initiatives' },
-  { city: 'Boise', state: 'ID', members: 4, status: 'new', focus: 'Community building' },
-  { city: 'Columbus', state: 'OH', members: 14, status: 'forming', focus: 'All initiatives' },
-  { city: 'Albuquerque', state: 'NM', members: 6, status: 'new', focus: 'Conflict resolution' },
+  { city: 'Waterville', state: 'OH', members: 1, status: 'new', focus: 'All initiatives' },
 ];
 
 function initChapterFinder() {
