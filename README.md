@@ -1,295 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get Involved — Human Unity</title>
-  <meta name="description" content="Join a local chapter, contribute your skills, or start a new chapter. Multiple entry points into the Human Unity network.">
-  <link rel="stylesheet" href="css/main.css">
-</head>
-<body>
+# Human Unity — Website
 
-<nav>
-  <div class="wrap nav-inner">
-    <a href="index.html" class="nav-logo">Human Unity</a>
-    <div class="nav-links">
-      <a href="problem.html">The problem</a>
-      <a href="framework.html">Framework</a>
-      <a href="initiatives.html">Initiatives</a>
-      <a href="get-involved.html">Get involved</a>
-      <a href="resources.html">Resources</a>
-      <a href="vision.html">Vision</a>
-      <a href="about.html">About</a>
-    </div>
-    <div style="display:flex;align-items:center;gap:1rem">
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
-      <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
-        <span></span><span></span><span></span>
-      </div>
-    </div>
-  </div>
-</nav>
+A fully functional static site for the Human Unity project. Ready to deploy on GitHub Pages.
 
-<!-- PAGE HERO -->
-<div class="page-hero">
-  <div class="wrap">
-    <div class="section-label">Get involved</div>
-    <h1>Multiple doors in.<br>Pick yours.</h1>
-    <p>There is no single right way to enter this movement. Find the path that connects to something you already care about — and start there.</p>
-  </div>
-</div>
+## File Structure
 
-<!-- EMAIL SIGNUP -->
-<section style="background:var(--ink);padding:3rem 0" id="join">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
-      <div>
-        <h2 style="color:white">Start with your email.</h2>
-        <p style="color:rgba(255,255,255,0.6);margin-top:0.5rem;margin-bottom:1.75rem">We'll connect you to the nearest active chapter and send your first action — a single, specific thing you can do this week.</p>
-        <form id="signup-form-main" class="signup-form">
-          <input type="email" placeholder="your@email.com" required>
-          <button type="submit">I'm in →</button>
-        </form>
-        <div id="signup-success-main" class="signup-success">
-          ✓ <span style="color:var(--teal)">You're in. Check your inbox within 24 hours.</span>
-        </div>
-        <p class="signup-note">No spam. No fundraising asks. Just coordination and connection.</p>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:1rem">
-        <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start">
-          <span style="font-size:20px;flex-shrink:0">📍</span>
-          <div>
-            <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.25rem">Chapter connection</p>
-            <p style="color:rgba(255,255,255,0.5);font-size:13px">We match you to the closest active or forming chapter based on your location.</p>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start">
-          <span style="font-size:20px;flex-shrink:0">🗓</span>
-          <div>
-            <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.25rem">First action within a week</p>
-            <p style="color:rgba(255,255,255,0.5);font-size:13px">Not a newsletter — a single, concrete next step tailored to your situation.</p>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start">
-          <span style="font-size:20px;flex-shrink:0">🔗</span>
-          <div>
-            <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.25rem">Access to the network</p>
-            <p style="color:rgba(255,255,255,0.5);font-size:13px">Resources, frameworks, templates, and the full Human Unity community.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+```
+human-unity/
+├── index.html              ← Landing page
+├── problem.html            ← The problem diagnosis
+├── framework.html          ← The Human Unity Framework
+├── initiatives.html        ← All initiatives overview
+├── get-involved.html       ← Join / chapter finder / skills form (Priority #1)
+├── resources.html          ← Full resource library
+├── vision.html             ← The 5-year vision
+├── about.html              ← About, philosophy, FAQ
+├── start-a-chapter.html    ← Chapter registration form
+├── css/
+│   └── main.css            ← All styles (DM Serif Display + DM Sans)
+├── js/
+│   ├── main.js             ← Nav, counter, forms, chapter finder
+│   └── partials.js         ← Shared nav, ticker, footer (inject into all pages)
+├── initiatives/
+│   ├── community-ground.html
+│   ├── conflict-bridge.html
+│   ├── leadership-lab.html
+│   ├── coordination-layer.html  ← stub (ready to expand)
+│   └── common-story.html        ← stub (ready to expand)
+└── images/                 ← DROP YOUR PHOTOS HERE
+    (see photo placeholders on each page for exact filenames)
+```
 
-<!-- CHAPTER FINDER -->
-<section id="chapters">
-  <div class="wrap">
-    <div class="section-label">Find a chapter</div>
-    <h2>Is your city already building?</h2>
-    <p style="max-width:540px;margin-top:0.5rem;margin-bottom:2rem">We have active and forming chapters across the country. Search below — if yours isn't listed, you're looking at an invitation to start it.</p>
+## Deploy to GitHub Pages
 
-    <div class="chapter-finder">
-      <div class="finder-form">
-        <input type="text" id="chapter-search" placeholder="Search by city or state...">
-        <select id="chapter-status">
-          <option value="all">All chapters</option>
-          <option value="active">Active</option>
-          <option value="forming">Forming</option>
-          <option value="new">Just started</option>
-        </select>
-        <a href="start-a-chapter.html" class="btn btn-primary btn-sm">+ Start a chapter</a>
-      </div>
-      <div id="chapter-results" class="chapter-results">
-        <p style="color:var(--ink-light);font-size:14px">Loading chapters...</p>
-      </div>
-    </div>
+### Step 1: Create a GitHub repository
+1. Go to github.com → New repository
+2. Name it `human-unity` (or anything you want)
+3. Set to Public
+4. Do NOT initialize with README (you already have one)
 
-    <div style="background:var(--teal-light);border-radius:var(--radius);padding:1.75rem;margin-top:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
-      <div>
-        <p style="font-weight:500;color:var(--teal-dark);font-size:15px">Don't see your city?</p>
-        <p style="color:var(--teal-mid);font-size:14px;margin-top:0.25rem">Every chapter started with one person. It could be yours.</p>
-      </div>
-      <a href="start-a-chapter.html" class="btn btn-primary">Start a chapter here →</a>
-    </div>
-  </div>
-</section>
+### Step 2: Upload the files
+**Option A — Drag and drop (easiest):**
+1. On your new repo page, click "uploading an existing file"
+2. Drag the entire `human-unity/` folder contents into the upload area
+3. Commit changes
 
-<!-- CONTRIBUTE SKILLS -->
-<section style="background:var(--surface)" id="skills">
-  <div class="wrap">
-    <div class="section-label">Contribute skills</div>
-    <h2>Every skill has a home in this network.</h2>
-    <p style="max-width:560px;margin-top:0.5rem;margin-bottom:2.5rem">We are not looking for a specific type of person. We are looking for people who are willing to apply what they already know to something that matters.</p>
-    <div class="grid-3">
-      <div class="card card-surface">
-        <h3>Organizers &amp; connectors</h3>
-        <p>People who know their neighborhood, can convene others, and create momentum from nothing.</p>
-        <a href="get-involved.html#join" class="card-link">Get started →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Mediators &amp; facilitators</h3>
-        <p>Willing to train in conflict de-escalation and run structured dialogue in your community.</p>
-        <a href="initiatives/conflict-bridge.html" class="card-link">Conflict Bridge →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Writers &amp; storytellers</h3>
-        <p>Contribute essays, documentary work, social content, or narrative strategy to Common Story.</p>
-        <a href="initiatives/common-story.html" class="card-link">Common Story →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Designers &amp; builders</h3>
-        <p>Help develop the visual identity, digital tools, and platforms that power the network.</p>
-        <a href="initiatives/coordination-layer.html" class="card-link">Coordination Layer →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Educators &amp; coaches</h3>
-        <p>Facilitate the Leadership Lab curriculum, mentor chapter leaders, or develop new training content.</p>
-        <a href="initiatives/leadership-lab.html" class="card-link">Leadership Lab →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Organizations &amp; partners</h3>
-        <p>Align an existing org with the Human Unity framework. We build with allies, not competitors.</p>
-        <a href="get-involved.html#partner" class="card-link">Partner with us →</a>
-      </div>
-    </div>
-  </div>
-</section>
+**Option B — Git command line:**
+```bash
+cd human-unity
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/YOUR_USERNAME/REPO_NAME.git
+git push -u origin main
+```
 
-<!-- SKILL OFFER FORM -->
-<section>
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
-      <div>
-        <div class="section-label">Offer your skills</div>
-        <h2>Tell us what you bring.</h2>
-        <p style="margin-top:0.75rem">Fill this out and we'll match you to the initiative and chapter where your skills have the most immediate impact.</p>
-        <div class="pullquote">The only pre-requisite is caring about something and being willing to show up.</div>
-      </div>
-      <div style="background:var(--surface);border-radius:var(--radius);padding:2rem">
-        <form id="skills-form" onsubmit="handleSkillsForm(event)">
-          <div style="display:flex;flex-direction:column;gap:1.25rem">
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">Your name</label>
-              <input type="text" placeholder="Full name" required style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">Email</label>
-              <input type="email" placeholder="your@email.com" required style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">City / State</label>
-              <input type="text" placeholder="e.g. Austin, TX" style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">Primary skill or background</label>
-              <select style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-                <option value="">Select one...</option>
-                <option>Community organizing</option>
-                <option>Conflict mediation / facilitation</option>
-                <option>Writing / storytelling</option>
-                <option>Design / visual communication</option>
-                <option>Software development</option>
-                <option>Teaching / coaching / training</option>
-                <option>Leadership / management</option>
-                <option>Research / analysis</option>
-                <option>Media / communications</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">What brought you here? (optional)</label>
-              <textarea rows="3" placeholder="What's happening in your community, or what drew you to Human Unity?" style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none;resize:vertical"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Submit →</button>
-          </div>
-        </form>
-        <div id="skills-success" style="display:none;text-align:center;padding:2rem">
-          <p style="font-family:var(--font-display);font-size:24px;color:var(--teal);margin-bottom:0.5rem">You're in the network.</p>
-          <p style="color:var(--ink-mid);font-size:14px">We'll be in touch within a few days with a specific match.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+### Step 3: Enable GitHub Pages
+1. Go to your repo → Settings → Pages
+2. Source: Deploy from a branch
+3. Branch: main / (root)
+4. Click Save
+5. Your site will be live at: `https://YOUR_USERNAME.github.io/REPO_NAME/`
 
-<!-- PARTNER -->
-<section style="background:var(--surface)" id="partner">
-  <div class="wrap">
-    <div class="section-label">Partner</div>
-    <h2>Bring your organization into alignment.</h2>
-    <p style="max-width:580px;margin-top:0.5rem">If you lead or are part of an organization — a nonprofit, a business, a faith community, a civic group — we can work together. Human Unity doesn't compete with existing efforts. It connects them.</p>
-    <div class="grid-2" style="margin-top:2.5rem">
-      <div class="card">
-        <h3>What partnership looks like</h3>
-        <p>Your organization adopts Human Unity frameworks for internal conflict resolution and community engagement. We provide training, resources, and network connections. You get the tools and credibility of a larger movement.</p>
-      </div>
-      <div class="card">
-        <h3>What we ask</h3>
-        <p>A commitment to post-partisan engagement. Willingness to show up in your community in the Human Unity spirit — constructive, honest, cross-partisan. That's it. No ideology test. No political alignment required.</p>
-      </div>
-    </div>
-    <div style="margin-top:2rem;text-align:center">
-      <a href="mailto:partners@humanunity.org" class="btn btn-outline">Reach out to discuss partnership →</a>
-    </div>
-  </div>
-</section>
+### Step 4: Custom domain (optional)
+1. In Settings → Pages → Custom domain
+2. Enter your domain (e.g. humanunity.org)
+3. Add a CNAME file to your repo root with your domain
+4. Update your DNS with your domain registrar
 
-<footer>
-  <div class="wrap">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">Human Unity</div>
-        <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
-        <div style="margin-top:1.5rem">
-          <form id="signup-form-footer" style="display:flex;gap:0;max-width:380px">
-            <input type="email" placeholder="Your email" style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
-            <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
-          </form>
-          <div id="signup-success-footer" style="display:none;align-items:center;gap:8px;color:var(--teal);font-size:14px;margin-top:0.5rem">
-            ✓ <span>You're in. Welcome to the project.</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-col">
-        <h5>The work</h5>
-        <a href="problem.html">The problem</a>
-        <a href="framework.html">The framework</a>
-        <a href="initiatives.html">Initiatives</a>
-        <a href="vision.html">Vision</a>
-      </div>
-      <div class="footer-col">
-        <h5>Participate</h5>
-        <a href="get-involved.html">Get involved</a>
-        <a href="get-involved.html#chapters">Find a chapter</a>
-        <a href="start-a-chapter.html">Start a chapter</a>
-        <a href="get-involved.html#skills">Offer skills</a>
-      </div>
-      <div class="footer-col">
-        <h5>Learn</h5>
-        <a href="resources.html">Resources</a>
-        <a href="about.html">About</a>
-        <a href="about.html#philosophy">Philosophy</a>
-        <a href="about.html#faq">FAQ</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2025 Human Unity. All rights reserved.</span>
-      <div style="display:flex;gap:1.5rem">
-        <a href="#">Privacy</a>
-        <a href="#">Contact</a>
-      </div>
-    </div>
-  </div>
-</footer>
+---
 
-<script src="js/main.js"></script>
-<script>
-function handleSkillsForm(e) {
-  e.preventDefault();
-  document.getElementById('skills-form').style.display = 'none';
-  document.getElementById('skills-success').style.display = 'block';
-}
-</script>
-</body>
-</html>
+## Adding Your Photos
+
+Every page has photo placeholders with the exact filename to use.
+Drop your photos into the `/images/` folder with these names:
+
+| Placeholder | Filename |
+|-------------|----------|
+| Homepage event 1 | `images/event-1.jpg` |
+| Homepage event 2 | `images/event-2.jpg` |
+| Homepage event 3 | `images/event-3.jpg` |
+| Community Ground | `images/community-ground.jpg` |
+| Community Ground detail 1 | `images/cg-event-1.jpg` |
+| Community Ground detail 2 | `images/cg-event-2.jpg` |
+| Conflict Bridge | `images/conflict-bridge.jpg` |
+| Conflict Bridge detail | `images/conflict-bridge-1.jpg` |
+| Leadership Lab cohort | `images/leadership-lab.jpg` |
+| Lab detail | `images/lab-cohort.jpg` |
+| Coordination Layer | `images/coordination-layer.jpg` |
+| Common Story | `images/common-story.jpg` |
+
+**Replace placeholders with images:**
+Find the photo-placeholder div and replace with:
+```html
+<img src="images/your-photo.jpg" alt="Description" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover">
+```
+
+---
+
+## Email Integration
+
+The signup forms currently store emails in localStorage (for demo).
+To capture real emails, replace the form submit handler in `js/main.js` with a POST to:
+
+- **Mailchimp**: Use their embedded form API
+- **Buttondown**: Simple POST to their API
+- **ConvertKit**: Their form embed
+- **Formspree**: Zero-backend form handler — just change `action` attribute
+
+**Quickest integration (Formspree — free tier):**
+1. Sign up at formspree.io
+2. Create a form, get your endpoint
+3. In `get-involved.html`, change the skills form action:
+```html
+<form action="https://formspree.io/f/YOUR_ID" method="POST">
+```
+
+---
+
+## What's Ready to Build Next
+
+- [ ] Coordination-layer.html full initiative page
+- [ ] Common-story.html full initiative page  
+- [ ] Admin dashboard for email signups
+- [ ] Chapter map (Mapbox or Google Maps embed)
+- [ ] Blog / updates section
+- [ ] Member portal (requires backend)
