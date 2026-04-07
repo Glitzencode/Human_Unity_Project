@@ -59,10 +59,12 @@
             <div style="margin-bottom:0.4rem">
               <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.7)">Date of birth <span style="color:var(--teal)">*</span></span>
             </div>
-            <div style="display:flex;gap:0.5rem">
+            <div style="display:flex;gap:0.5rem;align-items:center">
               <input type="number" name="BIRTHDAY[month]" placeholder="MM" min="1" max="12" required style="width:64px;padding:11px 10px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
+              <span style="color:rgba(255,255,255,0.3)">/</span>
               <input type="number" name="BIRTHDAY[day]" placeholder="DD" min="1" max="31" required style="width:64px;padding:11px 10px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-              <input type="number" id="bday-year" placeholder="YYYY" min="1900" max="2025" required style="width:84px;padding:11px 10px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
+              <span style="color:rgba(255,255,255,0.3)">/</span>
+              <input type="number" name="MMERGE8" id="bday-year" placeholder="YYYY" min="1900" max="2025" required style="width:84px;padding:11px 10px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
             </div>
             <p style="font-size:12px;color:rgba(255,255,255,0.35);margin-top:0.5rem;line-height:1.5">We ask for your date of birth to ensure we do not send age-restricted content to minors. We do not use this information for any other purpose.</p>
           </div>
