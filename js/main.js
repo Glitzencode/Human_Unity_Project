@@ -25,21 +25,23 @@ if (mobileToggle && navLinksEl) {
   });
 }
 
-// ── COUNTAPI — persists member count across all visitors ──
-// To reset or set a custom value: https://api.countapi.xyz/set/humanunity.us/members?value=NUMBER
-const COUNT_GET = 'https://api.countapi.xyz/get/humanunity.us/members';
-const COUNT_HIT = 'https://api.countapi.xyz/hit/humanunity.us/members';
-
+// ── LIVE MEMBER COUNTER — pulls real count from Mailchimp via Netlify function ──
 const counterEl = document.getElementById('counter-num');
 function updateCounterDisplay(n) {
   if (counterEl) counterEl.textContent = Number(n).toLocaleString();
 }
 
 if (counterEl) {
-  fetch(COUNT_GET)
-    .then(r => r.json())
-    .then(d => updateCounterDisplay(d.value || 1))
-    .catch(() => updateCounterDisplay(1));
+  fetch('/.netlify/functions/member-count')
+    .then(r => {
+      if (!r.ok) throw new Error('Function error: ' + r.status);
+      return r.json();
+    })
+    .then(d => updateCounterDisplay(d.count || 1))
+    .catch(err => {
+      console.warn('Member count fetch failed:', err.message);
+      updateCounterDisplay(1);
+    });
 }
 
 // ── MAILCHIMP JSONP SUBMISSION ──
@@ -103,10 +105,10 @@ function initMailchimpForm(formEl) {
 
     submitToMailchimp(formEl,
       function onSuccess() {
-        // Increment counter on confirmed Mailchimp success
-        fetch(COUNT_HIT)
+        // Refresh counter from real Mailchimp data
+        fetch('/.netlify/functions/member-count')
           .then(r => r.json())
-          .then(d => updateCounterDisplay(d.value))
+          .then(d => updateCounterDisplay(d.count))
           .catch(() => {});
 
         // Show inline success — no redirect
