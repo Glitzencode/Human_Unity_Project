@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Member Login — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <meta name="description" content="Sign in to the Human Unity member area.">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body {
+      background: var(--surface);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Minimal nav ── */
+    .login-nav {
+      background: white;
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .login-nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+    .login-nav-back {
+      font-size: 13px;
+      color: var(--ink-light);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+    .login-nav-back:hover { color: var(--teal); }
+
+    /* ── Page body ── */
+    .login-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .login-outer {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    /* ── Card ── */
+    .login-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      animation: fadeUp 0.35s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Dark hero strip at top of card — matches site's dark CTA sections */
+    .login-card-hero {
+      background: var(--ink);
+      padding: 2rem 2rem 1.75rem;
+    }
+    .login-card-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .login-card-title {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 0.375rem;
+    }
+    .login-card-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+    }
+
+    /* Form area */
+    .login-card-body {
+      padding: 1.75rem 2rem 2rem;
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .field-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-mid);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .field-input {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-family: var(--font-body);
+      background: var(--surface);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field-input::placeholder { color: var(--ink-light); opacity: 0.6; }
+    .field-input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-light);
+      background: white;
+    }
+
+    .forgot-row {
+      text-align: right;
+      margin-top: -0.5rem;
+    }
+    .forgot-link {
+      font-size: 13px;
+      color: var(--ink-light);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .forgot-link:hover { color: var(--teal); }
+
+    /* CTA button — matches site's .btn.btn-primary */
+    .login-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      letter-spacing: 0.01em;
+      transition: background 0.15s, transform 0.1s;
+      position: relative;
+      margin-top: 0.25rem;
+    }
+    .login-btn:hover { background: var(--teal-mid); }
+    .login-btn:active { transform: scale(0.99); }
+    .login-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    /* Loading spinner inside button */
+    .login-btn.loading { color: transparent; }
+    .login-btn.loading::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 17px; height: 17px;
+      margin: -8.5px 0 0 -8.5px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Error / success message */
+    .login-msg {
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.9rem;
+      font-size: 13px;
+      line-height: 1.5;
+      display: none;
+    }
+    .login-msg.error {
+      background: rgba(216,90,48,0.08);
+      border: 0.5px solid rgba(216,90,48,0.3);
+      color: #B84020;
+    }
+    .login-msg.success {
+      background: var(--teal-light);
+      border: 0.5px solid rgba(42,191,163,0.3);
+      color: var(--teal-dark);
+    }
+
+    /* Footer note */
+    .login-footer {
+      margin-top: 1.5rem;
+      padding-top: 1.25rem;
+      border-top: 0.5px solid var(--border);
+      font-size: 13px;
+      color: var(--ink-light);
+      text-align: center;
+      line-height: 1.6;
+    }
+    .login-footer a { color: var(--teal); text-decoration: none; }
+    .login-footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="login-nav">
+    <a href="../index.html" class="login-nav-logo">Human Unity</a>
+    <a href="../index.html" class="login-nav-back">← Back to site</a>
+  </nav>
+
+  <!-- Body -->
+  <div class="login-body">
+    <div class="login-outer">
+
+      <div class="login-card">
+
+        <!-- Dark hero strip -->
+        <div class="login-card-hero">
+          <p class="login-card-label">Member area</p>
+          <h1 class="login-card-title">Welcome back.</h1>
+          <p class="login-card-sub">Sign in to see your chapter, upcoming events, and active consent rounds.</p>
+        </div>
+
+        <!-- Form -->
+        <div class="login-card-body">
+
+          <div class="login-msg error" id="login-msg"></div>
+
+          <form class="login-form" id="login-form" onsubmit="handleLogin(event)">
+
+            <div class="field-group">
+              <label class="field-label" for="email">Email</label>
+              <input class="field-input" type="email" id="email" name="email"
+                placeholder="your@email.com" autocomplete="email" required>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label" for="password">Password</label>
+              <input class="field-input" type="password" id="password" name="password"
+                placeholder="••••••••••" autocomplete="current-password" required>
+            </div>
+
+            <div class="forgot-row">
+              <a href="#" class="forgot-link" id="forgot-link">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="login-btn">Sign in →</button>
+
+          </form>
+
+          <div class="login-footer">
+            Not a member yet?
+            <a href="../get-involved.html">Join the project →</a><br>
+            Trouble signing in?
+            <a href="mailto:hello@humanunity.us">hello@humanunity.us</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  // ── Netlify Identity init ──
+  netlifyIdentity.on('init', user => {
+    if (user) window.location.href = '/members/dashboard.html';
+  });
+
+  netlifyIdentity.on('login', () => {
+    window.location.href = '/members/dashboard.html';
+  });
+
+  netlifyIdentity.init();
+
+  // ── Helpers ──
+  function showMsg(text, type) {
+    const el = document.getElementById('login-msg');
+    el.textContent = text;
+    el.className = 'login-msg ' + type;
+    el.style.display = 'block';
+  }
+
+  function clearMsg() {
+    const el = document.getElementById('login-msg');
+    el.style.display = 'none';
+  }
+
+  // ── Login ──
+  async function handleLogin(e) {
+    e.preventDefault();
+    clearMsg();
+
+    const email    = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    const btn      = document.getElementById('login-btn');
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+      await netlifyIdentity.gotrue.login(email, password, true);
+      // redirect handled by 'login' event
+    } catch (err) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+
+      const msg = err.message || '';
+      if (msg.toLowerCase().includes('invalid') || msg.toLowerCase().includes('failed')) {
+        showMsg('Incorrect email or password. Please try again.', 'error');
+      } else if (msg.toLowerCase().includes('confirm')) {
+        showMsg('Please confirm your email before signing in — check your inbox.', 'error');
+      } else {
+        showMsg(msg || 'Something went wrong. Please try again.', 'error');
+      }
+    }
+  }
+
+  // ── Forgot password ──
+  document.getElementById('forgot-link').addEventListener('click', async function(e) {
+    e.preventDefault();
+    clearMsg();
+
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+      showMsg('Enter your email address above first.', 'error');
+      document.getElementById('email').focus();
+      return;
+    }
+
+    try {
+      await netlifyIdentity.gotrue.requestPasswordRecovery(email);
+      showMsg('Recovery email sent — check your inbox.', 'success');
+    } catch {
+      showMsg('Could not send recovery email. Contact hello@humanunity.us.', 'error');
+    }
+  });
+</script>
+
+</body>
+</html>
