@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propose an Event — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body { background: var(--surface); }
+
+    .dash-nav {
+      background: var(--ink);
+      height: 60px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .dash-nav-logo { font-family: var(--font-display); font-size: 1rem; color: white; text-decoration: none; }
+    .dash-nav-links { display: flex; align-items: center; gap: 0.25rem; }
+    .dash-nav-link { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; padding: 5px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .dash-nav-link:hover { color: white; background: rgba(255,255,255,0.07); }
+    .dash-nav-link.active { color: var(--teal); }
+    .dash-signout-btn { font-size: 13px; color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer; font-family: var(--font-body); padding: 5px 10px; }
+    .dash-signout-btn:hover { color: rgba(255,255,255,0.7); }
+
+    .page-wrap {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .page-back { font-size: 13px; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 1.5rem; }
+    .page-back:hover { text-decoration: underline; }
+
+    .page-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.4rem; }
+    .page-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--ink); margin-bottom: 0.4rem; }
+    .page-sub { font-size: 15px; color: var(--ink-light); line-height: 1.6; margin-bottom: 2rem; }
+
+    /* Consent explainer */
+    .consent-explainer {
+      background: var(--teal-light);
+      border: 0.5px solid rgba(42,191,163,0.25);
+      border-radius: var(--radius);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .consent-explainer h4 { font-size: 14px; color: var(--teal-dark); margin-bottom: 0.4rem; }
+    .consent-explainer p { font-size: 13px; color: var(--teal-dark); line-height: 1.6; margin: 0; opacity: 0.85; }
+
+    /* Form */
+    .proposal-form {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      padding: 2rem;
+    }
+
+    .form-section {
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.75rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .form-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+    .form-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--ink-mid);
+      margin-bottom: 1rem;
+    }
+
+    .field-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .field-group:last-child { margin-bottom: 0; }
+    .field-label { font-size: 12px; font-weight: 600; color: var(--ink-mid); letter-spacing: 0.05em; text-transform: uppercase; }
+    .field-hint { font-size: 12px; color: var(--ink-light); margin-top: -0.2rem; }
+
+    .field-input, .field-textarea, .field-select {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-family: var(--font-body);
+      background: var(--surface);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field-input:focus, .field-textarea:focus, .field-select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-light);
+      background: white;
+    }
+    .field-textarea { resize: vertical; min-height: 100px; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .field-row { grid-template-columns: 1fr; } }
+
+    /* Submit */
+    .form-submit {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+    }
+    .submit-btn:hover { background: var(--teal-mid); }
+    .submit-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+    .submit-btn.loading { color: transparent; }
+    .submit-btn.loading::after {
+      content: '';
+      position: absolute;
+      top:50%; left:50%;
+      width:17px; height:17px;
+      margin: -8.5px 0 0 -8.5px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .submit-note { font-size: 13px; color: var(--ink-light); text-align: center; line-height: 1.55; }
+
+    /* Success state */
+    .success-state {
+      display: none;
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .success-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .success-title { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .success-text { font-size: 15px; color: var(--ink-light); line-height: 1.65; max-width: 440px; margin: 0 auto 1.5rem; }
+
+    /* Form error */
+    .form-error {
+      background: rgba(216,90,48,0.08);
+      border: 0.5px solid rgba(216,90,48,0.3);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.9rem;
+      font-size: 13px;
+      color: #B84020;
+      display: none;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="dash-nav">
+    <a href="../index.html" class="dash-nav-logo">Human Unity</a>
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <div class="dash-nav-links">
+        <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
+        <a href="propose.html" class="dash-nav-link active">Propose event</a>
+        <a href="consent.html" class="dash-nav-link">Consent rounds</a>
+      </div>
+      <button class="dash-signout-btn" onclick="netlifyIdentity.logout()">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <a href="dashboard.html" class="page-back">← Dashboard</a>
+
+    <p class="page-label">Event proposal</p>
+    <h1 class="page-title">Propose an event.</h1>
+    <p class="page-sub">Any member can propose an event for their chapter. Your proposal opens a 5-day consent round — if no member raises a valid objection, it goes on the calendar automatically.</p>
+
+    <div class="consent-explainer">
+      <h4>How the consent round works</h4>
+      <p>Once submitted, all members of your chapter are notified by email. They have 5 days to consent or raise an objection. An objection isn't a veto — it's an invitation to resolve a specific concern. If the window closes with no objections, your event is approved and published.</p>
+    </div>
+
+    <!-- Error -->
+    <div class="form-error" id="form-error"></div>
+
+    <!-- Form -->
+    <div class="proposal-form" id="proposal-form-wrap">
+      <form id="proposal-form" onsubmit="submitProposal(event)">
+
+        <div class="form-section">
+          <div class="form-section-label">Event details</div>
+
+          <div class="field-group">
+            <label class="field-label" for="title">Event title *</label>
+            <input class="field-input" type="text" id="title" name="title"
+              placeholder="e.g. Neighborhood Skill Exchange" required>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="description">Description *</label>
+            <p class="field-hint">What will happen? Who is it for? What should people bring or expect?</p>
+            <textarea class="field-textarea" id="description" name="description"
+              placeholder="Describe the event in 2–4 sentences…" required></textarea>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-label">Date, time & location</div>
+
+          <div class="field-row">
+            <div class="field-group">
+              <label class="field-label" for="date">Date *</label>
+              <input class="field-input" type="date" id="date" name="date" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="time">Time *</label>
+              <input class="field-input" type="time" id="time" name="time" required>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label class="field-label" for="location">Location *</label>
+            <input class="field-input" type="text" id="location" name="location"
+              placeholder="Full address or venue name" required>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="form-section-label">Chapter</div>
+          <div class="field-group">
+            <label class="field-label" for="chapter">Which chapter is this for? *</label>
+            <select class="field-select" id="chapter" name="chapter" required>
+              <option value="">Loading chapters…</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <div class="form-error" id="form-error-inline"></div>
+          <button type="submit" class="submit-btn" id="submit-btn">
+            Open consent round →
+          </button>
+          <p class="submit-note">
+            Your chapter members will be notified by email.<br>
+            The consent window is 5 days (120 hours).
+          </p>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Success state (shown after submit) -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">🗓</div>
+      <h2 class="success-title">Proposal submitted.</h2>
+      <p class="success-text">
+        Your chapter members have been notified. The 5-day consent round is now open.
+        If no one raises an objection by <strong id="window-close-date"></strong>,
+        the event will automatically be published to the calendar.
+      </p>
+      <a href="consent.html" class="btn btn-primary" style="font-size:14px;padding:10px 24px;">Track the consent round →</a>
+    </div>
+
+  </div>
+
+<script>
+  // ── Auth guard ──
+  netlifyIdentity.on('init', user => {
+    if (!user) window.location.href = '/members/login.html';
+    else initProposePage(user);
+  });
+  netlifyIdentity.on('logout', () => { window.location.href = '/members/login.html'; });
+  netlifyIdentity.init();
+
+  // ── Set min date to tomorrow ──
+  const dateInput = document.getElementById('date');
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  dateInput.min = tomorrow.toISOString().split('T')[0];
+
+  // ── Load chapters into select ──
+  async function initProposePage(user) {
+    const res = await fetch('/data/chapters.json');
+    const chapters = await res.json();
+    const select = document.getElementById('chapter');
+    select.innerHTML = chapters.map(c =>
+      `<option value="${c.id}">${c.name}, ${c.state}</option>`
+    ).join('');
+  }
+
+  // ── Submit ──
+  async function submitProposal(e) {
+    e.preventDefault();
+
+    const user = netlifyIdentity.currentUser();
+    if (!user) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    const timeVal = document.getElementById('time').value;
+    const [h, m] = timeVal.split(':');
+    const hour = parseInt(h);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const hour12 = hour % 12 || 12;
+    const timeFormatted = `${hour12}:${m} ${ampm}`;
+
+    const payload = {
+      title:       document.getElementById('title').value.trim(),
+      description: document.getElementById('description').value.trim(),
+      proposedDate: document.getElementById('date').value,
+      proposedTime: timeFormatted,
+      location:    document.getElementById('location').value.trim(),
+      chapterId:   document.getElementById('chapter').value,
+    };
+
+    try {
+      const token = await user.jwt();
+      const res = await fetch('/.netlify/functions/propose-event', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        document.getElementById('proposal-form-wrap').style.display = 'none';
+        const successEl = document.getElementById('success-state');
+        successEl.style.display = 'block';
+        const closeDate = new Date(data.windowClosesAt);
+        document.getElementById('window-close-date').textContent =
+          closeDate.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
+      } else {
+        throw new Error(data.message || 'Submission failed.');
+      }
+
+    } catch (err) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      const errEl = document.getElementById('form-error-inline');
+      errEl.textContent = err.message || 'Something went wrong. Please try again.';
+      errEl.style.display = 'block';
+    }
+  }
+</script>
+
+</body>
+</html>
