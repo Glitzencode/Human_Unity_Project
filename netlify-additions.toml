@@ -1,0 +1,32 @@
+# Add these to your existing netlify.toml
+# (merge with whatever is already in there)
+
+[build]
+  functions = "netlify/functions"
+
+# ── Identity redirects ──────────────────────────────────────────
+# Protect /members/* — redirect to login if no Identity session
+[[redirects]]
+  from = "/members/dashboard.html"
+  to = "/members/login.html"
+  status = 302
+  conditions = {Role = ["member", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/members/propose.html"
+  to = "/members/login.html"
+  status = 302
+  conditions = {Role = ["member", "admin"]}
+  force = false
+
+[[redirects]]
+  from = "/members/consent.html"
+  to = "/members/login.html"
+  status = 302
+  conditions = {Role = ["member", "admin"]}
+  force = false
+
+# ── Scheduled function ──────────────────────────────────────────
+[functions."check-proposal-windows"]
+  schedule = "0 * * * *"
