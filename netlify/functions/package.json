@@ -1,0 +1,9 @@
+{
+  "name": "humanunity-functions",
+  "version": "1.0.0",
+  "description": "Netlify functions for Human Unity",
+  "dependencies": {
+    "nodemailer": "^6.9.13",
+    "@netlify/functions": "^2.6.0"
+  }
+}
