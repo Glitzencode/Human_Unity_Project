@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body {
+      background: var(--surface);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .welcome-nav {
+      background: var(--ink);
+      height: 60px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .welcome-nav-logo {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: white;
+      text-decoration: none;
+    }
+
+    .welcome-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .welcome-outer {
+      width: 100%;
+      max-width: 600px;
+    }
+
+    /* ── Password setup card (shown first) ── */
+    .setup-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      animation: fadeUp 0.35s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .setup-hero {
+      background: var(--ink);
+      padding: 2rem 2rem 1.75rem;
+    }
+    .setup-label {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .setup-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: white;
+      line-height: 1.2;
+      margin-bottom: 0.375rem;
+    }
+    .setup-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+    }
+
+    .setup-body { padding: 1.75rem 2rem 2rem; }
+
+    .field-group { display: flex; flex-direction: column; gap: 0.35rem; margin-bottom: 1rem; }
+    .field-label { font-size: 12px; font-weight: 600; color: var(--ink-mid); letter-spacing: 0.05em; text-transform: uppercase; }
+    .field-input {
+      width: 100%;
+      padding: 11px 14px;
+      font-size: 15px;
+      font-family: var(--font-body);
+      background: var(--surface);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field-input:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-light);
+      background: white;
+    }
+
+    .password-strength {
+      height: 3px;
+      border-radius: 2px;
+      background: var(--border);
+      margin-top: 6px;
+      overflow: hidden;
+    }
+    .password-strength-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.2s, background 0.2s;
+      width: 0;
+    }
+    .strength-hint {
+      font-size: 12px;
+      color: var(--ink-light);
+      margin-top: 4px;
+    }
+
+    .setup-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+      margin-top: 0.5rem;
+    }
+    .setup-btn:hover { background: var(--teal-mid); }
+    .setup-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .setup-btn.loading { color: transparent; }
+    .setup-btn.loading::after {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      width: 17px; height: 17px;
+      margin: -8.5px 0 0 -8.5px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .setup-msg {
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 0.9rem;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 0.75rem;
+      display: none;
+    }
+    .setup-msg.error   { background: rgba(216,90,48,0.08); border: 0.5px solid rgba(216,90,48,0.3); color: #B84020; }
+    .setup-msg.success { background: var(--teal-light); border: 0.5px solid rgba(42,191,163,0.3); color: var(--teal-dark); }
+
+    /* ── Welcome orientation (shown after password set) ── */
+    .orientation-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      display: none;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .orientation-hero {
+      background: var(--ink);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+    }
+    .orientation-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .orientation-title {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      color: white;
+      margin-bottom: 0.5rem;
+    }
+    .orientation-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    .orientation-body { padding: 2rem; }
+
+    .orientation-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+    .orientation-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      cursor: pointer;
+    }
+    .orientation-step:hover {
+      border-color: var(--teal-light);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 14px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-content { flex: 1; }
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: var(--ink-light);
+      line-height: 1.5;
+    }
+    .step-arrow { color: var(--teal); font-size: 16px; align-self: center; }
+
+    .orientation-cta {
+      width: 100%;
+      padding: 14px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .orientation-cta:hover { background: var(--teal-mid); }
+
+    /* No token state */
+    .no-token-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      display: none;
+    }
+    .no-token-card h2 { font-size: 1.25rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .no-token-card p  { font-size: 14px; color: var(--ink-light); line-height: 1.6; margin-bottom: 1.25rem; }
+  </style>
+</head>
+<body>
+
+  <nav class="welcome-nav">
+    <a href="../index.html" class="welcome-nav-logo">Human Unity</a>
+  </nav>
+
+  <div class="welcome-body">
+    <div class="welcome-outer">
+
+      <!-- Password setup (default view when invite token present) -->
+      <div class="setup-card" id="setup-card">
+        <div class="setup-hero">
+          <p class="setup-label">One last step</p>
+          <h1 class="setup-title">Set your password.</h1>
+          <p class="setup-sub">This creates your Human Unity member account. You'll use it to access your chapter dashboard, events, and consent rounds.</p>
+        </div>
+        <div class="setup-body">
+          <form id="setup-form" onsubmit="handleSetPassword(event)">
+            <div class="field-group">
+              <label class="field-label" for="new-password">Choose a password</label>
+              <input class="field-input" type="password" id="new-password" autocomplete="new-password"
+                placeholder="At least 8 characters" required minlength="8"
+                oninput="updateStrength(this.value)">
+              <div class="password-strength">
+                <div class="password-strength-fill" id="strength-fill"></div>
+              </div>
+              <p class="strength-hint" id="strength-hint">Use 8+ characters with a mix of letters and numbers.</p>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="confirm-password">Confirm password</label>
+              <input class="field-input" type="password" id="confirm-password" autocomplete="new-password"
+                placeholder="Repeat your password" required>
+            </div>
+            <button type="submit" class="setup-btn" id="setup-btn">Create my account →</button>
+            <div class="setup-msg" id="setup-msg"></div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Orientation (shown after password set successfully) -->
+      <div class="orientation-card" id="orientation-card">
+        <div class="orientation-hero">
+          <div class="orientation-icon">🌱</div>
+          <h1 class="orientation-title">You're in.</h1>
+          <p class="orientation-sub">Welcome to the Human Unity network. Here's where to start.</p>
+        </div>
+        <div class="orientation-body">
+          <div class="orientation-steps">
+            <a class="orientation-step" href="dashboard.html">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <div class="step-title">Find your chapter</div>
+                <div class="step-desc">See chapters near you, their ethos, and what they're building. Connect or start your own.</div>
+              </div>
+              <span class="step-arrow">→</span>
+            </a>
+            <a class="orientation-step" href="dashboard.html">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <div class="step-title">Check upcoming events</div>
+                <div class="step-desc">See what your chapter network has on the calendar and show up to something real.</div>
+              </div>
+              <span class="step-arrow">→</span>
+            </a>
+            <a class="orientation-step" href="propose.html">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <div class="step-title">Propose an event</div>
+                <div class="step-desc">Any member can propose. It goes through a 5-day consent round — if no one objects, it's on the calendar.</div>
+              </div>
+              <span class="step-arrow">→</span>
+            </a>
+          </div>
+          <button class="orientation-cta" onclick="window.location.href='dashboard.html'">
+            Go to my dashboard →
+          </button>
+        </div>
+      </div>
+
+      <!-- No token / already used -->
+      <div class="no-token-card" id="no-token-card">
+        <h2>This link has expired.</h2>
+        <p>Member invite links are valid for 24 hours. Request a new one or sign in if you've already set up your account.</p>
+        <a href="login.html" class="btn btn-primary" style="font-size:14px;padding:10px 24px;display:inline-block;">Sign in →</a>
+        <br><br>
+        <p style="font-size:13px;">Need a new invite? Email <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a></p>
+      </div>
+
+    </div>
+  </div>
+
+<script>
+  // ── Parse invite token from URL hash ──
+  // Netlify Identity puts it as: #invite_token=TOKEN
+  // or sometimes: #confirmation_token=TOKEN (recovery)
+  function getTokenFromHash() {
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    return params.get('invite_token') || params.get('confirmation_token') || null;
+  }
+
+  const inviteToken = getTokenFromHash();
+
+  // Init Netlify Identity
+  netlifyIdentity.on('init', user => {
+    if (user) {
+      // Already logged in — go straight to orientation
+      showOrientation();
+      return;
+    }
+
+    if (!inviteToken) {
+      // No token and not logged in
+      document.getElementById('setup-card').style.display = 'none';
+      document.getElementById('no-token-card').style.display = 'block';
+      return;
+    }
+
+    // Token present — show password setup (already visible by default)
+  });
+
+  netlifyIdentity.init();
+
+  // ── Password strength indicator ──
+  function updateStrength(val) {
+    const fill = document.getElementById('strength-fill');
+    const hint = document.getElementById('strength-hint');
+    let score = 0;
+    if (val.length >= 8)  score++;
+    if (val.length >= 12) score++;
+    if (/[0-9]/.test(val)) score++;
+    if (/[^a-zA-Z0-9]/.test(val)) score++;
+
+    const pct    = (score / 4) * 100;
+    const colors = ['#EEE', '#D85A30', '#F0A500', '#2ABFA3', '#1A8C7A'];
+    const hints  = ['', 'Too short', 'Weak', 'Good', 'Strong'];
+
+    fill.style.width      = pct + '%';
+    fill.style.background = colors[score];
+    hint.textContent      = hints[score] || '';
+  }
+
+  // ── Set password handler ──
+  async function handleSetPassword(e) {
+    e.preventDefault();
+
+    const password = document.getElementById('new-password').value;
+    const confirm  = document.getElementById('confirm-password').value;
+    const btn      = document.getElementById('setup-btn');
+    const msg      = document.getElementById('setup-msg');
+
+    msg.style.display = 'none';
+
+    if (password !== confirm) {
+      showMsg("Passwords don't match.", 'error');
+      return;
+    }
+    if (password.length < 8) {
+      showMsg('Password must be at least 8 characters.', 'error');
+      return;
+    }
+
+    btn.classList.add('loading');
+    btn.disabled = true;
+
+    try {
+      // Use Netlify Identity gotrue to confirm the invite
+      await netlifyIdentity.gotrue.confirm(inviteToken, password, true);
+      showOrientation();
+    } catch (err) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+
+      const errMsg = err.message || '';
+      if (errMsg.toLowerCase().includes('expired') || errMsg.toLowerCase().includes('invalid')) {
+        showMsg('This invite link has expired. Email hello@humanunity.us for a new one.', 'error');
+        setTimeout(() => {
+          document.getElementById('setup-card').style.display = 'none';
+          document.getElementById('no-token-card').style.display = 'block';
+        }, 3000);
+      } else {
+        showMsg(errMsg || 'Could not set up your account. Please try again.', 'error');
+      }
+    }
+  }
+
+  function showMsg(text, type) {
+    const el = document.getElementById('setup-msg');
+    el.textContent = text;
+    el.className = 'setup-msg ' + type;
+    el.style.display = 'block';
+  }
+
+  function showOrientation() {
+    document.getElementById('setup-card').style.display = 'none';
+    document.getElementById('no-token-card').style.display = 'none';
+    const card = document.getElementById('orientation-card');
+    card.style.display = 'block';
+    // Clean the hash from URL so token isn't reused
+    history.replaceState(null, '', window.location.pathname);
+  }
+</script>
+
+</body>
+</html>
