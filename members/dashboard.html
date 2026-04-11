@@ -647,7 +647,11 @@
 
     container.innerHTML = chapters.map((c, i) => {
       const chapterEvents = events.filter(e => e.chapterId === c.id && e.status === 'approved');
-      const upcomingEvents = chapterEvents.filter(e => new Date(e.date) >= new Date())
+      // Show events within the last 7 days OR upcoming — so recently-past events still show
+      const now = new Date();
+      const sevenDaysAgo = new Date(now - 7 * 24 * 60 * 60 * 1000);
+      const upcomingEvents = chapterEvents
+        .filter(e => new Date(e.date) >= sevenDaysAgo)
         .sort((a,b) => new Date(a.date) - new Date(b.date));
 
       const distLabel = c._dist != null
@@ -680,7 +684,7 @@
         : `<p class="no-events">No upcoming events scheduled yet.</p>`;
 
       return `
-        <div class="chapter-card" id="chapter-${c.id}" onclick="toggleChapter('${c.id}')">
+        <div class="chapter-card ${i === 0 ? 'expanded' : ''}" id="chapter-${c.id}" onclick="toggleChapter('${c.id}')">
           <div class="chapter-card-top">
             <div class="chapter-card-left">
               <div class="chapter-name">${c.name}, ${c.state}</div>
@@ -695,14 +699,14 @@
               <span class="chapter-meta-value">${c.members}</span>
             </div>
             <div class="chapter-meta-item">
-              <span class="chapter-meta-label">Upcoming events</span>
+              <span class="chapter-meta-label">Events</span>
               <span class="chapter-meta-value">${upcomingEvents.length}</span>
             </div>
           </div>
           <div class="chapter-focus-tags">${focusTags}</div>
-          <div class="chapter-card-detail" id="detail-${c.id}">
+          <div class="chapter-card-detail" id="detail-${c.id}" style="display:${i === 0 ? 'block' : 'none'}">
             <p class="chapter-ethos">"${c.ethos}"</p>
-            <div class="chapter-events-title">Upcoming events</div>
+            <div class="chapter-events-title">Events</div>
             ${eventsHtml}
           </div>
         </div>`;
