@@ -359,13 +359,13 @@
         <p>Member invite links are valid for 24 hours. Request a new one or sign in if you've already set up your account.</p>
         <a href="login.html" class="btn btn-primary" style="font-size:14px;padding:10px 24px;display:inline-block;">Sign in →</a>
         <br><br>
-        <p style="font-size:13px;">Need a new invite? Email <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a></p>
+        <p style="font-size:13px;">Need a new invite? Email <a href="/cdn-cgi/l/email-protection#cda5a8a1a1a28da5b8a0aca3b8a3a4b9b4e3b8be" style="color:var(--teal)"><span class="__cf_email__" data-cfemail="1078757c7c7f5078657d717e657e7964693e6563">[email&#160;protected]</span></a></p>
       </div>
 
     </div>
   </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Parse invite token from URL hash ──
   // Netlify Identity puts it as: #invite_token=TOKEN
   // or sometimes: #confirmation_token=TOKEN (recovery)
@@ -395,7 +395,12 @@
     // Token present — show password setup (already visible by default)
   });
 
-  netlifyIdentity.init();
+  // Pass { logo: false } to suppress the auto-popup that Netlify shows
+  // when it detects an invite token — our custom form handles it instead.
+  netlifyIdentity.init({ logo: false });
+
+  // Close the widget popup immediately if it somehow opens
+  netlifyIdentity.on('open', () => netlifyIdentity.close());
 
   // ── Password strength indicator ──
   function updateStrength(val) {
@@ -470,12 +475,3 @@
   function showOrientation() {
     document.getElementById('setup-card').style.display = 'none';
     document.getElementById('no-token-card').style.display = 'none';
-    const card = document.getElementById('orientation-card');
-    card.style.display = 'block';
-    // Clean the hash from URL so token isn't reused
-    history.replaceState(null, '', window.location.pathname);
-  }
-</script>
-
-</body>
-</html>
