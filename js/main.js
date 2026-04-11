@@ -192,9 +192,14 @@ function initJoinForm(formEl) {
   });
 }
 
-// Attach to every join form on the page
-// Matches both the main join form and footer form
-document.querySelectorAll('form[action*="list-manage.com"]').forEach(f => initJoinForm(f));
+// Attach to every join form on the page.
+// Catches both legacy Mailchimp forms (action*="list-manage.com")
+// and new signup forms (id contains "signup-form").
+const joinForms = new Set([
+  ...document.querySelectorAll('form[action*="list-manage.com"]'),
+  ...document.querySelectorAll('form[id*="signup-form"]'),
+]);
+joinForms.forEach(f => initJoinForm(f));
 
 // ── CHAPTER FINDER ──
 const CHAPTERS = [
