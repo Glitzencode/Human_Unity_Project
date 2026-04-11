@@ -3,24 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Vision — Human Unity</title>
-  <link rel="stylesheet" href="css/main.css">
+  <title>Community Ground — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <meta name="description" content="Community Ground — local Human Unity chapters built around shared projects, not shared politics.">
 </head>
 <body>
 <nav>
   <div class="wrap nav-inner">
-    <a href="index.html" class="nav-logo">Human Unity</a>
+    <a href="../index.html" class="nav-logo">Human Unity</a>
     <div class="nav-links">
-      <a href="problem.html">The problem</a>
-      <a href="framework.html">Framework</a>
-      <a href="initiatives.html">Initiatives</a>
-      <a href="get-involved.html">Get involved</a>
-      <a href="resources.html">Resources</a>
-      <a href="vision.html">Vision</a>
-      <a href="about.html">About</a>
+      <a href="../problem.html">The problem</a>
+      <a href="../framework.html">Framework</a>
+      <a href="../initiatives.html">Initiatives</a>
+      <a href="../get-involved.html">Get involved</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../vision.html">Vision</a>
+      <a href="../about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
+      <a href="../members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="../get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
@@ -28,98 +30,115 @@
   </div>
 </nav>
 
-<div class="page-hero" style="background:var(--ink)">
+<div class="init-hero" style="background:var(--teal-light);border-bottom:0.5px solid rgba(29,158,117,0.2)">
   <div class="wrap">
-    <div class="section-label" style="color:var(--teal)">The vision</div>
-    <h1 style="color:white">What we are<br>building toward.</h1>
-    <p style="color:rgba(255,255,255,0.65)">Not a utopia. Not a political victory. A society that has rebuilt the basic capacity to identify shared problems and work on them together — across lines of difference, without waiting for permission from above.</p>
+    <a href="../initiatives.html" style="font-size:13px;color:var(--teal-mid);display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem">← All initiatives</a>
+    <span class="tag tag-teal" style="margin-bottom:1rem">Community</span>
+    <h1>Community Ground</h1>
+    <p style="font-size:18px;max-width:580px;margin-top:0.75rem;color:var(--teal-dark)">Local chapter organizing built around shared projects — not shared politics.</p>
+    <div style="display:flex;gap:1rem;margin-top:2rem">
+      <a href="../get-involved.html" class="btn btn-primary">Join a chapter →</a>
+      <a href="../start-a-chapter.html" class="btn btn-outline">Start one in your city</a>
+    </div>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:4rem">
+    <div class="init-detail">
       <div>
-        <h2>The 5-year picture</h2>
-        <p style="margin-top:0.75rem">We are not describing a perfect society. We are describing a society that has regained the basic functional capacity that makes improvement possible. The difference between where we are and where this leads is not utopia — it is legibility. Problems are identifiable. Solutions are testable. Leadership is distributed. Trust is possible.</p>
+        <h2>What it is</h2>
+        <p style="margin-top:0.75rem">Community Ground is the foundational layer of the Human Unity network. It is a model for local chapters built around tangible, shared projects rather than political alignment or ideological agreement.</p>
+        <p style="margin-top:1rem">The premise is simple: trust is not built through conversation about values — it is built through working alongside someone toward a shared goal. A neighborhood improvement project. A local resource exchange. A monthly gathering with a specific purpose. Community Ground provides the structure, templates, and support to run these consistently.</p>
 
-        <div style="display:flex;flex-direction:column;gap:2rem;margin-top:2.5rem">
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:1.5rem;align-items:start">
-            <div style="width:52px;height:52px;background:var(--teal-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px">🏘</div>
-            <div>
-              <h3>500+ active chapters nationwide</h3>
-              <p style="margin-top:0.5rem">In every state. In cities, suburbs, and rural areas. Each one running at least one visible community project. A distributed national network of people who have direct experience building cross-partisan trust through shared work.</p>
-            </div>
+        <img src="../images/cg-event-1.jpg" alt="Community Ground chapter event" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
+
+        <h2>How it works</h2>
+        <div class="fw-steps" style="margin-top:1.5rem">
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">1</div>
+            <div><h3>A chapter forms around a project</h3><p>Not a mission statement — a specific, local problem worth solving. Chapters pick their first project before they recruit their first member.</p></div>
           </div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:1.5rem;align-items:start">
-            <div style="width:52px;height:52px;background:var(--purple-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px">🤝</div>
-            <div>
-              <h3>A trained mediation network in every major city</h3>
-              <p style="margin-top:0.5rem">Conflict Bridge mediators available in every metro area. Community disputes, workplace tensions, and political disagreements navigated by trained locals — not imported consultants. Conflict resolution as a civic skill, not a specialty service.</p>
-            </div>
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">2</div>
+            <div><h3>People show up and do the work</h3><p>Monthly gatherings focused on progress, not process. 80% doing, 20% planning. Trust accumulates through shared effort.</p></div>
           </div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:1.5rem;align-items:start">
-            <div style="width:52px;height:52px;background:var(--amber-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px">🌱</div>
-            <div>
-              <h3>A generation of community leaders</h3>
-              <p style="margin-top:0.5rem">Thousands of people who have completed the Local Leadership Lab — who have run real projects, navigated real conflict, and built real cross-partisan relationships. A trained leadership capacity that is distributed, local, and available.</p>
-            </div>
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">3</div>
+            <div><h3>The chapter grows and picks a new project</h3><p>Success on the first project builds credibility. New members join because they see something real happening. The chapter expands its scope.</p></div>
           </div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:1.5rem;align-items:start">
-            <div style="width:52px;height:52px;background:var(--teal-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px">📉</div>
-            <div>
-              <h3>Measurable decline in social isolation</h3>
-              <p style="margin-top:0.5rem">The loneliness epidemic is not inevitable. It is a structural problem with structural solutions. Chapter networks create consistent, meaningful social contact across difference. We are targeting measurable improvement in the social isolation metrics that currently define American life.</p>
-            </div>
-          </div>
-          <div style="display:grid;grid-template-columns:60px 1fr;gap:1.5rem;align-items:start">
-            <div style="width:52px;height:52px;background:var(--coral-light);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px">🔄</div>
-            <div>
-              <h3>A new cultural norm</h3>
-              <p style="margin-top:0.5rem">When enough communities have direct experience of post-partisan cooperation, the cultural baseline shifts. What is expected of people — and of institutions — changes. Not through persuasion campaigns, but through demonstrated alternative.</p>
-            </div>
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">4</div>
+            <div><h3>The chapter connects to the network</h3><p>Resources, frameworks, and cross-chapter learning from the broader Human Unity network. Your chapter is never alone.</p></div>
           </div>
         </div>
 
-        <div class="pullquote" style="margin-top:3rem">"The most radical thing you can do right now is believe that building something is more powerful than destroying something."</div>
+        <h2 style="margin-top:3rem">What chapters have built</h2>
+        <div class="grid-2" style="margin-top:1.5rem">
+          <div class="card card-surface">
+            <h3>Neighborhood skill exchanges</h3>
+            <p>Monthly events where community members teach each other practical skills — cooking, repair, financial literacy, language, childcare.</p>
+          </div>
+          <div class="card card-surface">
+            <h3>Local resource libraries</h3>
+            <p>Shared tool, equipment, and book lending among chapter members — reducing consumption and increasing connection.</p>
+          </div>
+          <div class="card card-surface">
+            <h3>Community infrastructure</h3>
+            <p>Park cleanups, community garden development, neighborhood safety mapping, and local business support networks.</p>
+          </div>
+          <div class="card card-surface">
+            <h3>Emergency mutual aid</h3>
+            <p>Pre-built networks for when neighbors need support — food, childcare, transportation, practical help during hard times.</p>
+          </div>
+        </div>
 
-        <h2 style="margin-top:2.5rem">What this is not</h2>
-        <p style="margin-top:0.75rem">This vision does not depend on political change at the national level. It does not require electing the right leaders, passing the right legislation, or defeating the right opponent. It operates in parallel to all of that — building social infrastructure that functions regardless of who holds power and makes democratic self-governance more viable over time.</p>
-        <p style="margin-top:1rem">This is not optimism as emotional state. It is optimism as methodology. The belief that construction is possible is not a feeling — it is a strategic commitment. And every chapter that ships a project makes it more credible.</p>
+        <img src="../images/cg-event-2.jpg" alt="Community Ground gathering" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
+
+        <h2>Who this is for</h2>
+        <p style="margin-top:0.75rem">Anyone who has looked at their neighborhood and thought: "this could be better, and I don't know where to start." Community Ground is the where-to-start. You don't need a big group. You don't need resources. You need a problem worth solving and a willingness to show up.</p>
+        <div class="pullquote">The goal is not to find people who agree with you. The goal is to find people willing to build something with you. Those groups overlap more than you think.</div>
       </div>
 
-      <div style="position:sticky;top:calc(var(--nav-h) + 2rem);height:fit-content">
-        <div style="background:var(--surface);border-radius:var(--radius);padding:1.75rem;margin-bottom:1rem">
-          <h4 style="margin-bottom:1.25rem">Vision milestones</h4>
+      <div class="init-sidebar">
+        <div class="sidebar-card">
+          <h4>Chapter details</h4>
+          <div class="sidebar-item"><span>Time commitment</span><span>2–4 hrs / month</span></div>
+          <div class="sidebar-item"><span>Ideal chapter size</span><span>8–25 people</span></div>
+          <div class="sidebar-item"><span>Active chapters</span><span>15+ nationwide</span></div>
+          <div class="sidebar-item"><span>Chapter starter kit</span><span>Provided free</span></div>
+          <div class="sidebar-item"><span>Network support</span><span>Included</span></div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Participate</h4>
           <div style="display:flex;flex-direction:column;gap:0.75rem">
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:0.5px solid var(--border)">
-              <span style="font-size:13px;color:var(--ink-mid)">Year 1</span>
-              <span style="font-size:13px;font-weight:500">50 chapters</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:0.5px solid var(--border)">
-              <span style="font-size:13px;color:var(--ink-mid)">Year 2</span>
-              <span style="font-size:13px;font-weight:500">150 chapters + Lab cohorts</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:0.5px solid var(--border)">
-              <span style="font-size:13px;color:var(--ink-mid)">Year 3</span>
-              <span style="font-size:13px;font-weight:500">Mediation network live</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0;border-bottom:0.5px solid var(--border)">
-              <span style="font-size:13px;color:var(--ink-mid)">Year 4</span>
-              <span style="font-size:13px;font-weight:500">350+ chapters, all states</span>
-            </div>
-            <div style="display:flex;justify-content:space-between;align-items:center;padding:0.6rem 0">
-              <span style="font-size:13px;color:var(--ink-mid)">Year 5</span>
-              <span style="font-size:13px;font-weight:500">500+ chapters nationwide</span>
-            </div>
+            <a href="../get-involved.html#chapters" class="btn btn-primary" style="justify-content:center">Find a chapter near you</a>
+            <a href="../start-a-chapter.html" class="btn btn-outline" style="justify-content:center">Start a chapter</a>
           </div>
         </div>
-        <div style="background:var(--teal);border-radius:var(--radius);padding:1.75rem">
-          <p style="color:white;font-weight:500;font-size:16px;margin-bottom:0.5rem">We are at year one.</p>
-          <p style="color:rgba(255,255,255,0.75);font-size:14px;margin-bottom:1.25rem">This is not a vision waiting to happen. It is already in motion. The question is where you fit in it.</p>
-          <a href="get-involved.html" class="btn" style="background:white;color:var(--teal);width:100%;justify-content:center">Join the project →</a>
+        <div class="sidebar-card">
+          <h4>Resources for this initiative</h4>
+          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--teal);margin-bottom:0.6rem">→ Chapter starter guide</a>
+          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--teal);margin-bottom:0.6rem">→ First project templates</a>
+          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--teal)">→ Facilitation guide</a>
+        </div>
+        <div style="background:var(--ink);border-radius:var(--radius);padding:1.5rem">
+          <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.5rem">Connect with other chapter leads</p>
+          <p style="color:rgba(255,255,255,0.6);font-size:13px;margin-bottom:1rem">Join the Community Ground network and get access to other chapter organizers.</p>
+          <a href="../get-involved.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center">Get access →</a>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--surface)">
+  <div class="wrap" style="text-align:center">
+    <h2>Ready to build something?</h2>
+    <p style="max-width:480px;margin:0.75rem auto 2rem">Find a chapter near you or take the first step to start one. Either way, you're not doing it alone.</p>
+    <div style="display:flex;gap:1rem;justify-content:center">
+      <a href="../get-involved.html#chapters" class="btn btn-primary">Find a chapter →</a>
+      <a href="../start-a-chapter.html" class="btn btn-outline">Start a chapter</a>
     </div>
   </div>
 </section>
@@ -131,7 +150,7 @@
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form action="https://humanunity.us6.list-manage.com/subscribe/post?u=2b32405c64d33eb7405ab0e47&amp;id=91d3047cd1&amp;f_id=000dc2e1f0" method="post" id="signup-form-footer" target="_blank" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
+          <form id="signup-form-footer">
             <div style="display:flex;gap:0">
               <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
               <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
@@ -151,22 +170,22 @@
       </div>
       <div class="footer-col">
         <h5>The work</h5>
-        <a href="problem.html">The problem</a>
-        <a href="framework.html">The framework</a>
-        <a href="initiatives.html">Initiatives</a>
-        <a href="vision.html">Vision</a>
+        <a href="../problem.html">The problem</a>
+        <a href="../framework.html">The framework</a>
+        <a href="../initiatives.html">Initiatives</a>
+        <a href="../vision.html">Vision</a>
       </div>
       <div class="footer-col">
         <h5>Participate</h5>
-        <a href="get-involved.html">Get involved</a>
-        <a href="get-involved.html#chapters">Find a chapter</a>
-        <a href="start-a-chapter.html">Start a chapter</a>
-        <a href="get-involved.html#skills">Offer skills</a>
+        <a href="../get-involved.html">Get involved</a>
+        <a href="../get-involved.html#chapters">Find a chapter</a>
+        <a href="../start-a-chapter.html">Start a chapter</a>
+        <a href="../get-involved.html#skills">Offer skills</a>
       </div>
       <div class="footer-col">
         <h5>Learn</h5>
-        <a href="resources.html">Resources</a>
-        <a href="about.html">About</a>
+        <a href="../resources.html">Resources</a>
+        <a href="../about.html">About</a>
         <a href="about.html#philosophy">Philosophy</a>
         <a href="about.html#faq">FAQ</a>
       </div>
@@ -174,13 +193,12 @@
     <div class="footer-bottom">
       <span>© 2025 Litzenberg &amp; Associates LLC. All rights reserved.</span>
       <div style="display:flex;gap:1.5rem">
-        <a href="privacy.html">Privacy</a>
-        <a href="sms-terms.html">SMS terms</a>
-        <a href="#">Contact</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="mailto:hello@humanunity.us">Contact</a>
       </div>
     </div>
   </div>
 </footer>
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

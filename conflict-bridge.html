@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Community Ground — Human Unity</title>
+  <title>Local Leadership Lab — Human Unity</title>
   <link rel="stylesheet" href="../css/main.css">
+  <meta name="description" content="The Local Leadership Lab — a 12-week incubator for emerging community leaders. You leave with a working initiative.">
 </head>
 <body>
 <nav>
@@ -20,6 +21,7 @@
       <a href="../about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
+      <a href="../members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
       <a href="../get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
@@ -27,16 +29,15 @@
     </div>
   </div>
 </nav>
-
-<div class="init-hero" style="background:var(--teal-light);border-bottom:0.5px solid rgba(29,158,117,0.2)">
+<div class="init-hero" style="background:var(--amber-light);border-bottom:0.5px solid rgba(186,117,23,0.15)">
   <div class="wrap">
-    <a href="../initiatives.html" style="font-size:13px;color:var(--teal-mid);display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem">← All initiatives</a>
-    <span class="tag tag-teal" style="margin-bottom:1rem">Community</span>
-    <h1>Community Ground</h1>
-    <p style="font-size:18px;max-width:580px;margin-top:0.75rem;color:var(--teal-dark)">Local chapter organizing built around shared projects — not shared politics.</p>
+    <a href="../initiatives.html" style="font-size:13px;color:var(--amber);display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem">← All initiatives</a>
+    <span class="tag tag-amber" style="margin-bottom:1rem">Leadership</span>
+    <h1>Local Leadership Lab</h1>
+    <p style="font-size:18px;max-width:580px;margin-top:0.75rem;color:#412402">A 12-week incubator for emerging community leaders. You leave with a working initiative, not a certificate.</p>
     <div style="display:flex;gap:1rem;margin-top:2rem">
-      <a href="../get-involved.html" class="btn btn-primary">Join a chapter →</a>
-      <a href="../start-a-chapter.html" class="btn btn-outline">Start one in your city</a>
+      <a href="../get-involved.html" class="btn btn-primary" style="background:var(--amber)">Apply for next cohort →</a>
+      <a href="../resources.html" class="btn btn-outline">Read the curriculum</a>
     </div>
   </div>
 </div>
@@ -45,106 +46,51 @@
   <div class="wrap">
     <div class="init-detail">
       <div>
-        <h2>What it is</h2>
-        <p style="margin-top:0.75rem">Community Ground is the foundational layer of the Human Unity network. It is a model for local chapters built around tangible, shared projects rather than political alignment or ideological agreement.</p>
-        <p style="margin-top:1rem">The premise is simple: trust is not built through conversation about values — it is built through working alongside someone toward a shared goal. A neighborhood improvement project. A local resource exchange. A monthly gathering with a specific purpose. Community Ground provides the structure, templates, and support to run these consistently.</p>
+        <h2>What this is not</h2>
+        <p style="margin-top:0.75rem">This is not a leadership seminar. It is not a motivational program. It is not a networking event dressed up as education. The Leadership Lab is a 12-week cohort-based program in which participants build an actual community initiative from scratch — with real mentorship, real accountability, and real peers doing the same thing beside them.</p>
 
-        <div class="photo-placeholder" style="margin:2rem 0;min-height:260px" onclick="alert('Replace with a community event photo')">
-          <span class="ph-icon">📷</span>
-          <span>Community Ground chapter event</span>
-          <span style="font-size:11px;color:var(--teal)">../images/cg-event-1.jpg</span>
-        </div>
+        <img src="../images/lab-cohort.jpg" alt="Leadership Lab at work" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
 
-        <h2>How it works</h2>
+        <h2>The 12-week structure</h2>
         <div class="fw-steps" style="margin-top:1.5rem">
-          <div class="fw-step">
-            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">1</div>
-            <div><h3>A chapter forms around a project</h3><p>Not a mission statement — a specific, local problem worth solving. Chapters pick their first project before they recruit their first member.</p></div>
-          </div>
-          <div class="fw-step">
-            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">2</div>
-            <div><h3>People show up and do the work</h3><p>Monthly gatherings focused on progress, not process. 80% doing, 20% planning. Trust accumulates through shared effort.</p></div>
-          </div>
-          <div class="fw-step">
-            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">3</div>
-            <div><h3>The chapter grows and picks a new project</h3><p>Success on the first project builds credibility. New members join because they see something real happening. The chapter expands its scope.</p></div>
-          </div>
-          <div class="fw-step">
-            <div class="fw-num" style="background:var(--teal-light);color:var(--teal-mid)">4</div>
-            <div><h3>The chapter connects to the network</h3><p>Resources, frameworks, and cross-chapter learning from the broader Human Unity network. Your chapter is never alone.</p></div>
-          </div>
+          <div class="fw-step"><div class="fw-num" style="background:var(--amber-light);color:var(--amber)">1–3</div><div><h3>Diagnosis (weeks 1–3)</h3><p>Identify a specific, local problem worth solving. Map existing assets and stakeholders. Define success concretely. Most leaders fail here — they're too vague too early.</p></div></div>
+          <div class="fw-step"><div class="fw-num" style="background:var(--amber-light);color:var(--amber)">4–6</div><div><h3>Design (weeks 4–6)</h3><p>Structure the initiative. Build the team. Create the participation model. Learn facilitation, conflict navigation, and distributed leadership tools.</p></div></div>
+          <div class="fw-step"><div class="fw-num" style="background:var(--amber-light);color:var(--amber)">7–9</div><div><h3>Launch (weeks 7–9)</h3><p>First public event or action. Real people, real feedback, real adjustments. The cohort supports each other through the vulnerability of starting.</p></div></div>
+          <div class="fw-step"><div class="fw-num" style="background:var(--amber-light);color:var(--amber)">10–12</div><div><h3>Sustain (weeks 10–12)</h3><p>Build the systems that keep it running without you. Hand off where needed. Connect to the Human Unity network. Commit to the next 90 days.</p></div></div>
         </div>
 
-        <h2 style="margin-top:3rem">What chapters have built</h2>
+        <h2 style="margin-top:3rem">Who should apply</h2>
+        <p style="margin-top:0.75rem">People who have thought "someone should do something about this" and are ready to become someone. No prior leadership experience required. Required: a specific community you are embedded in, a problem you care about, and 5–8 hours per week for 12 weeks.</p>
+
+        <div class="pullquote">Leadership is not a position. It is a practice. The Lab treats it that way.</div>
+
+        <h2>What you leave with</h2>
         <div class="grid-2" style="margin-top:1.5rem">
-          <div class="card card-surface">
-            <h3>Neighborhood skill exchanges</h3>
-            <p>Monthly events where community members teach each other practical skills — cooking, repair, financial literacy, language, childcare.</p>
-          </div>
-          <div class="card card-surface">
-            <h3>Local resource libraries</h3>
-            <p>Shared tool, equipment, and book lending among chapter members — reducing consumption and increasing connection.</p>
-          </div>
-          <div class="card card-surface">
-            <h3>Community infrastructure</h3>
-            <p>Park cleanups, community garden development, neighborhood safety mapping, and local business support networks.</p>
-          </div>
-          <div class="card card-surface">
-            <h3>Emergency mutual aid</h3>
-            <p>Pre-built networks for when neighbors need support — food, childcare, transportation, practical help during hard times.</p>
-          </div>
+          <div class="card card-surface"><h3>A working initiative</h3><p>Not a plan — an active, running community project with real participants and a 90-day momentum plan.</p></div>
+          <div class="card card-surface"><h3>A cohort</h3><p>14 peers who went through it with you. A peer accountability and support network that continues after the Lab ends.</p></div>
+          <div class="card card-surface"><h3>A facilitator toolkit</h3><p>Frameworks, templates, and tools for running groups, navigating conflict, and sustaining momentum.</p></div>
+          <div class="card card-surface"><h3>Network access</h3><p>Connection to the Human Unity network — resources, mentors, and other chapter leaders nationwide.</p></div>
         </div>
-
-        <div class="photo-placeholder" style="margin:2rem 0;min-height:260px">
-          <span class="ph-icon">📷</span>
-          <span>Chapter gathering / project photo</span>
-          <span style="font-size:11px;color:var(--teal)">../images/cg-event-2.jpg</span>
-        </div>
-
-        <h2>Who this is for</h2>
-        <p style="margin-top:0.75rem">Anyone who has looked at their neighborhood and thought: "this could be better, and I don't know where to start." Community Ground is the where-to-start. You don't need a big group. You don't need resources. You need a problem worth solving and a willingness to show up.</p>
-        <div class="pullquote">The goal is not to find people who agree with you. The goal is to find people willing to build something with you. Those groups overlap more than you think.</div>
       </div>
 
       <div class="init-sidebar">
         <div class="sidebar-card">
-          <h4>Chapter details</h4>
-          <div class="sidebar-item"><span>Time commitment</span><span>2–4 hrs / month</span></div>
-          <div class="sidebar-item"><span>Ideal chapter size</span><span>8–25 people</span></div>
-          <div class="sidebar-item"><span>Active chapters</span><span>15+ nationwide</span></div>
-          <div class="sidebar-item"><span>Chapter starter kit</span><span>Provided free</span></div>
-          <div class="sidebar-item"><span>Network support</span><span>Included</span></div>
+          <h4>Program details</h4>
+          <div class="sidebar-item"><span>Duration</span><span>12 weeks</span></div>
+          <div class="sidebar-item"><span>Cohort size</span><span>15 people</span></div>
+          <div class="sidebar-item"><span>Time / week</span><span>5–8 hours</span></div>
+          <div class="sidebar-item"><span>Format</span><span>In-person + online</span></div>
+          <div class="sidebar-item"><span>Cost</span><span>Sliding scale</span></div>
+          <div class="sidebar-item"><span>Next cohort</span><span>Rolling intake</span></div>
         </div>
         <div class="sidebar-card">
-          <h4>Participate</h4>
+          <h4>Apply</h4>
           <div style="display:flex;flex-direction:column;gap:0.75rem">
-            <a href="../get-involved.html#chapters" class="btn btn-primary" style="justify-content:center">Find a chapter near you</a>
-            <a href="../start-a-chapter.html" class="btn btn-outline" style="justify-content:center">Start a chapter</a>
+            <a href="../get-involved.html" class="btn btn-primary" style="justify-content:center;background:var(--amber)">Apply now</a>
+            <a href="../resources.html" class="btn btn-outline" style="justify-content:center">Read the curriculum</a>
           </div>
         </div>
-        <div class="sidebar-card">
-          <h4>Resources for this initiative</h4>
-          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--teal);margin-bottom:0.6rem">→ Chapter starter guide</a>
-          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--teal);margin-bottom:0.6rem">→ First project templates</a>
-          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--teal)">→ Facilitation guide</a>
-        </div>
-        <div style="background:var(--ink);border-radius:var(--radius);padding:1.5rem">
-          <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.5rem">Connect with other chapter leads</p>
-          <p style="color:rgba(255,255,255,0.6);font-size:13px;margin-bottom:1rem">Join the Community Ground network and get access to other chapter organizers.</p>
-          <a href="../get-involved.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center">Get access →</a>
-        </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section style="background:var(--surface)">
-  <div class="wrap" style="text-align:center">
-    <h2>Ready to build something?</h2>
-    <p style="max-width:480px;margin:0.75rem auto 2rem">Find a chapter near you or take the first step to start one. Either way, you're not doing it alone.</p>
-    <div style="display:flex;gap:1rem;justify-content:center">
-      <a href="../get-involved.html#chapters" class="btn btn-primary">Find a chapter →</a>
-      <a href="../start-a-chapter.html" class="btn btn-outline">Start a chapter</a>
     </div>
   </div>
 </section>
@@ -156,13 +102,22 @@
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form id="signup-form-footer" style="display:flex;gap:0;max-width:380px">
-            <input type="email" placeholder="Your email" style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
-            <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
+          <form id="signup-form-footer">
+            <div style="display:flex;gap:0">
+              <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
+              <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
+            </div>
+            <input type="text" name="FNAME" placeholder="First name *" required style="padding:9px 14px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:100px;background:rgba(255,255,255,0.08);color:white;outline:none">
+            <div style="display:flex;gap:0.4rem;align-items:center">
+              <input type="text" name="BIRTHDAY[month]" placeholder="MM" maxlength="2" pattern="[0-9]*" required style="width:52px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
+              <span style="color:rgba(255,255,255,0.3);font-size:13px">/</span>
+              <input type="text" name="BIRTHDAY[day]" placeholder="DD" maxlength="2" pattern="[0-9]*" required style="width:52px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
+              <span style="color:rgba(255,255,255,0.3);font-size:13px">/</span>
+              <input type="number" name="MMERGE8" placeholder="YYYY" min="1900" max="2025" required style="width:72px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
+            </div>
+            <p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.4">Birthday required to protect minors from age-restricted content.</p>
+            <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_2b32405c64d33eb7405ab0e47_91d3047cd1" tabindex="-1" value=""></div>
           </form>
-          <div id="signup-success-footer" style="display:none;align-items:center;gap:8px;color:var(--teal);font-size:14px;margin-top:0.5rem">
-            ✓ <span>You're in. Welcome to the project.</span>
-          </div>
         </div>
       </div>
       <div class="footer-col">
@@ -188,10 +143,10 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Human Unity. All rights reserved.</span>
+      <span>© 2025 Litzenberg &amp; Associates LLC. All rights reserved.</span>
       <div style="display:flex;gap:1.5rem">
-        <a href="#">Privacy</a>
-        <a href="#">Contact</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="mailto:hello@humanunity.us">Contact</a>
       </div>
     </div>
   </div>

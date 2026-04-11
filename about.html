@@ -3,120 +3,95 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Human Unity</title>
-  <link rel="stylesheet" href="css/main.css">
-  <meta name="description" content="Human Unity is a post-partisan framework for community renewal. Not a political party. Not an ideology. A system.">
+  <title>Conflict Bridge — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <meta name="description" content="Conflict Bridge — a trained mediation network for community disputes, workplace tensions, and political disagreements.">
 </head>
 <body>
 <nav>
   <div class="wrap nav-inner">
-    <a href="index.html" class="nav-logo">Human Unity</a>
+    <a href="../index.html" class="nav-logo">Human Unity</a>
     <div class="nav-links">
-      <a href="problem.html">The problem</a>
-      <a href="framework.html">Framework</a>
-      <a href="initiatives.html">Initiatives</a>
-      <a href="get-involved.html">Get involved</a>
-      <a href="resources.html">Resources</a>
-      <a href="vision.html">Vision</a>
-      <a href="about.html">About</a>
+      <a href="../problem.html">The problem</a>
+      <a href="../framework.html">Framework</a>
+      <a href="../initiatives.html">Initiatives</a>
+      <a href="../get-involved.html">Get involved</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../vision.html">Vision</a>
+      <a href="../about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
+      <a href="../members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="../get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
     </div>
   </div>
 </nav>
-
-<div class="page-hero">
+<div class="init-hero" style="background:var(--purple-light);border-bottom:0.5px solid rgba(83,74,183,0.15)">
   <div class="wrap">
-    <div class="section-label">About</div>
-    <h1>What Human Unity is —<br>and what it is not.</h1>
-    <p>Clarity on the nature of this project is important. Misunderstanding it wastes everyone's time.</p>
+    <a href="../initiatives.html" style="font-size:13px;color:var(--purple);display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem">← All initiatives</a>
+    <span class="tag tag-purple" style="margin-bottom:1rem">Conflict resolution</span>
+    <h1>Conflict Bridge</h1>
+    <p style="font-size:18px;max-width:580px;margin-top:0.75rem;color:#26215C">A trained mediation network for community disputes, workplace tensions, and political disagreements.</p>
+    <div style="display:flex;gap:1rem;margin-top:2rem">
+      <a href="../get-involved.html" class="btn btn-primary" style="background:var(--purple)">Get trained →</a>
+      <a href="../get-involved.html" class="btn btn-outline">Request a mediator</a>
+    </div>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:4rem">
+    <div class="init-detail">
       <div>
-        <h2 id="philosophy">The philosophy</h2>
-        <p style="margin-top:0.75rem">Human Unity starts from a single observation: the energy driving social collapse is the same energy that could drive social renewal. The anger, the frustration, the desperate sense that something is deeply wrong — none of that is pathological. It is appropriate. The problem is not that people feel it. The problem is where it goes.</p>
-        <p style="margin-top:1rem">In the current environment, that energy flows toward the path of least resistance: partisan outrage, social media conflict, institutional cynicism, and performative opposition. These outlets feel like action. They are not. They are substitutes for action — and highly profitable ones for the platforms and political actors who monetize them.</p>
-        <p style="margin-top:1rem">Human Unity offers a different path. Not a calmer path. Not a less urgent path. A path toward construction rather than destruction. The energy stays high. The direction changes.</p>
+        <h2>Why this exists</h2>
+        <p style="margin-top:0.75rem">Conflict does not go away when it is suppressed. It goes underground, hardens into resentment, and resurfaces later with more force. Communities that avoid conflict do not become harmonious — they become fragile.</p>
+        <p style="margin-top:1rem">Conflict Bridge trains community members in practical conflict navigation — the skills to sit across from someone with a fundamentally different view and move toward resolution rather than entrenchment. Not therapy. Not debate. Navigation.</p>
 
-        <div class="pullquote">This is not about finding common ground through compromise. It is about finding common ground through shared work.</div>
+        <img src="../images/conflict-bridge-1.jpg" alt="Conflict Bridge training" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
 
-        <h2 style="margin-top:2.5rem">What we are not</h2>
-        <div style="display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem">
-          <div style="display:flex;gap:1rem;padding:1.25rem;background:var(--surface);border-radius:var(--radius-sm)">
-            <span style="color:var(--coral);font-size:20px;flex-shrink:0">✗</span>
-            <div><p style="font-weight:500;color:var(--ink);font-size:15px">Not a political party</p><p style="font-size:14px;margin-top:0.25rem">We do not endorse candidates, take policy positions, or engage in electoral politics. Post-partisan is not apolitical — it means the framework works regardless of political affiliation.</p></div>
-          </div>
-          <div style="display:flex;gap:1rem;padding:1.25rem;background:var(--surface);border-radius:var(--radius-sm)">
-            <span style="color:var(--coral);font-size:20px;flex-shrink:0">✗</span>
-            <div><p style="font-weight:500;color:var(--ink);font-size:15px">Not an activist organization</p><p style="font-size:14px;margin-top:0.25rem">We do not organize protests, advocacy campaigns, or policy pushes. We build community infrastructure. That infrastructure enables people to do all of those things more effectively, but that is not our function.</p></div>
-          </div>
-          <div style="display:flex;gap:1rem;padding:1.25rem;background:var(--surface);border-radius:var(--radius-sm)">
-            <span style="color:var(--coral);font-size:20px;flex-shrink:0">✗</span>
-            <div><p style="font-weight:500;color:var(--ink);font-size:15px">Not a therapy or wellness program</p><p style="font-size:14px;margin-top:0.25rem">We treat healing as strategic infrastructure — not as the end goal. Emotional and relational health matters because it enables better collective action. It is a means, not the mission.</p></div>
-          </div>
-          <div style="display:flex;gap:1rem;padding:1.25rem;background:var(--surface);border-radius:var(--radius-sm)">
-            <span style="color:var(--coral);font-size:20px;flex-shrink:0">✗</span>
-            <div><p style="font-weight:500;color:var(--ink);font-size:15px">Not a nonprofit with a budget and a board</p><p style="font-size:14px;margin-top:0.25rem">We are a distributed framework. The goal is to make ourselves less necessary over time as local chapters develop their own capacity and leadership.</p></div>
-          </div>
+        <h2>The training</h2>
+        <p style="margin-top:0.75rem">The Conflict Bridge training is a 3-day intensive built on evidence-based mediation frameworks. It is practical, not theoretical. Participants leave with tools they can use the following week.</p>
+        <div class="fw-steps" style="margin-top:1.5rem">
+          <div class="fw-step"><div class="fw-num" style="background:var(--purple-light);color:var(--purple)">1</div><div><h3>Day one: Understanding conflict</h3><p>How conflict escalates, what needs sit beneath positions, and why most conflict resolution fails. The neuroscience of threat response and how to work with it.</p></div></div>
+          <div class="fw-step"><div class="fw-num" style="background:var(--purple-light);color:var(--purple)">2</div><div><h3>Day two: Navigation tools</h3><p>Active listening, reframing, interest-based negotiation, de-escalation techniques, and how to create psychological safety in a room that doesn't have it.</p></div></div>
+          <div class="fw-step"><div class="fw-num" style="background:var(--purple-light);color:var(--purple)">3</div><div><h3>Day three: Live practice</h3><p>Structured simulations with real-scenario conflict cases. Feedback from certified facilitators. Certification upon completion.</p></div></div>
         </div>
 
-        <h2 style="margin-top:2.5rem">What we are</h2>
-        <p style="margin-top:0.75rem">A meta-framework — a set of tools, networks, and principles designed to help people coordinate collective action regardless of political affiliation, geography, or background. A scalable model for rebuilding the social infrastructure that makes community possible.</p>
-        <p style="margin-top:1rem">The test of Human Unity is not whether people agree with its philosophy. It is whether chapters are forming, projects are completing, communities are strengthening, and leaders are emerging. That is the only measure that matters.</p>
-
-        <h2 style="margin-top:2.5rem" id="faq">Frequently asked questions</h2>
-        <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0">
-          <details style="border-top:0.5px solid var(--border);padding:1.25rem 0;cursor:pointer">
-            <summary style="font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center">Is Human Unity left or right?<span style="color:var(--teal)">+</span></summary>
-            <p style="margin-top:0.75rem;font-size:14px">Neither. The framework is explicitly post-partisan. We have chapters led by people across the political spectrum. The unifying commitment is to local, constructive action — not to any policy position or ideological framework.</p>
-          </details>
-          <details style="border-top:0.5px solid var(--border);padding:1.25rem 0;cursor:pointer">
-            <summary style="font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center">Who funds Human Unity?<span style="color:var(--teal)">+</span></summary>
-            <p style="margin-top:0.75rem;font-size:14px">Currently self-funded by founders and small individual contributions. We do not accept funding from political organizations, PACs, or donors who attach strings. We are developing a sustainable model built on membership and chapter fees.</p>
-          </details>
-          <details style="border-top:0.5px solid var(--border);padding:1.25rem 0;cursor:pointer">
-            <summary style="font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center">How is this different from other community organizations?<span style="color:var(--teal)">+</span></summary>
-            <p style="margin-top:0.75rem;font-size:14px">Most community organizations organize around a cause. Human Unity organizes around capacity — the ability to work together across difference on shared problems. We are not competing with other organizations. We are building the infrastructure that makes all of them more effective.</p>
-          </details>
-          <details style="border-top:0.5px solid var(--border);padding:1.25rem 0;cursor:pointer">
-            <summary style="font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center">What does success look like in 5 years?<span style="color:var(--teal)">+</span></summary>
-            <p style="margin-top:0.75rem;font-size:14px">500+ active chapters in every US state. A trained mediation network available in every major city. A generation of community leaders who have run real projects and built real trust across political lines. A measurable decline in the social isolation metrics that currently define American life.</p>
-          </details>
-          <details style="border-top:0.5px solid var(--border);padding:1.25rem 0;cursor:pointer">
-            <summary style="font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center">Can I start a chapter in my city?<span style="color:var(--teal)">+</span></summary>
-            <p style="margin-top:0.75rem;font-size:14px">Yes. That is explicitly the goal. <a href="start-a-chapter.html" style="color:var(--teal)">See the chapter starter guide</a> — it walks you through everything from identifying your first project to convening your first gathering.</p>
-          </details>
-          <details style="border-top:0.5px solid var(--border);border-bottom:0.5px solid var(--border);padding:1.25rem 0;cursor:pointer">
-            <summary style="font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center">How do I get in touch?<span style="color:var(--teal)">+</span></summary>
-            <p style="margin-top:0.75rem;font-size:14px">Email us at <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a> for general inquiries. For partnership discussions: <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a>.</p>
-          </details>
+        <h2 style="margin-top:3rem">Where mediators deploy</h2>
+        <div class="grid-2" style="margin-top:1.5rem">
+          <div class="card card-surface"><h3>Community disputes</h3><p>Neighbor conflicts, HOA disagreements, local government tensions, and public space disputes.</p></div>
+          <div class="card card-surface"><h3>Workplace tensions</h3><p>Team conflicts, management disputes, and organizational culture breakdowns.</p></div>
+          <div class="card card-surface"><h3>Political disagreements</h3><p>Facilitated cross-partisan dialogue in community settings — structured, safe, and productive.</p></div>
+          <div class="card card-surface"><h3>Chapter conflicts</h3><p>Supporting Human Unity chapters when internal tensions arise — modeling what we teach.</p></div>
         </div>
+
+        <div class="pullquote">Conflict is not the problem. Unnavigated conflict is the problem. Every community that learns to move through conflict together becomes significantly more resilient.</div>
       </div>
 
-      <div style="position:sticky;top:calc(var(--nav-h) + 2rem);height:fit-content">
-        <div style="background:var(--surface);border-radius:var(--radius);padding:1.75rem;margin-bottom:1rem">
-          <h4 style="margin-bottom:1rem">Core principles</h4>
+      <div class="init-sidebar">
+        <div class="sidebar-card">
+          <h4>Training details</h4>
+          <div class="sidebar-item"><span>Format</span><span>3-day intensive</span></div>
+          <div class="sidebar-item"><span>Class size</span><span>Up to 20</span></div>
+          <div class="sidebar-item"><span>Cost</span><span>Sliding scale</span></div>
+          <div class="sidebar-item"><span>Certification</span><span>Included</span></div>
+          <div class="sidebar-item"><span>Pilot success rate</span><span>89%</span></div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Get involved</h4>
           <div style="display:flex;flex-direction:column;gap:0.75rem">
-            <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:2px">◆</span><p style="font-size:14px">Anti-cynicism as praxis</p></div>
-            <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:2px">◆</span><p style="font-size:14px">Energy redirection over suppression</p></div>
-            <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:2px">◆</span><p style="font-size:14px">Post-partisan orientation</p></div>
-            <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:2px">◆</span><p style="font-size:14px">Community as infrastructure</p></div>
-            <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:2px">◆</span><p style="font-size:14px">Distributed leadership model</p></div>
-            <div style="display:flex;gap:10px;align-items:flex-start"><span style="color:var(--teal);font-size:16px;flex-shrink:0;margin-top:2px">◆</span><p style="font-size:14px">Healing as collective strategy</p></div>
+            <a href="../get-involved.html" class="btn btn-primary" style="justify-content:center;background:var(--purple)">Apply for training</a>
+            <a href="../get-involved.html" class="btn btn-outline" style="justify-content:center">Request a mediator</a>
           </div>
         </div>
-        <div style="background:var(--ink);border-radius:var(--radius);padding:1.5rem">
-          <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.5rem">Ready to participate?</p>
-          <p style="color:rgba(255,255,255,0.6);font-size:13px;margin-bottom:1rem">Join the network or start a chapter in your city.</p>
-          <a href="get-involved.html" class="btn btn-primary btn-sm" style="width:100%;justify-content:center">Get involved →</a>
+        <div class="sidebar-card">
+          <h4>Resources</h4>
+          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--purple);margin-bottom:0.6rem">→ Conflict navigation primer</a>
+          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--purple);margin-bottom:0.6rem">→ Community dialogue guide</a>
+          <a href="../resources.html" style="display:flex;align-items:center;gap:8px;font-size:14px;color:var(--purple)">→ De-escalation reference card</a>
         </div>
       </div>
     </div>
@@ -130,7 +105,7 @@
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form action="https://humanunity.us6.list-manage.com/subscribe/post?u=2b32405c64d33eb7405ab0e47&amp;id=91d3047cd1&amp;f_id=000dc2e1f0" method="post" id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
+          <form id="signup-form-footer">
             <div style="display:flex;gap:0">
               <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
               <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
@@ -150,22 +125,22 @@
       </div>
       <div class="footer-col">
         <h5>The work</h5>
-        <a href="problem.html">The problem</a>
-        <a href="framework.html">The framework</a>
-        <a href="initiatives.html">Initiatives</a>
-        <a href="vision.html">Vision</a>
+        <a href="../problem.html">The problem</a>
+        <a href="../framework.html">The framework</a>
+        <a href="../initiatives.html">Initiatives</a>
+        <a href="../vision.html">Vision</a>
       </div>
       <div class="footer-col">
         <h5>Participate</h5>
-        <a href="get-involved.html">Get involved</a>
-        <a href="get-involved.html#chapters">Find a chapter</a>
-        <a href="start-a-chapter.html">Start a chapter</a>
-        <a href="get-involved.html#skills">Offer skills</a>
+        <a href="../get-involved.html">Get involved</a>
+        <a href="../get-involved.html#chapters">Find a chapter</a>
+        <a href="../start-a-chapter.html">Start a chapter</a>
+        <a href="../get-involved.html#skills">Offer skills</a>
       </div>
       <div class="footer-col">
         <h5>Learn</h5>
-        <a href="resources.html">Resources</a>
-        <a href="about.html">About</a>
+        <a href="../resources.html">Resources</a>
+        <a href="../about.html">About</a>
         <a href="about.html#philosophy">Philosophy</a>
         <a href="about.html#faq">FAQ</a>
       </div>
@@ -173,13 +148,12 @@
     <div class="footer-bottom">
       <span>© 2025 Litzenberg &amp; Associates LLC. All rights reserved.</span>
       <div style="display:flex;gap:1.5rem">
-        <a href="privacy.html">Privacy</a>
-        <a href="sms-terms.html">SMS terms</a>
+        <a href="../privacy.html">Privacy</a>
         <a href="mailto:hello@humanunity.us">Contact</a>
       </div>
     </div>
   </div>
 </footer>
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>
