@@ -59,8 +59,9 @@ function handleLogin(e) {
   btn.classList.add('loading');
   btn.disabled = true;
 
-  netlifyIdentity.gotrue.login(email, password, true).then(function() {
-    // redirect handled by 'login' event
+  netlifyIdentity.gotrue.login(email, password, true).then(function(user) {
+    // Redirect directly — don't wait for the 'login' event which can be unreliable
+    window.location.href = '/members/dashboard.html';
   }).catch(function(err) {
     btn.classList.remove('loading');
     btn.disabled = false;
