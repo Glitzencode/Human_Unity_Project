@@ -442,12 +442,11 @@
     btn.disabled = true;
 
     try {
-      // Use Netlify Identity gotrue to confirm the invite
-      const user = await netlifyIdentity.gotrue.confirm(inviteToken, password, true);
+      // acceptInvite is the correct GoTrue method for invite tokens
+      const user = await netlifyIdentity.gotrue.acceptInvite(inviteToken, password, true);
       if (user) {
         showOrientation();
       } else {
-        // Confirm succeeded but no user object returned — redirect to dashboard
         window.location.href = '/members/dashboard.html';
       }
     } catch (err) {
@@ -456,7 +455,6 @@
 
       const errMsg = err.message || '';
 
-      // If error says "already confirmed" or similar — account was created, just redirect
       if (errMsg.toLowerCase().includes('already') || errMsg.toLowerCase().includes('confirmed')) {
         showOrientation();
         return;
