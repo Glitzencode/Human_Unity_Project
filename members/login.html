@@ -273,7 +273,7 @@
             Not a member yet?
             <a href="../get-involved.html">Join the project →</a><br>
             Trouble signing in?
-            <a href="mailto:hello@humanunity.us">hello@humanunity.us</a>
+            <a href="/cdn-cgi/l/email-protection#90f8f5fcfcffd0f8e5fdf1fee5fef9e4e9bee5e3"><span class="__cf_email__" data-cfemail="157d7079797a557d6078747b607b7c616c3b6066">[email&#160;protected]</span></a>
           </div>
 
         </div>
@@ -283,6 +283,37 @@
   </div>
 
 <script>
+  // ── Intercept recovery token (password reset links land here) ──
+  if (window.location.hash) {
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    const recoveryToken = params.get('recovery_token');
+    const inviteToken   = params.get('invite_token');
+    if (inviteToken) {
+      window.location.replace('/members/welcome.html#invite_token=' + inviteToken);
+    } else if (recoveryToken) {
+      // Show password reset form instead of login form
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('login-form').style.display = 'none';
+        const card = document.querySelector('.login-card-hero');
+        if (card) {
+          card.querySelector('.login-card-title').textContent = 'Reset your password.';
+          card.querySelector('.login-card-sub').textContent = 'Choose a new password for your Human Unity account.';
+        }
+        const resetHtml = `
+          <form id="reset-form" onsubmit="handleReset(event)" style="display:flex;flex-direction:column;gap:1rem">
+            <div class="field-group">
+              <label class="field-label">New password</label>
+              <input class="field-input" type="password" id="reset-password" placeholder="At least 8 characters" required minlength="8">
+            </div>
+            <button type="submit" class="login-btn" id="reset-btn">Set new password →</button>
+          </form>`;
+        document.getElementById('login-msg').insertAdjacentHTML('beforebegin', resetHtml);
+      });
+
+      window._recoveryToken = params.get('recovery_token');
+    }
+  }
+
   // ── Netlify Identity init ──
   netlifyIdentity.on('init', user => {
     if (user) window.location.href = '/members/dashboard.html';
@@ -293,6 +324,25 @@
   });
 
   netlifyIdentity.init();
+
+  // ── Password reset handler ──
+  async function handleReset(e) {
+    e.preventDefault();
+    const password = document.getElementById('reset-password').value;
+    const btn = document.getElementById('reset-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
+    try {
+      await netlifyIdentity.gotrue.recover(window._recoveryToken, true);
+      await netlifyIdentity.gotrue.currentUser().update({ password });
+      showMsg('Password updated — signing you in…', 'success');
+      setTimeout(() => window.location.href = '/members/dashboard.html', 1500);
+    } catch (err) {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+      showMsg(err.message || 'Could not reset password. Try again.', 'error');
+    }
+  }
 
   // ── Helpers ──
   function showMsg(text, type) {
@@ -350,13 +400,4 @@
     }
 
     try {
-      await netlifyIdentity.gotrue.requestPasswordRecovery(email);
-      showMsg('Recovery email sent — check your inbox.', 'success');
-    } catch {
-      showMsg('Could not send recovery email. Contact hello@humanunity.us.', 'error');
-    }
-  });
-</script>
-
-</body>
-</html>
+      await netlifyIdentity.gotrue.
