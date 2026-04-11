@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome — Human Unity</title>
   <link rel="stylesheet" href="../css/main.css">
+  <script>
+    // Capture and clear the invite token BEFORE the Identity widget loads.
+    // If the widget sees the token in the hash it shows its own popup —
+    // we remove it from the URL immediately so the widget finds nothing,
+    // and store the token in a variable for our own form to use.
+    (function() {
+      var hash = window.location.hash.substring(1);
+      var params = new URLSearchParams(hash);
+      var token = params.get('invite_token') || params.get('confirmation_token');
+      if (token) {
+        window._inviteToken = token;
+        history.replaceState(null, '', window.location.pathname);
+      }
+    })();
+  </script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     body {
@@ -365,42 +380,24 @@
     </div>
   </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // ── Parse invite token from URL hash ──
-  // Netlify Identity puts it as: #invite_token=TOKEN
-  // or sometimes: #confirmation_token=TOKEN (recovery)
-  function getTokenFromHash() {
-    const hash = window.location.hash.substring(1);
-    const params = new URLSearchParams(hash);
-    return params.get('invite_token') || params.get('confirmation_token') || null;
-  }
+<script>
+  // Token was captured and cleared from hash before widget loaded (see <head>)
+  const inviteToken = window._inviteToken || null;
 
-  const inviteToken = getTokenFromHash();
-
-  // Init Netlify Identity
+  // Init Netlify Identity — widget won't show popup since hash is already cleared
   netlifyIdentity.on('init', user => {
     if (user) {
-      // Already logged in — go straight to orientation
       showOrientation();
       return;
     }
-
     if (!inviteToken) {
-      // No token and not logged in
       document.getElementById('setup-card').style.display = 'none';
       document.getElementById('no-token-card').style.display = 'block';
-      return;
     }
-
-    // Token present — show password setup (already visible by default)
+    // Token present — custom form is already visible, nothing else needed
   });
 
-  // Pass { logo: false } to suppress the auto-popup that Netlify shows
-  // when it detects an invite token — our custom form handles it instead.
   netlifyIdentity.init({ logo: false });
-
-  // Close the widget popup immediately if it somehow opens
-  netlifyIdentity.on('open', () => netlifyIdentity.close());
 
   // ── Password strength indicator ──
   function updateStrength(val) {
