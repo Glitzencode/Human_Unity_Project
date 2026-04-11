@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consent Rounds — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body { background: var(--surface); }
+
+    .dash-nav {
+      background: var(--ink);
+      height: 60px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .dash-nav-logo { font-family: var(--font-display); font-size: 1rem; color: white; text-decoration: none; }
+    .dash-nav-links { display: flex; align-items: center; gap: 0.25rem; }
+    .dash-nav-link { font-size: 13px; color: rgba(255,255,255,0.45); text-decoration: none; padding: 5px 10px; border-radius: 6px; transition: color 0.15s, background 0.15s; }
+    .dash-nav-link:hover { color: white; background: rgba(255,255,255,0.07); }
+    .dash-nav-link.active { color: var(--teal); }
+    .dash-signout-btn { font-size: 13px; color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer; font-family: var(--font-body); padding: 5px 10px; }
+    .dash-signout-btn:hover { color: rgba(255,255,255,0.7); }
+
+    .page-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .page-back { font-size: 13px; color: var(--teal); text-decoration: none; display: inline-flex; align-items: center; gap: 5px; margin-bottom: 1.5rem; }
+    .page-back:hover { text-decoration: underline; }
+    .page-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); font-weight: 600; margin-bottom: 0.4rem; }
+    .page-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--ink); margin-bottom: 0.4rem; }
+    .page-sub { font-size: 15px; color: var(--ink-light); line-height: 1.6; margin-bottom: 2rem; }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      color: var(--ink-light);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      margin-bottom: -1px;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); font-weight: 600; }
+    .tab-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      margin-left: 6px;
+    }
+    .tab-count.amber { background: var(--amber-light); color: #7A4000; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Proposal card ── */
+    .proposal-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+
+    .proposal-card-header {
+      padding: 1.5rem 1.75rem 1.25rem;
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .proposal-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .proposal-title {
+      font-family: var(--font-display);
+      font-size: 1.125rem;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .proposal-status-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-open     { background: var(--teal-light); color: var(--teal-dark); }
+    .status-dialogue { background: var(--amber-light); color: #7A4000; }
+    .status-approved { background: #E6F4EA; color: #1A6630; }
+    .status-withdrawn { background: var(--surface-mid); color: var(--ink-light); }
+
+    .proposal-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      margin-bottom: 1rem;
+    }
+
+    .proposal-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.5rem;
+      font-size: 13px;
+      color: var(--ink-light);
+    }
+
+    .proposal-detail-item { display: flex; align-items: center; gap: 5px; }
+
+    /* Countdown */
+    .countdown-bar-wrap {
+      padding: 1rem 1.75rem;
+      border-bottom: 0.5px solid var(--border);
+      background: var(--surface);
+    }
+    .countdown-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+    .countdown-label { font-size: 12px; color: var(--ink-light); font-weight: 500; }
+    .countdown-value { font-size: 12px; font-weight: 700; color: var(--amber); }
+    .countdown-bar-bg {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+    .countdown-bar-fill {
+      height: 100%;
+      background: var(--teal);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+    .countdown-bar-fill.urgent { background: var(--amber); }
+
+    /* Responses tally */
+    .responses-section {
+      padding: 1rem 1.75rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .response-tally {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .tally-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+    .dot-consent   { background: var(--teal); }
+    .dot-objection { background: var(--coral); }
+    .dot-pending   { background: #DDD; }
+    .tally-label { font-weight: 400; color: var(--ink-light); }
+
+    /* Action area */
+    .action-section {
+      padding: 1.25rem 1.75rem;
+    }
+
+    .already-responded {
+      font-size: 14px;
+      color: var(--ink-light);
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+    }
+    .already-responded strong { color: var(--ink); }
+
+    .action-btns {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .btn-consent {
+      padding: 10px 20px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-consent:hover { background: var(--teal-mid); }
+    .btn-consent:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-object {
+      padding: 10px 20px;
+      background: white;
+      color: var(--ink);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-object:hover { border-color: var(--coral); color: var(--coral); }
+
+    .btn-withdraw {
+      padding: 10px 20px;
+      background: white;
+      color: var(--ink-light);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .btn-withdraw:hover { border-color: var(--ink-light); color: var(--ink); }
+
+    /* Objection form */
+    .objection-form {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+    }
+    .objection-form.open { display: block; }
+    .objection-form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-mid);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .objection-textarea {
+      width: 100%;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      background: white;
+      resize: vertical;
+      min-height: 90px;
+      outline: none;
+      margin-bottom: 0.75rem;
+    }
+    .objection-textarea:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-light);
+    }
+    .objection-hint {
+      font-size: 12px;
+      color: var(--ink-light);
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    .btn-submit-objection {
+      padding: 9px 20px;
+      background: var(--ink);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 13px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-submit-objection:hover { background: #2A2A4A; }
+
+    /* Dialogue thread */
+    .dialogue-section {
+      border-top: 0.5px solid var(--border);
+      padding: 1.25rem 1.75rem;
+      background: #FFFBF5;
+    }
+    .dialogue-header {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: #7A4000;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dialogue-thread {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .thread-item {
+      padding: 0.875rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 0.5px solid var(--border);
+    }
+    .thread-item.objection-item { background: #FFF3F0; border-color: rgba(216,90,48,0.2); }
+    .thread-item.consent-item { background: var(--teal-light); border-color: rgba(42,191,163,0.2); }
+    .thread-item.neutral-item { background: white; }
+    .thread-meta {
+      font-size: 11px;
+      color: var(--ink-light);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .thread-type {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-size: 10px;
+    }
+    .type-objection { color: var(--coral); }
+    .type-consent   { color: var(--teal-dark); }
+    .thread-text { font-size: 14px; color: var(--ink); line-height: 1.55; }
+
+    /* Empty state */
+    .empty-state {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .empty-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .empty-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 0.4rem; }
+    .empty-text { font-size: 13px; color: var(--ink-light); line-height: 1.6; margin-bottom: 1.25rem; }
+
+    /* Skeleton */
+    .skeleton-card { background: white; border-radius: var(--radius); border: 0.5px solid var(--border); padding: 1.5rem; margin-bottom: 1rem; }
+    .skeleton-line { height: 14px; background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%); background-size: 200% 100%; border-radius: 4px; animation: shimmer 1.4s infinite; margin-bottom: 10px; }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* Action feedback */
+    .action-msg {
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      margin-top: 0.75rem;
+      display: none;
+    }
+    .action-msg.success { background: var(--teal-light); color: var(--teal-dark); }
+    .action-msg.error   { background: rgba(216,90,48,0.08); color: #B84020; }
+  </style>
+</head>
+<body>
+
+  <nav class="dash-nav">
+    <a href="../index.html" class="dash-nav-logo">Human Unity</a>
+    <div style="display:flex;align-items:center;gap:0.5rem">
+      <div class="dash-nav-links">
+        <a href="dashboard.html" class="dash-nav-link">Dashboard</a>
+        <a href="propose.html" class="dash-nav-link">Propose event</a>
+        <a href="consent.html" class="dash-nav-link active">Consent rounds</a>
+      </div>
+      <button class="dash-signout-btn" onclick="netlifyIdentity.logout()">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="page-wrap">
+
+    <a href="dashboard.html" class="page-back">← Dashboard</a>
+
+    <p class="page-label">Sociocratic governance</p>
+    <h1 class="page-title">Consent rounds.</h1>
+    <p class="page-sub">Proposed events open a 5-day consent round. Consent means "I can work with this." An objection means "I have a specific concern" — not a veto, but an invitation to resolve something together.</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('open', this)">
+        Open <span class="tab-count" id="count-open">–</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('dialogue', this)">
+        In dialogue <span class="tab-count amber" id="count-dialogue">–</span>
+      </button>
+      <button class="tab-btn" onclick="switchTab('approved', this)">
+        Approved <span class="tab-count" id="count-approved">–</span>
+      </button>
+    </div>
+
+    <!-- Open proposals -->
+    <div class="tab-panel active" id="panel-open">
+      <div id="open-container">
+        <div class="skeleton-card">
+          <div class="skeleton-line" style="width:55%"></div>
+          <div class="skeleton-line" style="width:80%"></div>
+          <div class="skeleton-line" style="width:40%"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- In dialogue -->
+    <div class="tab-panel" id="panel-dialogue">
+      <div id="dialogue-container"></div>
+    </div>
+
+    <!-- Approved -->
+    <div class="tab-panel" id="panel-approved">
+      <div id="approved-container"></div>
+    </div>
+
+  </div>
+
+<script>
+  // ── Auth guard ──
+  netlifyIdentity.on('init', user => {
+    if (!user) window.location.href = '/members/login.html';
+    else initPage(user);
+  });
+  netlifyIdentity.on('logout', () => { window.location.href = '/members/login.html'; });
+  netlifyIdentity.init();
+
+  let _user = null;
+  let _proposals = [];
+  let _chapters = [];
+
+  // ── Tabs ──
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  // ── Helpers ──
+  function countdownText(isoStr) {
+    const diff = new Date(isoStr) - new Date();
+    if (diff <= 0) return 'Window closed';
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const days  = Math.floor(hours / 24);
+    const remH  = hours % 24;
+    if (days > 0) return `${days}d ${remH}h remaining`;
+    return `${hours}h remaining`;
+  }
+
+  function countdownPct(proposedAt, windowClosesAt) {
+    const total   = new Date(windowClosesAt) - new Date(proposedAt);
+    const elapsed = new Date() - new Date(proposedAt);
+    return Math.min(100, Math.max(0, (elapsed / total) * 100));
+  }
+
+  function formatDate(str) {
+    return new Date(str + 'T00:00:00').toLocaleDateString('en-US', {
+      weekday: 'long', month: 'long', day: 'numeric'
+    });
+  }
+
+  function timeAgo(isoStr) {
+    const diff = new Date() - new Date(isoStr);
+    const mins  = Math.floor(diff / 60000);
+    const hours = Math.floor(mins / 60);
+    const days  = Math.floor(hours / 24);
+    if (days > 0)  return `${days}d ago`;
+    if (hours > 0) return `${hours}h ago`;
+    if (mins > 0)  return `${mins}m ago`;
+    return 'just now';
+  }
+
+  // ── Render a single proposal card ──
+  function renderCard(proposal, userEmail) {
+    const chapter = _chapters.find(c => c.id === proposal.chapterId);
+    const chapterName = chapter ? `${chapter.name}, ${chapter.state}` : proposal.chapterId;
+
+    const consents   = proposal.responses.filter(r => r.type === 'consent');
+    const objections = proposal.responses.filter(r => r.type === 'objection');
+    const myResponse = proposal.responses.find(r => r.member === userEmail);
+    const isOpen     = proposal.status === 'open';
+    const isDialogue = proposal.status === 'dialogue';
+    const isApproved = proposal.status === 'approved';
+    const isProposer = proposal.proposedBy === userEmail;
+
+    const pct     = countdownPct(proposal.proposedAt, proposal.windowClosesAt);
+    const urgent  = pct > 75;
+
+    const statusLabels = { open: 'Open', dialogue: 'In dialogue', approved: 'Approved', withdrawn: 'Withdrawn' };
+    const statusClasses = { open: 'status-open', dialogue: 'status-dialogue', approved: 'status-approved', withdrawn: 'status-withdrawn' };
+
+    // Dialogue thread HTML
+    const threadHtml = (isDialogue || objections.length > 0)
+      ? `<div class="dialogue-section">
+          <div class="dialogue-header">⚠ Dialogue thread</div>
+          <div class="dialogue-thread">
+            ${proposal.responses.map(r => `
+              <div class="thread-item ${r.type === 'objection' ? 'objection-item' : 'consent-item'}">
+                <div class="thread-meta">
+                  <span class="thread-type ${r.type === 'objection' ? 'type-objection' : 'type-consent'}">${r.type}</span>
+                  <span>·</span>
+                  <span>${r.member}</span>
+                  <span>·</span>
+                  <span>${timeAgo(r.at)}</span>
+                </div>
+                ${r.reason ? `<div class="thread-text">${r.reason}</div>` : ''}
+              </div>`).join('')}
+          </div>
+        </div>`
+      : '';
+
+    // Action area
+    let actionHtml = '';
+    if (isApproved) {
+      actionHtml = `<div class="already-responded">✅ This proposal was approved and published to the calendar.</div>`;
+    } else if (myResponse) {
+      actionHtml = `<div class="already-responded">You responded: <strong>${myResponse.type}</strong>${myResponse.reason ? ` — "${myResponse.reason}"` : ''}</div>`;
+      if (isProposer && isDialogue) {
+        actionHtml += `
+          <div style="margin-top:0.75rem">
+            <button class="btn-withdraw" onclick="withdrawProposal('${proposal.id}', this)">Withdraw this proposal</button>
+          </div>`;
+      }
+    } else if (isOpen) {
+      actionHtml = `
+        <div class="action-btns">
+          <button class="btn-consent" onclick="respond('${proposal.id}', 'consent', this)">Consent ✓</button>
+          <button class="btn-object" onclick="toggleObjForm('${proposal.id}', this)">Raise objection…</button>
+          ${isProposer ? `<button class="btn-withdraw" onclick="withdrawProposal('${proposal.id}', this)">Withdraw</button>` : ''}
+        </div>
+        <div class="objection-form" id="obj-form-${proposal.id}">
+          <div class="objection-form-label">Your objection</div>
+          <p class="objection-hint">Be specific: what harm or problem does this proposal create? An objection should be based on the project's wellbeing, not personal preference.</p>
+          <textarea class="objection-textarea" id="obj-text-${proposal.id}" placeholder="Describe the specific concern…"></textarea>
+          <button class="btn-submit-objection" onclick="respond('${proposal.id}', 'objection', this)">Submit objection</button>
+        </div>
+        <div class="action-msg" id="action-msg-${proposal.id}"></div>`;
+    } else if (isDialogue) {
+      actionHtml = `<div class="already-responded" style="background:#FFFBF5;border-color:rgba(255,183,77,0.3);color:#7A4000;">This proposal is in dialogue. The proposer and objector(s) are working to resolve the concern.</div>`;
+    }
+
+    return `
+      <div class="proposal-card" id="pcard-${proposal.id}">
+        <div class="proposal-card-header">
+          <div class="proposal-card-top">
+            <div>
+              <div class="proposal-title">${proposal.title}</div>
+              <div style="font-size:12px;color:var(--ink-light);margin-top:3px">${chapterName} · Proposed by ${proposal.proposedBy} · ${timeAgo(proposal.proposedAt)}</div>
+            </div>
+            <span class="proposal-status-badge ${statusClasses[proposal.status] || ''}">${statusLabels[proposal.status] || proposal.status}</span>
+          </div>
+          <p class="proposal-desc">${proposal.description}</p>
+          <div class="proposal-details">
+            <span class="proposal-detail-item">📅 ${formatDate(proposal.proposedDate)} · ${proposal.proposedTime}</span>
+            <span class="proposal-detail-item">📍 ${proposal.location}</span>
+          </div>
+        </div>
+
+        ${isOpen ? `
+        <div class="countdown-bar-wrap">
+          <div class="countdown-row">
+            <span class="countdown-label">Consent window</span>
+            <span class="countdown-value">${countdownText(proposal.windowClosesAt)}</span>
+          </div>
+          <div class="countdown-bar-bg">
+            <div class="countdown-bar-fill ${urgent ? 'urgent' : ''}" style="width:${pct}%"></div>
+          </div>
+        </div>` : ''}
+
+        <div class="responses-section">
+          <div class="response-tally">
+            <span class="tally-dot dot-consent"></span>
+            <span>${consents.length} consented</span>
+          </div>
+          <div class="response-tally">
+            <span class="tally-dot dot-objection"></span>
+            <span>${objections.length} objection${objections.length !== 1 ? 's' : ''}</span>
+          </div>
+        </div>
+
+        ${threadHtml}
+
+        <div class="action-section">${actionHtml}</div>
+      </div>`;
+  }
+
+  // ── Render all panels ──
+  function renderAll(userEmail) {
+    const open     = _proposals.filter(p => p.status === 'open');
+    const dialogue = _proposals.filter(p => p.status === 'dialogue');
+    const approved = _proposals.filter(p => p.status === 'approved');
+
+    document.getElementById('count-open').textContent     = open.length;
+    document.getElementById('count-dialogue').textContent = dialogue.length;
+    document.getElementById('count-approved').textContent = approved.length;
+
+    const openEl = document.getElementById('open-container');
+    openEl.innerHTML = open.length
+      ? open.map(p => renderCard(p, userEmail)).join('')
+      : `<div class="empty-state">
+          <div class="empty-icon">✅</div>
+          <div class="empty-title">No open consent rounds</div>
+          <div class="empty-text">When a member proposes an event, the consent round will appear here.</div>
+          <a href="propose.html" class="btn btn-primary" style="font-size:14px;padding:10px 22px;">Propose an event →</a>
+        </div>`;
+
+    const dialogueEl = document.getElementById('dialogue-container');
+    dialogueEl.innerHTML = dialogue.length
+      ? dialogue.map(p => renderCard(p, userEmail)).join('')
+      : `<div class="empty-state">
+          <div class="empty-icon">🤝</div>
+          <div class="empty-title">No active dialogues</div>
+          <div class="empty-text">When an objection is raised and a window closes, the proposal enters dialogue here.</div>
+        </div>`;
+
+    const approvedEl = document.getElementById('approved-container');
+    approvedEl.innerHTML = approved.length
+      ? approved.map(p => renderCard(p, userEmail)).join('')
+      : `<div class="empty-state">
+          <div class="empty-icon">🗓</div>
+          <div class="empty-title">No approved proposals yet</div>
+          <div class="empty-text">Proposals that complete their consent round with no objections will appear here.</div>
+        </div>`;
+  }
+
+  // ── Toggle objection form ──
+  function toggleObjForm(proposalId, btn) {
+    const form = document.getElementById('obj-form-' + proposalId);
+    form.classList.toggle('open');
+  }
+
+  // ── Respond (consent or objection) ──
+  async function respond(proposalId, type, btn) {
+    const reason = type === 'objection'
+      ? document.getElementById('obj-text-' + proposalId)?.value?.trim()
+      : null;
+
+    if (type === 'objection' && !reason) {
+      showMsg(proposalId, 'Please describe your objection before submitting.', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    const originalText = btn.textContent;
+    btn.textContent = '…';
+
+    try {
+      const token = await _user.jwt();
+      const res = await fetch('/.netlify/functions/respond-to-proposal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        },
+        body: JSON.stringify({ proposalId, type, reason }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Request failed');
+
+      // Reload data
+      await loadData();
+
+    } catch (err) {
+      btn.disabled = false;
+      btn.textContent = originalText;
+      showMsg(proposalId, err.message || 'Something went wrong.', 'error');
+    }
+  }
+
+  // ── Withdraw proposal ──
+  async function withdrawProposal(proposalId, btn) {
+    if (!confirm('Are you sure you want to withdraw this proposal? This cannot be undone.')) return;
+
+    btn.disabled = true;
+    try {
+      const token = await _user.jwt();
+      const res = await fetch('/.netlify/functions/respond-to-proposal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token,
+        },
+        body: JSON.stringify({ proposalId, type: 'withdraw' }),
+      });
+      if (res.ok) await loadData();
+      else {
+        const d = await res.json();
+        alert(d.message || 'Could not withdraw.');
+        btn.disabled = false;
+      }
+    } catch {
+      alert('Network error. Please try again.');
+      btn.disabled = false;
+    }
+  }
+
+  function showMsg(proposalId, text, type) {
+    const el = document.getElementById('action-msg-' + proposalId);
+    if (!el) return;
+    el.textContent = text;
+    el.className = 'action-msg ' + type;
+    el.style.display = 'block';
+  }
+
+  // ── Load data ──
+  async function loadData() {
+    const [pRes, cRes] = await Promise.all([
+      fetch('/data/proposals.json'),
+      fetch('/data/chapters.json'),
+    ]);
+    _proposals = await pRes.json();
+    _chapters  = await cRes.json();
+    renderAll(_user.email);
+  }
+
+  async function initPage(user) {
+    _user = user;
+    await loadData();
+  }
+</script>
+
+</body>
+</html>
