@@ -5,11 +5,11 @@
 //   - Window closed + objections → move to 'dialogue', notify members
 
 const schedule = require('@netlify/functions').schedule;
+const { sendEmail } = require('./utils/mailer');
 
 const GITHUB_TOKEN  = process.env.GITHUB_TOKEN;
 const GITHUB_REPO   = process.env.GITHUB_REPO;
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
-const MC_API_KEY    = process.env.MAILCHIMP_API_KEY;
 
 async function getFile(path) {
   const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${path}?ref=${GITHUB_BRANCH}`;
@@ -39,23 +39,6 @@ async function writeFile(path, content, sha, message) {
   if (!res.ok) throw new Error(`GitHub PUT failed: ${(await res.json()).message}`);
 }
 
-async function sendTransactional({ to, subject, htmlBody }) {
-  if (!MC_API_KEY || !to.length) return;
-  await fetch('https://mandrillapp.com/api/1.0/messages/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      key: MC_API_KEY,
-      message: {
-        html: htmlBody,
-        subject,
-        from_email: 'hello@humanunity.us',
-        from_name: 'Human Unity',
-        to: to.map(e => ({ email: e, type: 'to' })),
-      },
-    }),
-  });
-}
 
 function approvalHtml(proposal, chapter) {
   return `<html><body style="font-family:sans-serif;background:#F4F3EF;padding:32px">
@@ -140,7 +123,7 @@ const handler = async () => {
         console.log(`Auto-approved: "${proposal.title}" (${proposal.id})`);
 
         if (members.length && chapter) {
-          await sendTransactional({
+          await sendEmail({
             to: members,
             subject: `"${proposal.title}" is on the calendar 🗓`,
             htmlBody: approvalHtml(proposal, chapter),
@@ -155,7 +138,7 @@ const handler = async () => {
         console.log(`Entered dialogue: "${proposal.title}" (${proposal.id})`);
 
         if (members.length && chapter) {
-          await sendTransactional({
+          await sendEmail({
             to: members,
             subject: `Dialogue needed: "${proposal.title}"`,
             htmlBody: dialogueHtml(proposal, chapter),

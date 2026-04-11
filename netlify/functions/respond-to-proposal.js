@@ -5,10 +5,11 @@
 // - On objection: notifies proposer by email
 // - If window has closed with no objections: moves to events.json + notifies chapter
 
+const { sendEmail } = require('./utils/mailer');
+
 const GITHUB_TOKEN  = process.env.GITHUB_TOKEN;
 const GITHUB_REPO   = process.env.GITHUB_REPO;
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
-const MC_API_KEY    = process.env.MAILCHIMP_API_KEY;
 
 // ── GitHub helpers ───────────────────────────────────────────────
 
@@ -50,29 +51,6 @@ async function writeFile(path, content, sha, message) {
   return res.json();
 }
 
-// ── Mailchimp / Mandrill helper ───────────────────────────────────
-
-async function sendTransactional({ to, subject, htmlBody }) {
-  if (!MC_API_KEY) {
-    console.warn('MAILCHIMP_API_KEY not set — skipping email');
-    return;
-  }
-  const res = await fetch('https://mandrillapp.com/api/1.0/messages/send', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      key: MC_API_KEY,
-      message: {
-        html: htmlBody,
-        subject,
-        from_email: 'hello@humanunity.us',
-        from_name: 'Human Unity',
-        to: to.map(email => ({ email, type: 'to' })),
-      },
-    }),
-  });
-  if (!res.ok) console.error('Mandrill error:', await res.text());
-}
 
 // ── Email templates ──────────────────────────────────────────────
 
@@ -313,7 +291,7 @@ exports.handler = async (event) => {
 
       // Notify all chapter members
       if (allMembers.length > 0) {
-        await sendTransactional({
+        await sendEmail({
           to: allMembers,
           subject: `"${proposal.title}" is on the calendar 🗓`,
           htmlBody: approvalEmailHtml({ proposal, chapter }),
@@ -323,7 +301,7 @@ exports.handler = async (event) => {
 
     // If objection raised — notify proposer
     if (type === 'objection') {
-      await sendTransactional({
+      await sendEmail({
         to: [proposal.proposedBy],
         subject: `An objection was raised on your proposal: "${proposal.title}"`,
         htmlBody: objectionEmailHtml({
@@ -338,7 +316,7 @@ exports.handler = async (event) => {
     // If entered dialogue — notify all members
     if (proposal.status === 'dialogue') {
       if (allMembers.length > 0) {
-        await sendTransactional({
+        await sendEmail({
           to: allMembers,
           subject: `Dialogue needed: "${proposal.title}"`,
           htmlBody: dialogueEmailHtml({ proposal, chapter }),

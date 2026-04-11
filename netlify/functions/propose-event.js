@@ -2,15 +2,13 @@
 // Called when a member submits a new event proposal
 // - Validates auth via Netlify Identity JWT
 // - Appends to /data/proposals.json via GitHub API
-// - Sends Mailchimp transactional email to all chapter members
+// - Sends email notifications via Namecheap Private Email SMTP
 
-const { createClient } = require('@supabase/supabase-js'); // not used — just future-proofing comment
+const { sendEmail } = require('./utils/mailer');
 
 const GITHUB_TOKEN  = process.env.GITHUB_TOKEN;
 const GITHUB_REPO   = process.env.GITHUB_REPO;   // e.g. "Glitzencode/Human_Unity_Project"
 const GITHUB_BRANCH = process.env.GITHUB_BRANCH || 'main';
-const MC_API_KEY    = process.env.MAILCHIMP_API_KEY;   // add this to Netlify env vars
-const MC_SERVER     = process.env.MAILCHIMP_SERVER;    // e.g. "us6"
 
 // ── GitHub helpers ──────────────────────────────────────────────
 
@@ -52,34 +50,6 @@ async function writeFile(path, content, sha, message) {
   return res.json();
 }
 
-// ── Mailchimp transactional (Mandrill) helper ────────────────────
-// Note: Mailchimp transactional requires the Mandrill add-on.
-// If you don't have it, swap this for a simple Mailchimp campaign
-// or use a free transactional service like Resend or Postmark.
-
-async function sendTransactional({ to, subject, htmlBody }) {
-  if (!MC_API_KEY) {
-    console.warn('MAILCHIMP_API_KEY not set — skipping email notification');
-    return;
-  }
-
-  const res = await fetch(`https://mandrillapp.com/api/1.0/messages/send`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      key: MC_API_KEY,
-      message: {
-        html: htmlBody,
-        subject,
-        from_email: 'hello@humanunity.us',
-        from_name: 'Human Unity',
-        to: to.map(email => ({ email, type: 'to' })),
-      },
-    }),
-  });
-
-  if (!res.ok) console.error('Mandrill send failed:', await res.text());
-}
 
 function proposalEmailHtml({ proposal, chapter, windowClosesAt }) {
   const closeDate = new Date(windowClosesAt).toLocaleDateString('en-US', {
@@ -243,7 +213,7 @@ exports.handler = async (event) => {
     // Send email notifications to chapter members
     const recipients = (chapter.memberEmails || []).filter(e => e !== user.email);
     if (recipients.length > 0) {
-      await sendTransactional({
+      await sendEmail({
         to: recipients,
         subject: `New event proposed: "${title}" — you have 5 days to respond`,
         htmlBody: proposalEmailHtml({ proposal, chapter, windowClosesAt: windowClosesAt.toISOString() }),
