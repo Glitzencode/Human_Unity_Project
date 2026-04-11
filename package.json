@@ -1,0 +1,9 @@
+{
+  "name": "humanunity",
+  "version": "1.0.0",
+  "description": "Human Unity project root dependencies",
+  "dependencies": {
+    "@netlify/functions": "^2.6.0",
+    "nodemailer": "^6.9.13"
+  }
+}
