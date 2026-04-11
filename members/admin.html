@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    body { background: var(--surface); }
+
+    .dash-nav {
+      background: var(--ink);
+      height: 60px;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .dash-nav-logo { font-family: var(--font-display); font-size: 1rem; color: white; text-decoration: none; }
+    .dash-nav-right { display: flex; align-items: center; gap: 0.75rem; }
+    .admin-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: rgba(216,90,48,0.25); color: #F0876A; padding: 3px 8px; border-radius: 4px; }
+    .dash-signout-btn { font-size: 13px; color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer; font-family: var(--font-body); padding: 5px 10px; }
+    .dash-signout-btn:hover { color: rgba(255,255,255,0.7); }
+
+    .admin-wrap {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+    }
+
+    .page-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral); font-weight: 600; margin-bottom: 0.4rem; }
+    .page-title { font-family: var(--font-display); font-size: 1.75rem; color: var(--ink); margin-bottom: 0.4rem; }
+    .page-sub { font-size: 15px; color: var(--ink-light); line-height: 1.6; margin-bottom: 2rem; }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+      gap: 0;
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      font-family: var(--font-body);
+      color: var(--ink-light);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      margin-bottom: -1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .tab-btn:hover { color: var(--ink); }
+    .tab-btn.active { color: var(--ink); border-bottom-color: var(--ink); font-weight: 600; }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Cards & tables ── */
+    .admin-card {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      margin-bottom: 1.25rem;
+      overflow: hidden;
+    }
+    .admin-card-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-card-title { font-size: 15px; font-weight: 600; color: var(--ink); }
+    .admin-card-meta { font-size: 13px; color: var(--ink-light); }
+    .admin-card-body { padding: 1.25rem 1.5rem; }
+
+    /* ── Form styles ── */
+    .admin-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
+
+    .field-group { display: flex; flex-direction: column; gap: 0.35rem; }
+    .field-label { font-size: 12px; font-weight: 600; color: var(--ink-mid); letter-spacing: 0.05em; text-transform: uppercase; }
+    .field-hint  { font-size: 12px; color: var(--ink-light); margin-top: -0.15rem; }
+    .field-input, .field-textarea, .field-select {
+      width: 100%;
+      padding: 10px 13px;
+      font-size: 14px;
+      font-family: var(--font-body);
+      background: var(--surface);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-sm);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .field-input:focus, .field-textarea:focus, .field-select:focus {
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px var(--teal-light);
+      background: white;
+    }
+    .field-textarea { resize: vertical; min-height: 80px; }
+
+    /* ── Buttons ── */
+    .btn-save {
+      padding: 11px 24px;
+      background: var(--teal);
+      color: white;
+      border: none;
+      border-radius: var(--radius-pill);
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+      position: relative;
+      align-self: flex-start;
+    }
+    .btn-save:hover { background: var(--teal-mid); }
+    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-save.loading { color: transparent; }
+    .btn-save.loading::after {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      width: 16px; height: 16px;
+      margin: -8px 0 0 -8px;
+      border: 2px solid rgba(255,255,255,0.35);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .btn-danger {
+      padding: 7px 14px;
+      background: white;
+      color: var(--coral);
+      border: 0.5px solid rgba(216,90,48,0.3);
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-danger:hover { background: rgba(216,90,48,0.06); }
+
+    .btn-edit {
+      padding: 7px 14px;
+      background: white;
+      color: var(--ink);
+      border: 0.5px solid var(--border-mid);
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+      font-family: var(--font-body);
+      cursor: pointer;
+    }
+    .btn-edit:hover { border-color: var(--teal); color: var(--teal); }
+
+    /* ── List items ── */
+    .list-item {
+      padding: 1rem 1.5rem;
+      border-bottom: 0.5px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .list-item:last-child { border-bottom: none; }
+    .list-item-title { font-size: 14px; font-weight: 600; color: var(--ink); margin-bottom: 2px; }
+    .list-item-meta  { font-size: 12px; color: var(--ink-light); line-height: 1.5; }
+    .list-item-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+    /* Status badges */
+    .badge { font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+    .badge-active   { background: var(--teal-light); color: var(--teal-dark); }
+    .badge-approved { background: #E6F4EA; color: #1A6630; }
+    .badge-open     { background: var(--blue-light); color: var(--blue-text); }
+    .badge-dialogue { background: var(--amber-light); color: #7A4000; }
+
+    /* Save feedback */
+    .save-msg {
+      font-size: 13px;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      margin-top: 0.5rem;
+      display: none;
+    }
+    .save-msg.success { background: var(--teal-light); color: var(--teal-dark); display: block; }
+    .save-msg.error   { background: rgba(216,90,48,0.08); color: #B84020; display: block; }
+
+    /* Access denied */
+    .access-denied {
+      background: white;
+      border-radius: var(--radius);
+      border: 0.5px solid var(--border);
+      padding: 3rem 2rem;
+      text-align: center;
+      max-width: 480px;
+      margin: 4rem auto;
+    }
+    .access-denied h2 { font-size: 1.25rem; color: var(--ink); margin-bottom: 0.5rem; }
+    .access-denied p  { font-size: 14px; color: var(--ink-light); line-height: 1.6; }
+
+    /* Section divider */
+    .section-divider {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+      color: var(--ink-light);
+      margin: 2rem 0 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="dash-nav">
+    <a href="../index.html" class="dash-nav-logo">Human Unity</a>
+    <div class="dash-nav-right">
+      <span class="admin-badge">Admin</span>
+      <button class="dash-signout-btn" onclick="netlifyIdentity.logout()">Sign out</button>
+    </div>
+  </nav>
+
+  <div class="admin-wrap" id="admin-wrap" style="display:none">
+
+    <p class="page-label">Network administration</p>
+    <h1 class="page-title">Admin panel.</h1>
+    <p class="page-sub">Manage chapters, events, and proposals across the Human Unity network. Changes are committed directly to the data files.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('chapters', this)">Chapters</button>
+      <button class="tab-btn" onclick="switchTab('events', this)">Events</button>
+      <button class="tab-btn" onclick="switchTab('proposals', this)">Proposals</button>
+      <button class="tab-btn" onclick="switchTab('members', this)">Member emails</button>
+    </div>
+
+    <!-- ══ CHAPTERS TAB ══ -->
+    <div class="tab-panel active" id="panel-chapters">
+
+      <div class="section-divider">Existing chapters</div>
+      <div class="admin-card" id="chapters-list">
+        <div style="padding:1.5rem;color:var(--ink-light);font-size:14px">Loading…</div>
+      </div>
+
+      <div class="section-divider">Add new chapter</div>
+      <div class="admin-card">
+        <div class="admin-card-body">
+          <form class="admin-form" onsubmit="saveChapter(event)">
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">City name *</label>
+                <input class="field-input" id="ch-name" placeholder="e.g. Waterville" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">State (2-letter) *</label>
+                <input class="field-input" id="ch-state" placeholder="OH" maxlength="2" style="text-transform:uppercase" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Latitude *</label>
+                <input class="field-input" id="ch-lat" type="number" step="any" placeholder="41.5006" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Longitude *</label>
+                <input class="field-input" id="ch-lng" type="number" step="any" placeholder="-83.7185" required>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Chapter ethos</label>
+              <p class="field-hint">1–3 sentences describing what this chapter stands for.</p>
+              <textarea class="field-textarea" id="ch-ethos" placeholder="We believe…"></textarea>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Focus areas (comma-separated)</label>
+              <input class="field-input" id="ch-focus" placeholder="Community Ground, Mutual Aid">
+            </div>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Status</label>
+                <select class="field-select" id="ch-status">
+                  <option value="new">Just started</option>
+                  <option value="forming">Forming</option>
+                  <option value="active">Active</option>
+                </select>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Founded date</label>
+                <input class="field-input" id="ch-founded" type="date">
+              </div>
+            </div>
+            <button type="submit" class="btn-save" id="btn-save-chapter">Add chapter →</button>
+            <div class="save-msg" id="msg-chapter"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ EVENTS TAB ══ -->
+    <div class="tab-panel" id="panel-events">
+
+      <div class="section-divider">Upcoming events</div>
+      <div class="admin-card" id="events-list">
+        <div style="padding:1.5rem;color:var(--ink-light);font-size:14px">Loading…</div>
+      </div>
+
+      <div class="section-divider">Add event directly (bypasses consent round)</div>
+      <div class="admin-card">
+        <div class="admin-card-body">
+          <form class="admin-form" onsubmit="saveEvent(event)">
+            <div class="field-group">
+              <label class="field-label">Chapter *</label>
+              <select class="field-select" id="ev-chapter" required>
+                <option value="">Loading chapters…</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Event title *</label>
+              <input class="field-input" id="ev-title" placeholder="e.g. First Gathering" required>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Description *</label>
+              <textarea class="field-textarea" id="ev-desc" required></textarea>
+            </div>
+            <div class="form-row-3">
+              <div class="field-group">
+                <label class="field-label">Date *</label>
+                <input class="field-input" id="ev-date" type="date" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Time *</label>
+                <input class="field-input" id="ev-time" type="time" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Status</label>
+                <select class="field-select" id="ev-status">
+                  <option value="approved">Approved</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Location *</label>
+              <input class="field-input" id="ev-location" placeholder="Full address" required>
+            </div>
+            <button type="submit" class="btn-save" id="btn-save-event">Add event →</button>
+            <div class="save-msg" id="msg-event"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PROPOSALS TAB ══ -->
+    <div class="tab-panel" id="panel-proposals">
+      <div class="section-divider">All proposals</div>
+      <div class="admin-card" id="proposals-list">
+        <div style="padding:1.5rem;color:var(--ink-light);font-size:14px">Loading…</div>
+      </div>
+    </div>
+
+    <!-- ══ MEMBERS TAB ══ -->
+    <div class="tab-panel" id="panel-members">
+      <div class="section-divider">Chapter member email rosters</div>
+      <p style="font-size:14px;color:var(--ink-light);margin-bottom:1.5rem;line-height:1.6">
+        Member emails control who receives consent round notifications. Add a member's email to a chapter roster once they've joined. One email per line.
+      </p>
+      <div id="member-rosters">
+        <div style="color:var(--ink-light);font-size:14px">Loading…</div>
+      </div>
+      <div class="save-msg" id="msg-members"></div>
+    </div>
+
+  </div>
+
+  <!-- Access denied state -->
+  <div class="access-denied" id="access-denied" style="display:none">
+    <h2>Admin access only.</h2>
+    <p>This page is restricted to Human Unity administrators. If you believe you should have access, contact <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a>.</p>
+    <br>
+    <a href="dashboard.html" class="btn btn-primary" style="font-size:14px;padding:10px 22px;">Back to dashboard →</a>
+  </div>
+
+<script>
+  let _user = null;
+  let _chapters = [], _chapSha = null;
+  let _events = [],   _evtSha  = null;
+  let _proposals = [], _propSha = null;
+
+  // ── Auth + role guard ──
+  netlifyIdentity.on('init', async user => {
+    if (!user) { window.location.href = '/members/login.html'; return; }
+    const roles = user.app_metadata?.roles || [];
+    if (!roles.includes('admin')) {
+      document.getElementById('access-denied').style.display = 'block';
+      return;
+    }
+    _user = user;
+    document.getElementById('admin-wrap').style.display = 'block';
+    await loadAll();
+  });
+  netlifyIdentity.on('logout', () => { window.location.href = '/members/login.html'; });
+  netlifyIdentity.init();
+
+  // ── Tabs ──
+  function switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + tab).classList.add('active');
+  }
+
+  // ── Load all data ──
+  async function loadAll() {
+    const [cRes, eRes, pRes] = await Promise.all([
+      fetch('/data/chapters.json'),
+      fetch('/data/events.json'),
+      fetch('/data/proposals.json'),
+    ]);
+    _chapters  = await cRes.json();
+    _events    = await eRes.json();
+    _proposals = await pRes.json();
+
+    renderChaptersList();
+    renderEventsList();
+    renderProposalsList();
+    renderMemberRosters();
+    populateChapterSelects();
+  }
+
+  // ── Render chapters list ──
+  function renderChaptersList() {
+    const el = document.getElementById('chapters-list');
+    if (!_chapters.length) {
+      el.innerHTML = '<div style="padding:1.5rem;color:var(--ink-light);font-size:14px">No chapters yet.</div>';
+      return;
+    }
+    el.innerHTML = _chapters.map(c => `
+      <div class="list-item">
+        <div>
+          <div class="list-item-title">${c.name}, ${c.state} <span class="badge badge-${c.status}">${c.status}</span></div>
+          <div class="list-item-meta">${c.members} member${c.members !== 1 ? 's' : ''} · Founded ${c.founded || '—'} · ${(c.focus || []).join(', ')}</div>
+          <div class="list-item-meta" style="margin-top:3px">${c.lat}, ${c.lng}</div>
+        </div>
+        <div class="list-item-actions">
+          <button class="btn-danger" onclick="deleteChapter('${c.id}')">Delete</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // ── Render events list ──
+  function renderEventsList() {
+    const el = document.getElementById('events-list');
+    const upcoming = _events
+      .filter(e => new Date(e.date) >= new Date())
+      .sort((a,b) => new Date(a.date) - new Date(b.date));
+    if (!upcoming.length) {
+      el.innerHTML = '<div style="padding:1.5rem;color:var(--ink-light);font-size:14px">No upcoming events.</div>';
+      return;
+    }
+    el.innerHTML = upcoming.map(e => {
+      const ch = _chapters.find(c => c.id === e.chapterId);
+      return `
+        <div class="list-item">
+          <div>
+            <div class="list-item-title">${e.title} <span class="badge badge-${e.status}">${e.status}</span></div>
+            <div class="list-item-meta">${ch ? `${ch.name}, ${ch.state}` : e.chapterId} · ${e.date} · ${e.time}</div>
+            <div class="list-item-meta">${e.location}</div>
+          </div>
+          <div class="list-item-actions">
+            <button class="btn-danger" onclick="deleteEvent('${e.id}')">Delete</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Render proposals list ──
+  function renderProposalsList() {
+    const el = document.getElementById('proposals-list');
+    if (!_proposals.length) {
+      el.innerHTML = '<div style="padding:1.5rem;color:var(--ink-light);font-size:14px">No proposals yet.</div>';
+      return;
+    }
+    const statusClass = { open:'badge-open', dialogue:'badge-dialogue', approved:'badge-approved' };
+    el.innerHTML = _proposals.map(p => {
+      const ch = _chapters.find(c => c.id === p.chapterId);
+      return `
+        <div class="list-item">
+          <div>
+            <div class="list-item-title">${p.title} <span class="badge ${statusClass[p.status] || ''}">${p.status}</span></div>
+            <div class="list-item-meta">${ch ? `${ch.name}, ${ch.state}` : p.chapterId} · by ${p.proposedBy}</div>
+            <div class="list-item-meta">${p.proposedDate} · ${p.responses.length} response${p.responses.length !== 1 ? 's' : ''} · Window closes ${new Date(p.windowClosesAt).toLocaleDateString()}</div>
+          </div>
+          <div class="list-item-actions">
+            ${p.status === 'open' ? `<button class="btn-edit" onclick="forceApprove('${p.id}')">Force approve</button>` : ''}
+            <button class="btn-danger" onclick="deleteProposal('${p.id}')">Delete</button>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Render member rosters ──
+  function renderMemberRosters() {
+    const el = document.getElementById('member-rosters');
+    if (!_chapters.length) {
+      el.innerHTML = '<div style="color:var(--ink-light);font-size:14px">No chapters yet.</div>';
+      return;
+    }
+    el.innerHTML = _chapters.map(c => `
+      <div class="admin-card" style="margin-bottom:1rem">
+        <div class="admin-card-header">
+          <span class="admin-card-title">${c.name}, ${c.state}</span>
+          <span class="admin-card-meta">${(c.memberEmails || []).length} email${(c.memberEmails||[]).length !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="admin-card-body">
+          <div class="field-group" style="margin-bottom:0.75rem">
+            <label class="field-label">Member emails — one per line</label>
+            <textarea class="field-textarea" id="roster-${c.id}" style="min-height:100px;font-size:13px">${(c.memberEmails || []).join('\n')}</textarea>
+          </div>
+          <button class="btn-save" onclick="saveRoster('${c.id}', this)">Save roster →</button>
+        </div>
+      </div>`).join('');
+  }
+
+  // ── Populate chapter selects ──
+  function populateChapterSelects() {
+    const sel = document.getElementById('ev-chapter');
+    sel.innerHTML = _chapters.map(c =>
+      `<option value="${c.id}">${c.name}, ${c.state}</option>`
+    ).join('');
+  }
+
+  // ── GitHub write via admin function ──
+  async function adminWrite(file, content, message) {
+    const token = await _user.jwt();
+    const res = await fetch('/.netlify/functions/admin-write', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + token,
+      },
+      body: JSON.stringify({ file, content, message }),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || 'Write failed');
+    }
+    return res.json();
+  }
+
+  function showMsg(id, text, type) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = text;
+    el.className = 'save-msg ' + type;
+  }
+
+  function setBtnLoading(btn, loading) {
+    btn.disabled = loading;
+    btn.classList.toggle('loading', loading);
+  }
+
+  // ── Save chapter ──
+  async function saveChapter(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-save-chapter');
+    setBtnLoading(btn, true);
+
+    const name    = document.getElementById('ch-name').value.trim();
+    const state   = document.getElementById('ch-state').value.trim().toUpperCase();
+    const lat     = parseFloat(document.getElementById('ch-lat').value);
+    const lng     = parseFloat(document.getElementById('ch-lng').value);
+    const ethos   = document.getElementById('ch-ethos').value.trim();
+    const focus   = document.getElementById('ch-focus').value.split(',').map(s => s.trim()).filter(Boolean);
+    const status  = document.getElementById('ch-status').value;
+    const founded = document.getElementById('ch-founded').value || new Date().toISOString().split('T')[0];
+
+    const id = `${name.toLowerCase().replace(/\s+/g, '-')}-${state.toLowerCase()}`;
+    if (_chapters.find(c => c.id === id)) {
+      showMsg('msg-chapter', `Chapter "${name}, ${state}" already exists.`, 'error');
+      setBtnLoading(btn, false);
+      return;
+    }
+
+    const newChapter = { id, name, state, lat, lng, status, founded, ethos, focus, members: 0, memberEmails: [] };
+    const updated = [..._chapters, newChapter];
+
+    try {
+      await adminWrite('data/chapters.json', updated, `Add chapter: ${name}, ${state}`);
+      _chapters = updated;
+      renderChaptersList();
+      renderMemberRosters();
+      populateChapterSelects();
+      e.target.reset();
+      showMsg('msg-chapter', `✓ Chapter "${name}, ${state}" added.`, 'success');
+    } catch (err) {
+      showMsg('msg-chapter', err.message, 'error');
+    }
+    setBtnLoading(btn, false);
+  }
+
+  // ── Delete chapter ──
+  async function deleteChapter(id) {
+    const ch = _chapters.find(c => c.id === id);
+    if (!confirm(`Delete chapter "${ch?.name}"? This cannot be undone.`)) return;
+    const updated = _chapters.filter(c => c.id !== id);
+    try {
+      await adminWrite('data/chapters.json', updated, `Delete chapter: ${id}`);
+      _chapters = updated;
+      renderChaptersList();
+      renderMemberRosters();
+      populateChapterSelects();
+    } catch (err) { alert(err.message); }
+  }
+
+  // ── Save event ──
+  async function saveEvent(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-save-event');
+    setBtnLoading(btn, true);
+
+    const chapterId = document.getElementById('ev-chapter').value;
+    const title     = document.getElementById('ev-title').value.trim();
+    const desc      = document.getElementById('ev-desc').value.trim();
+    const date      = document.getElementById('ev-date').value;
+    const rawTime   = document.getElementById('ev-time').value;
+    const status    = document.getElementById('ev-status').value;
+    const location  = document.getElementById('ev-location').value.trim();
+
+    const [h, m] = rawTime.split(':');
+    const hour = parseInt(h);
+    const time = `${hour % 12 || 12}:${m} ${hour >= 12 ? 'PM' : 'AM'}`;
+
+    const newEvent = {
+      id: `evt-${Date.now()}`,
+      chapterId, title, description: desc, date, time, location, status,
+      proposedBy: _user.email,
+      approvedAt: new Date().toISOString(),
+    };
+
+    const updated = [..._events, newEvent];
+    try {
+      await adminWrite('data/events.json', updated, `Add event: "${title}"`);
+      _events = updated;
+      renderEventsList();
+      e.target.reset();
+      showMsg('msg-event', `✓ Event "${title}" added.`, 'success');
+    } catch (err) {
+      showMsg('msg-event', err.message, 'error');
+    }
+    setBtnLoading(btn, false);
+  }
+
+  // ── Delete event ──
+  async function deleteEvent(id) {
+    const ev = _events.find(e => e.id === id);
+    if (!confirm(`Delete event "${ev?.title}"?`)) return;
+    const updated = _events.filter(e => e.id !== id);
+    try {
+      await adminWrite('data/events.json', updated, `Delete event: ${id}`);
+      _events = updated;
+      renderEventsList();
+    } catch (err) { alert(err.message); }
+  }
+
+  // ── Delete proposal ──
+  async function deleteProposal(id) {
+    const p = _proposals.find(x => x.id === id);
+    if (!confirm(`Delete proposal "${p?.title}"?`)) return;
+    const updated = _proposals.filter(x => x.id !== id);
+    try {
+      await adminWrite('data/proposals.json', updated, `Delete proposal: ${id}`);
+      _proposals = updated;
+      renderProposalsList();
+    } catch (err) { alert(err.message); }
+  }
+
+  // ── Force approve proposal ──
+  async function forceApprove(id) {
+    const p = _proposals.find(x => x.id === id);
+    if (!confirm(`Force-approve "${p?.title}" and publish to events?`)) return;
+
+    p.status = 'approved';
+    const newEvent = {
+      id: `evt-${Date.now()}`,
+      chapterId: p.chapterId, title: p.title, description: p.description,
+      date: p.proposedDate, time: p.proposedTime, location: p.location,
+      status: 'approved', proposedBy: p.proposedBy,
+      approvedAt: new Date().toISOString(), fromProposalId: p.id,
+    };
+    const updatedEvents = [..._events, newEvent];
+
+    try {
+      await Promise.all([
+        adminWrite('data/proposals.json', _proposals, `Admin force-approve: ${id}`),
+        adminWrite('data/events.json', updatedEvents, `Force-approved event: "${p.title}"`),
+      ]);
+      _events = updatedEvents;
+      renderProposalsList();
+      renderEventsList();
+    } catch (err) { alert(err.message); }
+  }
+
+  // ── Save member roster ──
+  async function saveRoster(chapterId, btn) {
+    setBtnLoading(btn, true);
+    const raw = document.getElementById('roster-' + chapterId).value;
+    const emails = raw.split('\n').map(s => s.trim()).filter(s => s.includes('@'));
+    const updated = _chapters.map(c =>
+      c.id === chapterId ? { ...c, memberEmails: emails, members: emails.length } : c
+    );
+    try {
+      await adminWrite('data/chapters.json', updated, `Update member roster: ${chapterId}`);
+      _chapters = updated;
+      renderChaptersList();
+      showMsg('msg-members', `✓ Roster saved for ${chapterId}.`, 'success');
+    } catch (err) {
+      showMsg('msg-members', err.message, 'error');
+    }
+    setBtnLoading(btn, false);
+  }
+</script>
+
+</body>
+</html>
