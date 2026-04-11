@@ -443,13 +443,25 @@
 
     try {
       // Use Netlify Identity gotrue to confirm the invite
-      await netlifyIdentity.gotrue.confirm(inviteToken, password, true);
-      showOrientation();
+      const user = await netlifyIdentity.gotrue.confirm(inviteToken, password, true);
+      if (user) {
+        showOrientation();
+      } else {
+        // Confirm succeeded but no user object returned — redirect to dashboard
+        window.location.href = '/members/dashboard.html';
+      }
     } catch (err) {
       btn.classList.remove('loading');
       btn.disabled = false;
 
       const errMsg = err.message || '';
+
+      // If error says "already confirmed" or similar — account was created, just redirect
+      if (errMsg.toLowerCase().includes('already') || errMsg.toLowerCase().includes('confirmed')) {
+        showOrientation();
+        return;
+      }
+
       if (errMsg.toLowerCase().includes('expired') || errMsg.toLowerCase().includes('invalid')) {
         showMsg('This invite link has expired. Email hello@humanunity.us for a new one.', 'error');
         setTimeout(() => {
@@ -472,3 +484,11 @@
   function showOrientation() {
     document.getElementById('setup-card').style.display = 'none';
     document.getElementById('no-token-card').style.display = 'none';
+    const card = document.getElementById('orientation-card');
+    card.style.display = 'block';
+    // Clean the token from memory
+    window._inviteToken = null;
+  }
+</script>
+</body>
+</html>
