@@ -247,7 +247,7 @@
 
           <div class="login-msg error" id="login-msg"></div>
 
-          <form class="login-form" id="login-form" onsubmit="handleLogin(event)" method="post">
+          <form class="login-form" id="login-form" onsubmit="handleLogin(event)" action="javascript:void(0)">
 
             <div class="field-group">
               <label class="field-label" for="email">Email</label>
@@ -273,7 +273,7 @@
             Not a member yet?
             <a href="../get-involved.html">Join the project →</a><br>
             Trouble signing in?
-            <a href="mailto:hello@humanunity.us">hello@humanunity.us</a>
+            <a href="/cdn-cgi/l/email-protection#2c44494040436c4459414d42594245585502595f"><span class="__cf_email__" data-cfemail="274f424b4b48674f524a464952494e535e095254">[email&#160;protected]</span></a>
           </div>
 
         </div>
@@ -282,7 +282,7 @@
     </div>
   </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // ── Intercept recovery token (password reset links land here) ──
   if (window.location.hash) {
     const params = new URLSearchParams(window.location.hash.substring(1));
@@ -392,12 +392,4 @@
     e.preventDefault();
     clearMsg();
 
-    const email = document.getElementById('email').value.trim();
-    if (!email) {
-      showMsg('Enter your email address above first.', 'error');
-      document.getElementById('email').focus();
-      return;
-    }
-
-    try {
-      await netlifyIdentity.gotrue.
+    const email = d
