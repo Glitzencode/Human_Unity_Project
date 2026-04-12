@@ -6,6 +6,7 @@
   <title>Consent Rounds — Human Unity</title>
   <link rel="stylesheet" href="../css/main.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="../js/loading.js"></script>
   <style>
     body { background: var(--surface); }
 
@@ -447,6 +448,7 @@
 <script>
   // ── Auth guard ──
   netlifyIdentity.on('init', user => {
+    window.HULoading && window.HULoading.dismiss();
     if (!user) window.location.href = '/members/login.html';
     else initPage(user);
   });

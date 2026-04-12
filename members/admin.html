@@ -6,6 +6,7 @@
   <title>Admin — Human Unity</title>
   <link rel="stylesheet" href="../css/main.css">
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="../js/loading.js"></script>
   <style>
     body { background: var(--surface); }
 
@@ -385,12 +386,12 @@
   <!-- Access denied state -->
   <div class="access-denied" id="access-denied" style="display:none">
     <h2>Admin access only.</h2>
-    <p>This page is restricted to Human Unity administrators. If you believe you should have access, contact <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a>.</p>
+    <p>This page is restricted to Human Unity administrators. If you believe you should have access, contact <a href="/cdn-cgi/l/email-protection#335b565f5f5c735b465e525d465d5a474a1d4640" style="color:var(--teal)"><span class="__cf_email__" data-cfemail="94fcf1f8f8fbd4fce1f9f5fae1fafde0edbae1e7">[email&#160;protected]</span></a>.</p>
     <br>
     <a href="dashboard.html" class="btn btn-primary" style="font-size:14px;padding:10px 22px;">Back to dashboard →</a>
   </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   let _user = null;
   let _chapters = [], _chapSha = null;
   let _events = [],   _evtSha  = null;
@@ -398,6 +399,7 @@
 
   // ── Auth + role guard ──
   netlifyIdentity.on('init', async user => {
+    window.HULoading && window.HULoading.dismiss();
     if (!user) { window.location.href = '/members/login.html'; return; }
     const roles = user.app_metadata?.roles || [];
     if (!roles.includes('admin')) {
@@ -721,14 +723,4 @@
     try {
       await adminWrite('data/chapters.json', updated, `Update member roster: ${chapterId}`);
       _chapters = updated;
-      renderChaptersList();
-      showMsg('msg-members', `✓ Roster saved for ${chapterId}.`, 'success');
-    } catch (err) {
-      showMsg('msg-members', err.message, 'error');
-    }
-    setBtnLoading(btn, false);
-  }
-</script>
-
-</body>
-</html>
+    

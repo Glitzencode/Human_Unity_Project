@@ -21,6 +21,7 @@
     })();
   </script>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="../js/loading.js"></script>
   <style>
     body {
       background: var(--surface);
@@ -386,6 +387,7 @@
 
   // Init Netlify Identity — widget won't show popup since hash is already cleared
   netlifyIdentity.on('init', user => {
+    window.HULoading && window.HULoading.dismiss();
     if (user) {
       showOrientation();
       return;
