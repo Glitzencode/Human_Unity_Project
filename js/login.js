@@ -31,6 +31,8 @@
 
 // ── Netlify Identity ──
 netlifyIdentity.on('init', function(user) {
+  // Auth state resolved — safe to show the page
+  window.HULoading && window.HULoading.dismiss();
   if (user) window.location.href = '/members/dashboard.html';
 });
 netlifyIdentity.on('login', function() {
