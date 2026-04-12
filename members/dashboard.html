@@ -141,15 +141,8 @@
       border: 0.5px solid var(--border);
       margin-bottom: 1rem;
       overflow: hidden;
-      cursor: pointer;
-      transition: box-shadow 0.2s, border-color 0.2s;
     }
-    .chapter-card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-      border-color: var(--teal-light);
-    }
-    .chapter-card.expanded .chapter-card-detail { display: block; }
-    .chapter-card-detail { display: none; }
+    .chapter-card-detail { display: block; }
 
     .chapter-card-top {
       padding: 1.25rem 1.5rem;
@@ -686,7 +679,7 @@
         : `<p class="no-events">No upcoming events scheduled yet.</p>`;
 
       return `
-        <div class="chapter-card ${i === 0 ? 'expanded' : ''}" id="chapter-${c.id}" onclick="toggleChapter('${c.id}')">
+        <div class="chapter-card" id="chapter-${c.id}">
           <div class="chapter-card-top">
             <div class="chapter-card-left">
               <div class="chapter-name">${c.name}, ${c.state}</div>
@@ -706,7 +699,7 @@
             </div>
           </div>
           <div class="chapter-focus-tags">${focusTags}</div>
-          <div class="chapter-card-detail" id="detail-${c.id}" style="display:${i === 0 ? 'block' : 'none'}">
+          <div class="chapter-card-detail" id="detail-${c.id}">
             <p class="chapter-ethos">"${c.ethos}"</p>
             <div class="chapter-events-title">Events</div>
             ${eventsHtml}
@@ -715,18 +708,6 @@
     }).join('');
   }
 
-  function toggleChapter(id) {
-    const card   = document.getElementById('chapter-' + id);
-    const detail = document.getElementById('detail-' + id);
-    const isOpen = card.classList.contains('expanded');
-    // Close all
-    document.querySelectorAll('.chapter-card').forEach(c => c.classList.remove('expanded'));
-    document.querySelectorAll('.chapter-card-detail').forEach(d => d.style.display = 'none');
-    if (!isOpen) {
-      card.classList.add('expanded');
-      detail.style.display = 'block';
-    }
-  }
 
   // ── Render consent rounds ──
   function renderConsent(proposals, chapters, userEmail) {
