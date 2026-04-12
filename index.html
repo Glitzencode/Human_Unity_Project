@@ -6,6 +6,7 @@
   <title>Human Unity — A Framework for Collective Renewal</title>
   <meta name="description" content="Redirecting social energy away from division and toward construction. A scalable framework for community-driven renewal.">
   <link rel="stylesheet" href="css/main.css">
+  <script src="js/loading.js"></script>
   <style>
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
@@ -27,7 +28,7 @@
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
       <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join</a>
+      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
@@ -349,5 +350,11 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  // Dismiss loading screen once Identity resolves and counter loads
+  netlifyIdentity.on('init', function() {
+    window.HULoading && window.HULoading.dismiss();
+  });
+</script>
 </body>
 </html>
