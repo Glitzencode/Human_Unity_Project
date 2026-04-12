@@ -13,7 +13,6 @@ const NAV_HTML = `
       <a href="about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
       <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
@@ -64,21 +63,13 @@ const FOOTER_HTML = `
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
-            <div style="display:flex;gap:0">
-              <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
-              <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
-            </div>
-            <input type="text" name="FNAME" placeholder="First name *" required style="padding:9px 14px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:100px;background:rgba(255,255,255,0.08);color:white;outline:none">
-            <div style="display:flex;gap:0.4rem;align-items:center">
-              <input type="text" name="BIRTHDAY[month]" placeholder="MM" maxlength="2" pattern="[0-9]*" required style="width:52px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-              <span style="color:rgba(255,255,255,0.3);font-size:13px">/</span>
-              <input type="text" name="BIRTHDAY[day]" placeholder="DD" maxlength="2" pattern="[0-9]*" required style="width:52px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-              <span style="color:rgba(255,255,255,0.3);font-size:13px">/</span>
-              <input type="number" name="MMERGE8" placeholder="YYYY" min="1900" max="2025" required style="width:72px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-            </div>
-            <p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.4">Birthday required to protect minors from age-restricted content.</p>
+          <form id="signup-form-footer" style="display:flex;gap:0;max-width:380px">
+            <input type="email" placeholder="Your email" style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
+            <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
           </form>
+          <div id="signup-success-footer" style="display:none;align-items:center;gap:8px;color:var(--teal);font-size:14px;margin-top:0.5rem">
+            ✓ <span>You're in. Welcome to the project.</span>
+          </div>
         </div>
       </div>
       <div class="footer-col">
@@ -104,11 +95,10 @@ const FOOTER_HTML = `
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2025 Litzenberg &amp; Associates LLC. All rights reserved.</span>
+      <span>© 2025 Human Unity. All rights reserved.</span>
       <div style="display:flex;gap:1.5rem">
-        <a href="privacy.html">Privacy</a>
-        <a href="sms-terms.html">SMS terms</a>
-        <a href="mailto:hello@humanunity.us">Contact</a>
+        <a href="#">Privacy</a>
+        <a href="#">Contact</a>
       </div>
     </div>
   </div>

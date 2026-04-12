@@ -1,18 +1,3 @@
-// ── NETLIFY IDENTITY TOKEN INTERCEPT ──
-// Invite and password recovery links from Netlify land at the site root (/#invite_token=...)
-// This intercepts those tokens on any page and forwards to the correct members page.
-(function interceptIdentityTokens() {
-  if (!window.location.hash) return;
-  const params = new URLSearchParams(window.location.hash.substring(1));
-  const inviteToken   = params.get('invite_token');
-  const recoveryToken = params.get('recovery_token');
-  if (inviteToken) {
-    window.location.replace('/members/welcome.html#invite_token=' + inviteToken);
-  } else if (recoveryToken) {
-    window.location.replace('/members/login.html#recovery_token=' + recoveryToken);
-  }
-})();
-
 // ── NAV SCROLL BEHAVIOR ──
 const nav = document.querySelector('nav');
 const navLinks = document.querySelectorAll('.nav-links a');
@@ -59,65 +44,40 @@ if (counterEl) {
     });
 }
 
-// ── MEMBER AREA NAV LINK ──
-// Adds a "Member area" link to the nav.
-// Shows "Dashboard" if already logged in, "Member area" if not.
-// Uses Netlify Identity to check auth state.
-(function initMemberNavLink() {
-  // Load Netlify Identity widget script if not already present
-  if (!window.netlifyIdentity) {
-    const s = document.createElement('script');
-    s.src = 'https://identity.netlify.com/v1/netlify-identity-widget.js';
-    s.onload = setupMemberLink;
-    document.head.appendChild(s);
-  } else {
-    setupMemberLink();
-  }
+// ── MAILCHIMP JSONP SUBMISSION ──
+// Submits without page redirect — only increments counter on confirmed success
+const MC_ACTION = 'https://humanunity.us6.list-manage.com/subscribe/post-json?u=2b32405c64d33eb7405ab0e47&id=91d3047cd1&f_id=000dc2e1f0';
 
-  function setupMemberLink() {
-    // Wait for Identity to init
-    netlifyIdentity.on('init', user => {
-      const navRight = document.querySelector('.wrap.nav-inner > div');
-      if (!navRight) return;
+function submitToMailchimp(form, onSuccess, onError) {
+  const params = new URLSearchParams(new FormData(form));
+  const cbName = 'mcCb_' + Date.now();
+  params.set('c', cbName);
 
-      // Remove existing member link if any (prevent duplicates)
-      const existing = document.getElementById('nav-member-link');
-      if (existing) existing.remove();
+  window[cbName] = function(response) {
+    delete window[cbName];
+    const s = document.getElementById(cbName);
+    if (s) s.remove();
+    if (response.result === 'success') {
+      onSuccess();
+    } else {
+      onError(response.msg || 'Something went wrong. Please try again.');
+    }
+  };
 
-      const link = document.createElement('a');
-      link.id = 'nav-member-link';
+  const script = document.createElement('script');
+  script.id = cbName;
+  script.src = MC_ACTION + '&' + params.toString();
+  document.body.appendChild(script);
 
-      if (user) {
-        link.href = '/members/dashboard.html';
-        link.textContent = 'Dashboard →';
-        link.className = 'btn btn-outline btn-sm';
-        link.style.cssText = 'border-color:var(--teal);color:var(--teal);';
-      } else {
-        link.href = '/members/login.html';
-        link.textContent = 'Member area';
-        link.style.cssText = 'font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;transition:color 0.15s;';
-        link.onmouseover = () => link.style.color = 'var(--teal)';
-        link.onmouseout  = () => link.style.color = 'var(--ink-light)';
-      }
+  setTimeout(() => {
+    if (window[cbName]) {
+      delete window[cbName];
+      onError('Request timed out. Please try again.');
+    }
+  }, 8000);
+}
 
-      // Insert before the "Join the project" button
-      const joinBtn = navRight.querySelector('.btn-primary');
-      if (joinBtn) {
-        navRight.insertBefore(link, joinBtn);
-      } else {
-        navRight.prepend(link);
-      }
-    });
-
-    netlifyIdentity.init();
-  }
-})();
-
-// ── JOIN FORM — routes through /signup function ──
-// Replaces direct Mailchimp POST with our unified signup function
-// which handles Mailchimp + Netlify Identity invite + welcome email
-
-function initJoinForm(formEl) {
+function initMailchimpForm(formEl) {
   if (!formEl) return;
 
   // Create inline message element
@@ -125,7 +85,7 @@ function initJoinForm(formEl) {
   msgEl.style.cssText = 'font-size:14px;margin-top:0.75rem;display:none;';
   formEl.parentNode.insertBefore(msgEl, formEl.nextSibling);
 
-  formEl.addEventListener('submit', async function(e) {
+  formEl.addEventListener('submit', function(e) {
     e.preventDefault();
 
     // Age check
@@ -140,66 +100,34 @@ function initJoinForm(formEl) {
 
     const btn = formEl.querySelector('button[type="submit"]');
     const originalText = btn ? btn.textContent : '';
-    if (btn) { btn.textContent = 'Joining...'; btn.disabled = true; }
+    if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
     msgEl.style.display = 'none';
 
-    const payload = {
-      email:         formEl.querySelector('[name="EMAIL"]')?.value?.trim(),
-      firstName:     formEl.querySelector('[name="FNAME"]')?.value?.trim(),
-      birthdayMonth: formEl.querySelector('[name="BIRTHDAY[month]"]')?.value?.trim(),
-      birthdayDay:   formEl.querySelector('[name="BIRTHDAY[day]"]')?.value?.trim(),
-      birthYear:     formEl.querySelector('[name="MMERGE8"]')?.value?.trim(),
-    };
-
-    if (!payload.email || !payload.firstName) {
-      if (btn) { btn.textContent = originalText; btn.disabled = false; }
-      msgEl.style.cssText = 'font-size:13px;margin-top:0.75rem;display:block;color:#D85A30;';
-      msgEl.textContent = 'Please fill in all required fields.';
-      return;
-    }
-
-    try {
-      const res = await fetch('/.netlify/functions/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        // Refresh member counter
+    submitToMailchimp(formEl,
+      function onSuccess() {
+        // Refresh counter from real Mailchimp data
         fetch('/.netlify/functions/member-count')
           .then(r => r.json())
           .then(d => updateCounterDisplay(d.count))
           .catch(() => {});
 
-        // Show success
+        // Show inline success — no redirect
         formEl.style.display = 'none';
         msgEl.style.cssText = 'font-size:15px;margin-top:0.75rem;display:flex;align-items:center;gap:8px;color:#1D9E75;font-weight:500;';
-        msgEl.innerHTML = '&#10003; You\'re in. Check your email to set up your member account.';
-      } else {
+        msgEl.innerHTML = '&#10003; You\'re in. Welcome to the project.';
+      },
+      function onError(msg) {
         if (btn) { btn.textContent = originalText; btn.disabled = false; }
+        const clean = msg.replace(/<[^>]+>/g, '');
         msgEl.style.cssText = 'font-size:13px;margin-top:0.75rem;display:block;color:#D85A30;';
-        msgEl.textContent = data.message || 'Something went wrong. Please try again.';
+        msgEl.textContent = clean;
       }
-
-    } catch (err) {
-      if (btn) { btn.textContent = originalText; btn.disabled = false; }
-      msgEl.style.cssText = 'font-size:13px;margin-top:0.75rem;display:block;color:#D85A30;';
-      msgEl.textContent = 'Network error. Please try again.';
-    }
+    );
   });
 }
 
-// Attach to every join form on the page.
-// Catches both legacy Mailchimp forms (action*="list-manage.com")
-// and new signup forms (id contains "signup-form").
-const joinForms = new Set([
-  ...document.querySelectorAll('form[action*="list-manage.com"]'),
-  ...document.querySelectorAll('form[id*="signup-form"]'),
-]);
-joinForms.forEach(f => initJoinForm(f));
+// Attach to every Mailchimp form on the page
+document.querySelectorAll('form[action*="list-manage.com"]').forEach(f => initMailchimpForm(f));
 
 // ── CHAPTER FINDER ──
 const CHAPTERS = [
