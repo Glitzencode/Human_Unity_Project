@@ -6,6 +6,7 @@
   <title>Human Unity — A Framework for Collective Renewal</title>
   <meta name="description" content="Redirecting social energy away from division and toward construction. A scalable framework for community-driven renewal.">
   <link rel="stylesheet" href="css/main.css">
+  <script src="js/loading.js"></script>
   <style>
     .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
@@ -26,7 +27,8 @@
       <a href="about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
+      <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="get-involved.html" class="btn btn-primary btn-sm">Join</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
@@ -47,7 +49,7 @@
       </div>
       <div class="counter-strip">
         <span class="live-dot"></span>
-        <span><span class="counter-num" id="counter-num">1</span> people building alongside you</span>
+        <span><span class="counter-num" id="counter-num">4,217</span> people building alongside you</span>
       </div>
     </div>
 
@@ -247,7 +249,7 @@
         <div>
           <h2>You are already part of this.</h2>
           <p>The fact that you're here is signal. Start with your email — we'll connect you to the nearest chapter and first steps.</p>
-          <form action="https://humanunity.us6.list-manage.com/subscribe/post?u=2b32405c64d33eb7405ab0e47&amp;id=91d3047cd1&amp;f_id=000dc2e1f0" method="post" id="signup-form-main" style="display:flex;flex-direction:column;gap:0.6rem;max-width:480px">
+          <form id="signup-form-main" style="display:flex;flex-direction:column;gap:0.6rem;max-width:480px">
             <div style="display:flex;gap:0">
               <input type="email" name="EMAIL" placeholder="your@email.com" required style="flex:1;padding:13px 18px;font-size:15px;font-family:var(--font-body);border:1.5px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
               <button type="submit" style="padding:13px 22px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:14px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Join the project →</button>
@@ -296,7 +298,7 @@
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form action="https://humanunity.us6.list-manage.com/subscribe/post?u=2b32405c64d33eb7405ab0e47&amp;id=91d3047cd1&amp;f_id=000dc2e1f0" method="post" id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
+          <form id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
             <div style="display:flex;gap:0">
               <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
               <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
@@ -341,12 +343,12 @@
       <div style="display:flex;gap:1.5rem">
         <a href="privacy.html">Privacy</a>
         <a href="sms-terms.html">SMS terms</a>
-        <a href="mailto:hello@humanunity.us">Contact</a>
+        <a href="/cdn-cgi/l/email-protection#553d3039393a153d2038343b203b3c212c7b2026">Contact</a>
       </div>
     </div>
   </div>
 </footer>
 
-<script src="js/main.js"></script>
-</body>
-</html>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/main.js"></script>
+<script>
+  // Dismiss loading screen once Identity re
