@@ -3,27 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Get Involved — Human Unity</title>
-  <meta name="description" content="Join a local chapter, contribute your skills, or start a new chapter. Multiple entry points into the Human Unity network.">
-  <link rel="stylesheet" href="css/main.css">
+  <title>The Coordination Layer — Human Unity</title>
+  <link rel="stylesheet" href="../css/main.css">
+  <meta name="description" content="The Coordination Layer — digital infrastructure for cross-community collaboration and resource sharing across the Human Unity network.">
 </head>
 <body>
-
 <nav>
   <div class="wrap nav-inner">
-    <a href="index.html" class="nav-logo">Human Unity</a>
+    <a href="../index.html" class="nav-logo">Human Unity</a>
     <div class="nav-links">
-      <a href="problem.html">The problem</a>
-      <a href="framework.html">Framework</a>
-      <a href="initiatives.html">Initiatives</a>
-      <a href="get-involved.html">Get involved</a>
-      <a href="resources.html">Resources</a>
-      <a href="vision.html">Vision</a>
-      <a href="about.html">About</a>
+      <a href="../problem.html">The problem</a>
+      <a href="../framework.html">Framework</a>
+      <a href="../initiatives.html">Initiatives</a>
+      <a href="../get-involved.html">Get involved</a>
+      <a href="../resources.html">Resources</a>
+      <a href="../vision.html">Vision</a>
+      <a href="../about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
+      <a href="../members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="../get-involved.html" class="btn btn-primary btn-sm">Join</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
@@ -31,230 +30,109 @@
   </div>
 </nav>
 
-<!-- PAGE HERO -->
-<div class="page-hero">
+<div class="init-hero" style="background:var(--blue-light);border-bottom:0.5px solid rgba(12,68,124,0.1)">
   <div class="wrap">
-    <div class="section-label">Get involved</div>
-    <h1>Multiple doors in.<br>Pick yours.</h1>
-    <p>There is no single right way to enter this movement. Find the path that connects to something you already care about — and start there.</p>
+    <a href="../initiatives.html" style="font-size:13px;color:var(--blue-text);display:inline-flex;align-items:center;gap:6px;margin-bottom:1.5rem">← All initiatives</a>
+    <span class="tag tag-blue" style="margin-bottom:1rem">Platform</span>
+    <h1>The Coordination Layer</h1>
+    <p style="font-size:18px;max-width:580px;margin-top:0.75rem;color:var(--blue-text)">Digital infrastructure for cross-community collaboration, resource sharing, and distributed governance across the Human Unity network.</p>
+    <div style="display:flex;gap:1rem;margin-top:2rem">
+      <a href="../get-involved.html" class="btn btn-primary" style="background:var(--blue-text)">Get involved →</a>
+      <a href="../members/login.html" class="btn btn-outline">Member login</a>
+    </div>
   </div>
 </div>
 
-<!-- EMAIL SIGNUP -->
-<section style="background:var(--ink);padding:3rem 0" id="join">
-  <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center">
-      <div>
-        <h2 style="color:white">Start with your email.</h2>
-        <p style="color:rgba(255,255,255,0.6);margin-top:0.5rem;margin-bottom:1.75rem">We'll connect you to the nearest active chapter and send your first action — a single, specific thing you can do this week.</p>
-        <form id="hu-join-form">
-          <input type="email" name="EMAIL" placeholder="Email address *" required style="padding:12px 14px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none">
-            <input type="text" name="FNAME" placeholder="First name *" required style="padding:11px 14px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:100px;background:rgba(255,255,255,0.08);color:white;outline:none">
-            <div style="display:flex;gap:0.5rem;align-items:center">
-              <input type="text" name="BIRTHDAY[month]" placeholder="MM" maxlength="2" pattern="[0-9]*" required style="width:60px;padding:11px 8px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-              <span style="color:rgba(255,255,255,0.3)">/</span>
-              <input type="text" name="BIRTHDAY[day]" placeholder="DD" maxlength="2" pattern="[0-9]*" required style="width:60px;padding:11px 8px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-              <span style="color:rgba(255,255,255,0.3)">/</span>
-              <input type="number" name="MMERGE8" placeholder="YYYY" min="1900" max="2025" required style="width:80px;padding:11px 8px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:8px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
-            </div>
-            <p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.5">Birthday required — we use it to protect minors from age-restricted content.</p>
-          <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_2b32405c64d33eb7405ab0e47_91d3047cd1" tabindex="-1" value=""></div>
-          <button type="submit" style="padding:13px 22px;background:var(--teal);color:white;border:none;border-radius:100px;font-size:15px;font-weight:500;font-family:var(--font-body);cursor:pointer">I'm in →</button>
-        </form>
-        <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:0.75rem">Email, first name, and birthday required. No spam, ever.</p>
-        <div style="margin-top:1rem;background:rgba(255,255,255,0.06);border-radius:8px;padding:0.75rem 1rem;display:flex;align-items:center;gap:10px">
-          <span style="font-size:18px;flex-shrink:0">&#128241;</span>
-          <p style="font-size:12px;color:rgba(255,255,255,0.45);line-height:1.5">Want SMS updates? We'll send you an opt-in link after you join. See our <a href="sms-terms.html" style="color:var(--teal)">SMS Terms</a>.</p>
-        </div>
-        <script>
-        (function(){
-          var f = document.getElementById('hu-join-form');
-          if(f) f.addEventListener('submit', function(e){
-            var y = parseInt(document.querySelector('[name=MMERGE8]').value);
-            if(y && (new Date().getFullYear() - y) < 13){
-              e.preventDefault();
-              alert('You must be 13 or older to join the Human Unity network.');
-            }
-          });
-        })();
-        </script>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:1rem">
-        <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start">
-          <span style="font-size:20px;flex-shrink:0">📍</span>
-          <div>
-            <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.25rem">Chapter connection</p>
-            <p style="color:rgba(255,255,255,0.5);font-size:13px">We match you to the closest active or forming chapter based on your location.</p>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start">
-          <span style="font-size:20px;flex-shrink:0">🗓</span>
-          <div>
-            <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.25rem">First action within a week</p>
-            <p style="color:rgba(255,255,255,0.5);font-size:13px">Not a newsletter — a single, concrete next step tailored to your situation.</p>
-          </div>
-        </div>
-        <div style="background:rgba(255,255,255,0.06);border-radius:var(--radius);padding:1.25rem;display:flex;gap:1rem;align-items:flex-start">
-          <span style="font-size:20px;flex-shrink:0">🔗</span>
-          <div>
-            <p style="color:white;font-weight:500;font-size:15px;margin-bottom:0.25rem">Access to the network</p>
-            <p style="color:rgba(255,255,255,0.5);font-size:13px">Resources, frameworks, templates, and the full Human Unity community.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CHAPTER FINDER -->
-<section id="chapters">
-  <div class="wrap">
-    <div class="section-label">Find a chapter</div>
-    <h2>Is your city already building?</h2>
-    <p style="max-width:540px;margin-top:0.5rem;margin-bottom:2rem">We have active and forming chapters across the country. Search below — if yours isn't listed, you're looking at an invitation to start it.</p>
-
-    <div class="chapter-finder">
-      <div class="finder-form">
-        <input type="text" id="chapter-search" placeholder="Search by city or state...">
-        <select id="chapter-status">
-          <option value="all">All chapters</option>
-          <option value="active">Active</option>
-          <option value="forming">Forming</option>
-          <option value="new">Just started</option>
-        </select>
-        <a href="start-a-chapter.html" class="btn btn-primary btn-sm">+ Start a chapter</a>
-      </div>
-      <div id="chapter-results" class="chapter-results">
-        <p style="color:var(--ink-light);font-size:14px">Loading chapters...</p>
-      </div>
-    </div>
-
-    <div style="background:var(--teal-light);border-radius:var(--radius);padding:1.75rem;margin-top:1.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
-      <div>
-        <p style="font-weight:500;color:var(--teal-dark);font-size:15px">Don't see your city?</p>
-        <p style="color:var(--teal-mid);font-size:14px;margin-top:0.25rem">Every chapter started with one person. It could be yours.</p>
-      </div>
-      <a href="start-a-chapter.html" class="btn btn-primary">Start a chapter here →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTRIBUTE SKILLS -->
-<section style="background:var(--surface)" id="skills">
-  <div class="wrap">
-    <div class="section-label">Contribute skills</div>
-    <h2>Every skill has a home in this network.</h2>
-    <p style="max-width:560px;margin-top:0.5rem;margin-bottom:2.5rem">We are not looking for a specific type of person. We are looking for people who are willing to apply what they already know to something that matters.</p>
-    <div class="grid-3">
-      <div class="card card-surface">
-        <h3>Organizers &amp; connectors</h3>
-        <p>People who know their neighborhood, can convene others, and create momentum from nothing.</p>
-        <a href="get-involved.html#join" class="card-link">Get started →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Mediators &amp; facilitators</h3>
-        <p>Willing to train in conflict de-escalation and run structured dialogue in your community.</p>
-        <a href="initiatives/conflict-bridge.html" class="card-link">Conflict Bridge →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Writers &amp; storytellers</h3>
-        <p>Contribute essays, documentary work, social content, or narrative strategy to Common Story.</p>
-        <a href="initiatives/common-story.html" class="card-link">Common Story →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Designers &amp; builders</h3>
-        <p>Help develop the visual identity, digital tools, and platforms that power the network.</p>
-        <a href="initiatives/coordination-layer.html" class="card-link">Coordination Layer →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Educators &amp; coaches</h3>
-        <p>Facilitate the Leadership Lab curriculum, mentor chapter leaders, or develop new training content.</p>
-        <a href="initiatives/leadership-lab.html" class="card-link">Leadership Lab →</a>
-      </div>
-      <div class="card card-surface">
-        <h3>Organizations &amp; partners</h3>
-        <p>Align an existing org with the Human Unity framework. We build with allies, not competitors.</p>
-        <a href="get-involved.html#partner" class="card-link">Partner with us →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILL OFFER FORM -->
 <section>
   <div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+    <div class="init-detail">
       <div>
-        <div class="section-label">Offer your skills</div>
-        <h2>Tell us what you bring.</h2>
-        <p style="margin-top:0.75rem">Fill this out and we'll match you to the initiative and chapter where your skills have the most immediate impact.</p>
-        <div class="pullquote">The only pre-requisite is caring about something and being willing to show up.</div>
-      </div>
-      <div style="background:var(--surface);border-radius:var(--radius);padding:2rem">
-        <form id="skills-form" onsubmit="handleSkillsForm(event)">
-          <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <h2>What it is</h2>
+        <p style="margin-top:0.75rem">The Coordination Layer is the digital backbone of the Human Unity network. It connects chapters, enables resource sharing, supports distributed governance, and creates the learning loops that turn a collection of local experiments into a coherent national movement.</p>
+        <p style="margin-top:1rem">It is not a social media platform. It is not a content feed. It is infrastructure — the kind that makes it easier for people doing real work in the real world to find each other, share what they have learned, and build on each other's progress.</p>
+
+        <h2 style="margin-top:2.5rem">What it does</h2>
+        <div class="fw-steps" style="margin-top:1.5rem">
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--blue-light);color:var(--blue-text)">1</div>
             <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">Your name</label>
-              <input type="text" placeholder="Full name" required style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
+              <h3>Chapter management</h3>
+              <p>Every Human Unity chapter gets a member dashboard — event management, member rosters, consent-based governance tools, and a direct line to the broader network. No spreadsheets. No email threads. Coordinated action from day one.</p>
             </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">Email</label>
-              <input type="email" placeholder="your@email.com" required style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">City / State</label>
-              <input type="text" placeholder="e.g. Austin, TX" style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">Primary skill or background</label>
-              <select style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none">
-                <option value="">Select one...</option>
-                <option>Community organizing</option>
-                <option>Conflict mediation / facilitation</option>
-                <option>Writing / storytelling</option>
-                <option>Design / visual communication</option>
-                <option>Software development</option>
-                <option>Teaching / coaching / training</option>
-                <option>Leadership / management</option>
-                <option>Research / analysis</option>
-                <option>Media / communications</option>
-                <option>Other</option>
-              </select>
-            </div>
-            <div>
-              <label style="font-size:13px;font-weight:500;display:block;margin-bottom:0.4rem">What brought you here? (optional)</label>
-              <textarea rows="3" placeholder="What's happening in your community, or what drew you to Human Unity?" style="width:100%;padding:11px 14px;font-size:14px;font-family:var(--font-body);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);background:white;color:var(--ink);outline:none;resize:vertical"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Submit →</button>
           </div>
-        </form>
-        <div id="skills-success" style="display:none;text-align:center;padding:2rem">
-          <p style="font-family:var(--font-display);font-size:24px;color:var(--teal);margin-bottom:0.5rem">You're in the network.</p>
-          <p style="color:var(--ink-mid);font-size:14px">We'll be in touch within a few days with a specific match.</p>
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--blue-light);color:var(--blue-text)">2</div>
+            <div>
+              <h3>Cross-chapter collaboration</h3>
+              <p>When a chapter in Columbus solves a problem that a chapter in Cincinnati is facing, that knowledge should flow automatically. The Coordination Layer creates the pathways — shared resource libraries, cross-chapter connections, and structured peer learning.</p>
+            </div>
+          </div>
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--blue-light);color:var(--blue-text)">3</div>
+            <div>
+              <h3>Sociocratic governance</h3>
+              <p>Every event, initiative, and decision within a chapter goes through a structured consent process. Not majority rule. Not top-down authority. A consent-based model where anyone can propose and anyone can raise a valid concern — and the process resolves it.</p>
+            </div>
+          </div>
+          <div class="fw-step">
+            <div class="fw-num" style="background:var(--blue-light);color:var(--blue-text)">4</div>
+            <div>
+              <h3>Network intelligence</h3>
+              <p>Aggregated, anonymized data across the network creates a picture of what is working and where. Which project types build the most trust? Which facilitation approaches reduce dropout? The network learns collectively so individual chapters don't have to learn alone.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 style="margin-top:2.5rem">The current build</h2>
+        <p style="margin-top:0.75rem">The Coordination Layer is live in its first form — the member area you can access at <a href="../members/login.html" style="color:var(--teal)">humanunity.us/members</a>. It currently supports:</p>
+        <div class="grid-2" style="margin-top:1.5rem">
+          <div class="card card-surface">
+            <h3>Member dashboard</h3>
+            <p>Location-aware chapter discovery, upcoming events, and active consent rounds — all in one place.</p>
+          </div>
+          <div class="card card-surface">
+            <h3>Event governance</h3>
+            <p>Any member can propose an event. It goes through a 5-day consent round before going on the calendar.</p>
+          </div>
+          <div class="card card-surface">
+            <h3>Chapter management</h3>
+            <p>Admin tools for managing chapters, member rosters, events, and proposals across the network.</p>
+          </div>
+          <div class="card card-surface">
+            <h3>Network notifications</h3>
+            <p>Email notifications for proposals, objections, approvals, and dialogue — keeping the whole chapter informed.</p>
+          </div>
+        </div>
+
+        <div class="pullquote" style="margin-top:3rem">The point of the Coordination Layer is not to replace human relationships — it is to remove the friction that prevents them from forming at scale.</div>
+
+        <h2 style="margin-top:2.5rem">What's being built next</h2>
+        <p style="margin-top:0.75rem">The roadmap includes cross-chapter resource sharing, a structured peer learning system, a public chapter map, and deeper integrations with the Leadership Lab curriculum. Every feature is designed around one principle: make it easier for people to show up consistently and do real work together.</p>
+        <p style="margin-top:1rem">If you are a designer, developer, or systems thinker who wants to help build this, we want to hear from you.</p>
+      </div>
+
+      <div class="init-sidebar">
+        <div class="sidebar-card">
+          <h4>Current status</h4>
+          <div class="sidebar-item"><span>Member area</span><span style="color:var(--teal);font-weight:600">Live</span></div>
+          <div class="sidebar-item"><span>Chapter management</span><span style="color:var(--teal);font-weight:600">Live</span></div>
+          <div class="sidebar-item"><span>Consent governance</span><span style="color:var(--teal);font-weight:600">Live</span></div>
+          <div class="sidebar-item"><span>Cross-chapter tools</span><span style="color:var(--amber);font-weight:600">Building</span></div>
+          <div class="sidebar-item"><span>Public chapter map</span><span style="color:var(--amber);font-weight:600">Building</span></div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Get involved</h4>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <a href="../members/login.html" class="btn btn-primary" style="justify-content:center;background:var(--blue-text)">Access member area</a>
+            <a href="../get-involved.html" class="btn btn-outline" style="justify-content:center">Join the network</a>
+          </div>
+        </div>
+        <div class="sidebar-card">
+          <h4>Built with</h4>
+          <p style="font-size:13px;color:var(--ink-mid);line-height:1.6">Netlify · Netlify Identity · GitHub · Namecheap Private Email · Mailchimp</p>
+          <p style="font-size:13px;color:var(--ink-light);margin-top:0.5rem;line-height:1.6">Open architecture. No vendor lock-in. Designed to be community-owned.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- PARTNER -->
-<section style="background:var(--surface)" id="partner">
-  <div class="wrap">
-    <div class="section-label">Partner</div>
-    <h2>Bring your organization into alignment.</h2>
-    <p style="max-width:580px;margin-top:0.5rem">If you lead or are part of an organization — a nonprofit, a business, a faith community, a civic group — we can work together. Human Unity doesn't compete with existing efforts. It connects them.</p>
-    <div class="grid-2" style="margin-top:2.5rem">
-      <div class="card">
-        <h3>What partnership looks like</h3>
-        <p>Your organization adopts Human Unity frameworks for internal conflict resolution and community engagement. We provide training, resources, and network connections. You get the tools and credibility of a larger movement.</p>
-      </div>
-      <div class="card">
-        <h3>What we ask</h3>
-        <p>A commitment to post-partisan engagement. Willingness to show up in your community in the Human Unity spirit — constructive, honest, cross-partisan. That's it. No ideology test. No political alignment required.</p>
-      </div>
-    </div>
-    <div style="margin-top:2rem;text-align:center">
-      <a href="mailto:hello@humanunity.us" class="btn btn-outline">Reach out to discuss partnership →</a>
     </div>
   </div>
 </section>
@@ -266,7 +144,7 @@
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form id="signup-form-footer">
+          <form id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
             <div style="display:flex;gap:0">
               <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
               <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
@@ -280,50 +158,41 @@
               <input type="number" name="MMERGE8" placeholder="YYYY" min="1900" max="2025" required style="width:72px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
             </div>
             <p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.4">Birthday required to protect minors from age-restricted content.</p>
-            <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_2b32405c64d33eb7405ab0e47_91d3047cd1" tabindex="-1" value=""></div>
           </form>
         </div>
       </div>
       <div class="footer-col">
         <h5>The work</h5>
-        <a href="problem.html">The problem</a>
-        <a href="framework.html">The framework</a>
-        <a href="initiatives.html">Initiatives</a>
-        <a href="vision.html">Vision</a>
+        <a href="../problem.html">The problem</a>
+        <a href="../framework.html">The framework</a>
+        <a href="../initiatives.html">Initiatives</a>
+        <a href="../vision.html">Vision</a>
       </div>
       <div class="footer-col">
         <h5>Participate</h5>
-        <a href="get-involved.html">Get involved</a>
-        <a href="get-involved.html#chapters">Find a chapter</a>
-        <a href="start-a-chapter.html">Start a chapter</a>
-        <a href="get-involved.html#skills">Offer skills</a>
+        <a href="../get-involved.html">Get involved</a>
+        <a href="../get-involved.html#chapters">Find a chapter</a>
+        <a href="../start-a-chapter.html">Start a chapter</a>
+        <a href="../get-involved.html#skills">Offer skills</a>
       </div>
       <div class="footer-col">
         <h5>Learn</h5>
-        <a href="resources.html">Resources</a>
-        <a href="about.html">About</a>
-        <a href="about.html#philosophy">Philosophy</a>
-        <a href="about.html#faq">FAQ</a>
+        <a href="../resources.html">Resources</a>
+        <a href="../about.html">About</a>
+        <a href="../about.html#philosophy">Philosophy</a>
+        <a href="../about.html#faq">FAQ</a>
       </div>
     </div>
     <div class="footer-bottom">
       <span>© 2025 Litzenberg &amp; Associates LLC. All rights reserved.</span>
       <div style="display:flex;gap:1.5rem">
-        <a href="privacy.html">Privacy</a>
-        <a href="sms-terms.html">SMS terms</a>
-        <a href="mailto:hello@humanunity.us">Contact</a>
+        <a href="../privacy.html">Privacy</a>
+        <a href="../sms-terms.html">SMS terms</a>
+        <a href="../about.html">Contact</a>
       </div>
     </div>
   </div>
 </footer>
-
-<script src="js/main.js"></script>
-<script>
-function handleSkillsForm(e) {
-  e.preventDefault();
-  document.getElementById('skills-form').style.display = 'none';
-  document.getElementById('skills-success').style.display = 'block';
-}
-</script>
+<script src="../js/main.js"></script>
 </body>
 </html>
