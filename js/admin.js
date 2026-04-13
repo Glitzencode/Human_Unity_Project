@@ -135,6 +135,7 @@ let _user = null;
             <textarea class="field-textarea" id="roster-${c.id}" style="min-height:100px;font-size:13px">${(c.memberEmails || []).join('\n')}</textarea>
           </div>
           <button class="btn-save" onclick="saveRoster('${c.id}', this)">Save roster →</button>
+          <div id="msg-roster-${c.id}" class="save-msg" style="margin-top:0.5rem;display:none"></div>
         </div>
       </div>`).join('');
   }
@@ -329,8 +330,10 @@ let _user = null;
     try {
       await adminWrite('data/chapters.json', updated, `Update member roster: ${chapterId}`);
       _chapters = updated;
-          renderMemberRosters();
-      showMsg('msg-roster-' + chapterId, '✓ Roster saved.', 'success');
+      btn.textContent = '✓ Saved';
+      btn.style.background = 'var(--teal)';
+      showMsg('msg-roster-' + chapterId, `✓ Roster saved — ${emails.length} email${emails.length !== 1 ? 's' : ''}.`, 'success');
+      setTimeout(() => { btn.textContent = 'Save roster →'; btn.style.background = ''; }, 3000);
     } catch (err) {
       showMsg('msg-roster-' + chapterId, err.message, 'error');
     }
