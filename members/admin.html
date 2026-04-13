@@ -243,6 +243,7 @@
       <button class="tab-btn" onclick="switchTab('events', this)">Events</button>
       <button class="tab-btn" onclick="switchTab('proposals', this)">Proposals</button>
       <button class="tab-btn" onclick="switchTab('members', this)">Member emails</button>
+      <button class="tab-btn" onclick="switchTab('yearend', this)">Year-end report</button>
     </div>
 
     <!-- ══ CHAPTERS TAB ══ -->
@@ -379,6 +380,66 @@
         <div style="color:var(--ink-light);font-size:14px">Loading…</div>
       </div>
       <div class="save-msg" id="msg-members"></div>
+    </div>
+
+    <!-- ══ YEAR-END REPORT TAB ══ -->
+    <div class="tab-panel" id="panel-yearend">
+      <div class="section-divider">Annual trust report</div>
+      <p style="font-size:14px;color:var(--ink-light);margin-bottom:1.5rem;line-height:1.6">
+        These figures appear on the public <a href="../donate.html" style="color:var(--teal)">donate page</a> as the prior fiscal year breakdown. Enter actual disbursed amounts after each fiscal year closes. All figures in USD.
+      </p>
+      <div class="admin-card">
+        <div class="admin-card-body">
+          <div id="yearend-current" style="margin-bottom:1.5rem;padding:1.25rem;background:var(--surface);border-radius:var(--radius-sm)">
+            <p style="font-size:13px;color:var(--ink-light)">Loading current report…</p>
+          </div>
+          <form class="admin-form" onsubmit="saveYearEnd(event)" action="javascript:void(0)">
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Fiscal year *</label>
+                <input class="field-input" id="ye-year" type="number" placeholder="e.g. 2025" min="2020" max="2050" required>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Total raised ($) *</label>
+                <input class="field-input" id="ye-total" type="number" step="0.01" min="0" placeholder="0.00" required>
+              </div>
+            </div>
+            <div class="section-divider" style="margin:1rem 0 0.75rem">Disbursement breakdown</div>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Project costs ($)</label>
+                <input class="field-input" id="ye-project" type="number" step="0.01" min="0" placeholder="0.00" value="0">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Event costs ($)</label>
+                <input class="field-input" id="ye-event" type="number" step="0.01" min="0" placeholder="0.00" value="0">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">General chapter costs ($)</label>
+                <input class="field-input" id="ye-chapter" type="number" step="0.01" min="0" placeholder="0.00" value="0">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Initiative costs ($)</label>
+                <input class="field-input" id="ye-initiative" type="number" step="0.01" min="0" placeholder="0.00" value="0">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="field-group">
+                <label class="field-label">Administrative costs ($)</label>
+                <input class="field-input" id="ye-admin" type="number" step="0.01" min="0" placeholder="0.00" value="0">
+              </div>
+              <div class="field-group">
+                <label class="field-label">Narrative (optional)</label>
+                <input class="field-input" id="ye-narrative" placeholder="Brief summary of the year">
+              </div>
+            </div>
+            <button type="submit" class="btn-save" id="btn-save-yearend">Publish year-end report →</button>
+            <div class="save-msg" id="msg-yearend"></div>
+          </form>
+        </div>
+      </div>
     </div>
 
   </div>
