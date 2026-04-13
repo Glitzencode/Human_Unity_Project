@@ -20,7 +20,9 @@ const navLinks = document.querySelectorAll('.nav-links a');
 window.addEventListener('scroll', () => {
   nav && nav.classList.toggle('scrolled', window.scrollY > 20);
   navLinks.forEach(link => {
-    const target = document.querySelector(link.getAttribute('href'));
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+    const target = document.querySelector(href);
     if (target) {
       const rect = target.getBoundingClientRect();
       link.classList.toggle('active', rect.top <= 100 && rect.bottom > 100);
