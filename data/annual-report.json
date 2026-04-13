@@ -1,0 +1,13 @@
+{
+  "fiscalYear": null,
+  "totalRaised": 0,
+  "breakdown": {
+    "projectCosts": 0,
+    "eventCosts": 0,
+    "chapterCosts": 0,
+    "initiativeCosts": 0,
+    "administrativeCosts": 0
+  },
+  "narrative": "",
+  "publishedAt": null
+}

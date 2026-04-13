@@ -1,0 +1,15 @@
+[
+  {
+    "id": "goal-001",
+    "chapterId": "waterville-oh",
+    "type": "chapter",
+    "targetId": "waterville-oh",
+    "title": "Waterville Chapter General Fund",
+    "description": "General operating fund for the Waterville, OH chapter.",
+    "goalAmount": 1000,
+    "category": "general",
+    "status": "active",
+    "proposedBy": "hello@humanunity.us",
+    "approvedAt": "2025-04-10T20:00:00Z"
+  }
+]
