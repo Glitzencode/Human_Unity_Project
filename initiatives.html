@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Initiatives — Human Unity</title>
-  <meta name="description" content="Six operational initiatives forming the Human Unity network. Join one today.">
   <link rel="stylesheet" href="css/main.css">
+  <meta name="description" content="Human Unity initiatives — operational entry points into the network. Real projects. Real participation. Right now.">
 </head>
 <body>
 <nav>
@@ -21,7 +21,8 @@
       <a href="about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
+      <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="get-involved.html" class="btn btn-primary btn-sm">Join</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
@@ -39,155 +40,128 @@
 
 <div class="ticker-wrap">
   <div class="ticker-inner">
-    <span class="ticker-item">Heal the commons</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Redirect the energy</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Build what's missing</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Lead from where you are</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Trust is infrastructure</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Local action scales</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Cynicism is a choice — so is construction</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Heal the commons</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Redirect the energy</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Build what's missing</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Lead from where you are</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Trust is infrastructure</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Local action scales</span>
-    <span class="ticker-item">·</span>
-    <span class="ticker-item">Cynicism is a choice — so is construction</span>
-    <span class="ticker-item">·</span>
+    <span class="ticker-item">Heal the commons</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Redirect the energy</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Build what's missing</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Lead from where you are</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Trust is infrastructure</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Local action scales</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Cynicism is a choice — so is construction</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Heal the commons</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Redirect the energy</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Build what's missing</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Trust is infrastructure</span><span class="ticker-item">·</span>
+    <span class="ticker-item">Cynicism is a choice — so is construction</span><span class="ticker-item">·</span>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <div style="display:flex;flex-direction:column;gap:3rem">
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding-bottom:3rem;border-bottom:0.5px solid var(--border)">
-        <div>
-          <span class="tag tag-teal" style="margin-bottom:1rem">Community</span>
-          <h2>Community Ground</h2>
-          <p style="margin-top:0.75rem">Local chapter organizing built around shared projects — not shared politics. Neighborhood infrastructure, resource networks, and regular gatherings that build social trust through doing, not discussing.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem">
-            <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1rem;text-align:center">
-              <div style="font-size:28px;font-family:var(--font-display);color:var(--teal)">15+</div>
-              <p style="font-size:12px;margin-top:0.2rem">Active chapters</p>
-            </div>
-            <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1rem;text-align:center">
-              <div style="font-size:28px;font-family:var(--font-display);color:var(--teal)">2–4 hrs</div>
-              <p style="font-size:12px;margin-top:0.2rem">Time per month minimum</p>
-            </div>
-          </div>
-          <div style="margin-top:1.75rem;display:flex;gap:1rem">
-            <a href="initiatives/community-ground.html" class="btn btn-primary">Learn more →</a>
-            <a href="get-involved.html" class="btn btn-outline">Participate</a>
-          </div>
+    <!-- Community Ground -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:3rem 0;border-bottom:0.5px solid var(--border)">
+      <div>
+        <span class="tag tag-teal" style="margin-bottom:1rem">Community</span>
+        <h2>Community Ground</h2>
+        <p style="margin-top:0.75rem">Local chapter organizing built around shared projects — not shared politics. Neighborhood infrastructure, resource networks, and regular gatherings that build social trust through doing, not discussing.</p>
+        <div class="stats-row" style="margin-top:1.5rem;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="stat"><div class="stat-num good">1</div><p>Active chapter</p></div>
+          <div class="stat"><div class="stat-num good">2–4 hrs</div><p>Time per month minimum</p></div>
         </div>
-        <img src="images/community-ground.jpg" alt="Community Ground chapter" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding-bottom:3rem;border-bottom:0.5px solid var(--border)">
-        <img src="images/conflict-bridge.jpg" alt="Conflict Bridge session" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
-        <div>
-          <span class="tag tag-purple" style="margin-bottom:1rem">Conflict resolution</span>
-          <h2>Conflict Bridge</h2>
-          <p style="margin-top:0.75rem">A trained mediation network for community disputes, workplace tensions, and political disagreements. Applying proven de-escalation methods in real-world environments — not therapy, not politics. Practical conflict navigation.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem">
-            <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1rem;text-align:center">
-              <div style="font-size:28px;font-family:var(--font-display);color:var(--purple)">3-day</div>
-              <p style="font-size:12px;margin-top:0.2rem">Core training program</p>
-            </div>
-            <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1rem;text-align:center">
-              <div style="font-size:28px;font-family:var(--font-display);color:var(--purple)">89%</div>
-              <p style="font-size:12px;margin-top:0.2rem">Resolution rate in pilots</p>
-            </div>
-          </div>
-          <div style="margin-top:1.75rem;display:flex;gap:1rem">
-            <a href="initiatives/conflict-bridge.html" class="btn btn-primary">Learn more →</a>
-            <a href="get-involved.html" class="btn btn-outline">Get trained</a>
-          </div>
+        <div style="display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap">
+          <a href="initiatives/community-ground.html" class="btn btn-primary">Learn more →</a>
+          <a href="get-involved.html" class="btn btn-outline">Participate</a>
         </div>
       </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding-bottom:3rem;border-bottom:0.5px solid var(--border)">
-        <div>
-          <span class="tag tag-amber" style="margin-bottom:1rem">Leadership</span>
-          <h2>Local Leadership Lab</h2>
-          <p style="margin-top:0.75rem">A 12-week incubator for emerging community leaders. Not a seminar — a cohort-based program with real projects, real mentorship, and real accountability. You leave with a working initiative, not a certificate.</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem">
-            <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1rem;text-align:center">
-              <div style="font-size:28px;font-family:var(--font-display);color:var(--amber)">12 wks</div>
-              <p style="font-size:12px;margin-top:0.2rem">Cohort length</p>
-            </div>
-            <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1rem;text-align:center">
-              <div style="font-size:28px;font-family:var(--font-display);color:var(--amber)">15</div>
-              <p style="font-size:12px;margin-top:0.2rem">People per cohort</p>
-            </div>
-          </div>
-          <div style="margin-top:1.75rem;display:flex;gap:1rem">
-            <a href="initiatives/leadership-lab.html" class="btn btn-primary">Learn more →</a>
-            <a href="get-involved.html" class="btn btn-outline">Apply now</a>
-          </div>
-        </div>
-        <img src="images/leadership-lab.jpg" alt="Leadership Lab cohort" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding-bottom:3rem;border-bottom:0.5px solid var(--border)">
-        <img src="images/coordination-layer.jpg" alt="The Coordination Layer" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
-        <div>
-          <span class="tag tag-blue" style="margin-bottom:1rem">Platform</span>
-          <h2>The Coordination Layer</h2>
-          <p style="margin-top:0.75rem">A digital infrastructure for cross-community collaboration — shared resource libraries, project matching, inter-chapter communication, and collective learning loops. Currently in beta with active chapters.</p>
-          <div style="background:var(--blue-light);border-radius:var(--radius-sm);padding:1rem;margin-top:1.5rem">
-            <p style="color:var(--blue-text);font-size:14px;font-weight:500">Currently in beta</p>
-            <p style="color:var(--blue-text);font-size:13px;margin-top:0.25rem">Active chapters have access. Join the waitlist to get early access when your region opens.</p>
-          </div>
-          <div style="margin-top:1.75rem;display:flex;gap:1rem">
-            <a href="initiatives/coordination-layer.html" class="btn btn-primary">Learn more →</a>
-            <a href="get-involved.html" class="btn btn-outline">Join waitlist</a>
-          </div>
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;padding-bottom:3rem;border-bottom:0.5px solid var(--border)">
-        <div>
-          <span class="tag tag-coral" style="margin-bottom:1rem">Culture</span>
-          <h2>Common Story</h2>
-          <p style="margin-top:0.75rem">A creative and cultural initiative producing shared narratives — films, essays, public art, podcasts, and events that model a different way of being together. Culture is infrastructure. Stories change what feels possible.</p>
-          <div style="background:var(--coral-light);border-radius:var(--radius-sm);padding:1rem;margin-top:1.5rem">
-            <p style="color:#712B13;font-size:14px;font-weight:500">Open call for contributors</p>
-            <p style="color:#712B13;font-size:13px;margin-top:0.25rem">Writers, filmmakers, artists, and podcasters — we want your voice in this project.</p>
-          </div>
-          <div style="margin-top:1.75rem;display:flex;gap:1rem">
-            <a href="initiatives/common-story.html" class="btn btn-primary">Learn more →</a>
-            <a href="get-involved.html" class="btn btn-outline">Contribute</a>
-          </div>
-        </div>
-        <img src="images/common-story.jpg" alt="Common Story project" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
-      </div>
-
+      <img src="images/community-ground.jpg" alt="Community Ground chapter" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
     </div>
-  </div>
-</section>
 
-<!-- START A CHAPTER CTA -->
-<section style="background:var(--surface)">
-  <div class="wrap" style="text-align:center">
-    <div class="section-label">Expansion</div>
-    <h2>Your city is waiting.</h2>
-    <p style="max-width:500px;margin:0.75rem auto 2rem">Every chapter started with one person who decided their community was worth building. We provide the templates, training, and network connections. You provide the commitment.</p>
-    <a href="start-a-chapter.html" class="btn btn-primary" style="font-size:16px;padding:15px 36px">Start a chapter in your city →</a>
+    <!-- Conflict Bridge -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:3rem 0;border-bottom:0.5px solid var(--border)">
+      <img src="images/conflict-bridge.jpg" alt="Conflict Bridge session" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
+      <div>
+        <span class="tag tag-purple" style="margin-bottom:1rem">Conflict resolution</span>
+        <h2>Conflict Bridge</h2>
+        <p style="margin-top:0.75rem">A trained mediation network for community disputes, workplace tensions, and political disagreements. Applying proven de-escalation methods in real-world environments — not therapy, not politics. Practical conflict navigation.</p>
+        <div class="stats-row" style="margin-top:1.5rem;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="stat"><div class="stat-num good">3-day</div><p>Core training program</p></div>
+          <div class="stat"><div class="stat-num good">89%</div><p>Pilot success rate</p></div>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap">
+          <a href="initiatives/conflict-bridge.html" class="btn btn-primary" style="background:var(--purple)">Learn more →</a>
+          <a href="get-involved.html" class="btn btn-outline">Get trained</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leadership Lab -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:3rem 0;border-bottom:0.5px solid var(--border)">
+      <div>
+        <span class="tag tag-amber" style="margin-bottom:1rem">Leadership</span>
+        <h2>Local Leadership Lab</h2>
+        <p style="margin-top:0.75rem">A 12-week incubator for emerging community leaders. Not a seminar — a structured program where you leave with a working initiative, a network of peers, and the skills to run something real.</p>
+        <div class="stats-row" style="margin-top:1.5rem;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="stat"><div class="stat-num good">12</div><p>Weeks per cohort</p></div>
+          <div class="stat"><div class="stat-num good">100%</div><p>Leave with a working plan</p></div>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap">
+          <a href="initiatives/leadership-lab.html" class="btn btn-primary" style="background:var(--amber)">Learn more →</a>
+          <a href="get-involved.html" class="btn btn-outline">Apply</a>
+        </div>
+      </div>
+      <img src="images/leadership-lab.jpg" alt="Leadership Lab session" style="width:100%;border-radius:var(--radius);aspect-ratio:16/9;object-fit:cover;display:block">
+    </div>
+
+    <!-- Coordination Layer -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:3rem 0;border-bottom:0.5px solid var(--border)">
+      <div style="background:var(--blue-light);border-radius:var(--radius);padding:2.5rem;display:flex;align-items:center;justify-content:center;aspect-ratio:16/9">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem">⚙</div>
+          <p style="font-size:14px;color:var(--blue-text);font-weight:500">Digital infrastructure<br>for the network</p>
+        </div>
+      </div>
+      <div>
+        <span class="tag tag-blue" style="margin-bottom:1rem">Platform</span>
+        <h2>The Coordination Layer</h2>
+        <p style="margin-top:0.75rem">Digital infrastructure for cross-community collaboration and resource sharing. The member area, event governance tools, and chapter management systems that make the network function at scale.</p>
+        <div class="stats-row" style="margin-top:1.5rem;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="stat"><div class="stat-num good" style="font-size:1rem">Live</div><p>Member area active</p></div>
+          <div class="stat"><div class="stat-num good" style="font-size:1rem">Open</div><p>Source architecture</p></div>
+        </div>
+        <div style="display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap">
+          <a href="initiatives/coordination-layer.html" class="btn btn-primary" style="background:var(--blue-text)">Learn more →</a>
+          <a href="members/login.html" class="btn btn-outline">Member login</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Common Story -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:3rem 0;border-bottom:0.5px solid var(--border)">
+      <div>
+        <span class="tag tag-coral" style="margin-bottom:1rem">Culture</span>
+        <h2>Common Story</h2>
+        <p style="margin-top:0.75rem">A creative initiative producing shared narratives — films, essays, public art, and events that shift what feels culturally normal. The long-term project of making community construction feel like something real people actually choose.</p>
+        <div style="display:flex;gap:1rem;margin-top:1.75rem;flex-wrap:wrap">
+          <a href="initiatives/common-story.html" class="btn btn-primary" style="background:var(--coral)">Learn more →</a>
+          <a href="get-involved.html" class="btn btn-outline">Contribute</a>
+        </div>
+      </div>
+      <div style="background:var(--coral-light);border-radius:var(--radius);padding:2.5rem;display:flex;align-items:center;justify-content:center;aspect-ratio:16/9">
+        <div style="text-align:center">
+          <div style="font-size:2.5rem;margin-bottom:0.75rem">✍</div>
+          <p style="font-size:14px;color:#712B13;font-weight:500">Essays · Film · Public art<br>Narrative strategy</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start a Chapter CTA -->
+    <div style="padding:3rem 0;text-align:center">
+      <div class="section-label">Don't see your city?</div>
+      <h2 style="margin-top:0.5rem">Start a chapter.</h2>
+      <p style="max-width:520px;margin:0.75rem auto 2rem;font-size:16px;color:var(--ink-mid)">Every chapter started with one person who decided their community was worth building. We provide the framework, the templates, and the network.</p>
+      <a href="start-a-chapter.html" class="btn btn-primary">Start a chapter in your city →</a>
+    </div>
+
   </div>
 </section>
 
@@ -198,7 +172,7 @@
         <div class="footer-logo">Human Unity</div>
         <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
         <div style="margin-top:1.5rem">
-          <form action="https://humanunity.us6.list-manage.com/subscribe/post?u=2b32405c64d33eb7405ab0e47&amp;id=91d3047cd1&amp;f_id=000dc2e1f0" method="post" id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
+          <form id="signup-form-footer" style="display:flex;flex-direction:column;gap:0.5rem;max-width:380px">
             <div style="display:flex;gap:0">
               <input type="email" name="EMAIL" placeholder="Your email" required style="flex:1;padding:11px 16px;font-size:14px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-right:none;border-radius:100px 0 0 100px;background:rgba(255,255,255,0.08);color:white;outline:none">
               <button type="submit" style="padding:11px 20px;background:var(--teal);color:white;border:none;border-radius:0 100px 100px 0;font-size:13px;font-weight:500;font-family:var(--font-body);cursor:pointer;white-space:nowrap">Stay informed</button>
@@ -212,7 +186,6 @@
               <input type="number" name="MMERGE8" placeholder="YYYY" min="1900" max="2025" required style="width:72px;padding:9px 6px;font-size:13px;font-family:var(--font-body);border:1px solid rgba(255,255,255,0.15);border-radius:6px;background:rgba(255,255,255,0.08);color:white;outline:none;text-align:center">
             </div>
             <p style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.4">Birthday required to protect minors from age-restricted content.</p>
-            <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_2b32405c64d33eb7405ab0e47_91d3047cd1" tabindex="-1" value=""></div>
           </form>
         </div>
       </div>
@@ -243,7 +216,7 @@
       <div style="display:flex;gap:1.5rem">
         <a href="privacy.html">Privacy</a>
         <a href="sms-terms.html">SMS terms</a>
-        <a href="mailto:hello@humanunity.us">Contact</a>
+        <a href="about.html">Contact</a>
       </div>
     </div>
   </div>

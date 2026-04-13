@@ -4,11 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy — Human Unity</title>
-  <meta name="description" content="Human Unity's privacy policy — how we collect, use, and protect your information.">
   <link rel="stylesheet" href="css/main.css">
+  <meta name="description" content="Human Unity's privacy policy — how we collect, use, and protect your information.">
 </head>
 <body>
-
 <nav>
   <div class="wrap nav-inner">
     <a href="index.html" class="nav-logo">Human Unity</a>
@@ -22,7 +21,8 @@
       <a href="about.html">About</a>
     </div>
     <div style="display:flex;align-items:center;gap:1rem">
-      <a href="get-involved.html" class="btn btn-primary btn-sm">Join the project</a>
+      <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="get-involved.html" class="btn btn-primary btn-sm">Join</a>
       <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
         <span></span><span></span><span></span>
       </div>
@@ -42,7 +42,6 @@
 <section>
   <div class="wrap">
     <div style="display:grid;grid-template-columns:2fr 1fr;gap:4rem;align-items:start">
-
       <div style="display:flex;flex-direction:column;gap:2.5rem">
 
         <div>
@@ -58,7 +57,6 @@
         <div>
           <h2>What we collect</h2>
           <p style="margin-top:0.75rem">We collect information in two ways: what you give us directly, and what is collected automatically when you use the site.</p>
-
           <h3 style="margin-top:1.5rem;font-size:18px">Information you provide directly</h3>
           <div style="margin-top:1rem;display:flex;flex-direction:column;gap:1rem">
             <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1.25rem">
@@ -74,9 +72,8 @@
               <p style="font-size:14px">When you describe your skills or project ideas in our forms. Used solely to match you with relevant opportunities in the network. Not shared with third parties.</p>
             </div>
           </div>
-
           <h3 style="margin-top:1.5rem;font-size:18px">Information collected automatically</h3>
-          <p style="margin-top:0.75rem">Like all websites, our hosting provider (GitHub Pages) may log basic technical information including your IP address, browser type, and pages visited. We do not use tracking cookies, advertising pixels, or behavioral analytics tools. We do not use Google Analytics or similar services.</p>
+          <p style="margin-top:0.75rem">Like all websites, our hosting provider may log basic technical information including your IP address, browser type, and pages visited. We do not use tracking cookies, advertising pixels, or behavioral analytics tools. We do not use Google Analytics or similar services.</p>
         </div>
 
         <div>
@@ -98,7 +95,7 @@
           <div style="margin-top:1rem;display:flex;flex-direction:column;gap:1rem">
             <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1.25rem">
               <p style="font-weight:500;color:var(--ink);font-size:15px;margin-bottom:0.4rem">Mailchimp</p>
-              <p style="font-size:14px">Our email platform. Your email address and name are stored there to send you communications. Mailchimp's privacy policy applies to their handling of this data. You can review it at mailchimp.com/legal/privacy.</p>
+              <p style="font-size:14px">Our email platform. Your email address and name are stored there to send you communications. Mailchimp's privacy policy applies to their handling of this data.</p>
             </div>
             <div style="background:var(--surface);border-radius:var(--radius-sm);padding:1.25rem">
               <p style="font-weight:500;color:var(--ink);font-size:15px;margin-bottom:0.4rem">Local chapter organizers</p>
@@ -125,7 +122,7 @@
 
         <div>
           <h2>Cookies</h2>
-          <p style="margin-top:0.75rem">This website does not use tracking cookies or advertising cookies. The site may use minimal session-based browser storage (localStorage) to remember form state within a single visit. This data stays on your device and is not transmitted to us.</p>
+          <p style="margin-top:0.75rem">This website does not use tracking cookies or advertising cookies. The site may use minimal session-based browser storage to remember form state within a single visit. This data stays on your device and is not transmitted to us.</p>
         </div>
 
         <div>
@@ -135,7 +132,7 @@
 
         <div>
           <h2>Children's privacy</h2>
-          <p style="margin-top:0.75rem">Human Unity is not directed at children under 13. We do not knowingly collect personal information from children under 13. If you believe we have inadvertently collected such information, please contact us at <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a> and we will delete it promptly.</p>
+          <p style="margin-top:0.75rem">Human Unity is not directed at children under 13. We do not knowingly collect personal information from children under 13. We collect birthday information solely to verify minimum age eligibility. If you believe we have inadvertently collected such information, please contact us at <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a> and we will delete it promptly.</p>
         </div>
 
         <div>
@@ -146,8 +143,8 @@
         <div>
           <h2>Contact</h2>
           <p style="margin-top:0.75rem">Questions, requests, or concerns about this privacy policy or our data practices:</p>
-          <div style="background:var(--surface);border-radius:var(--radius);padding:1.5rem;margin-top:1rem;display:inline-block">
-            <p style="font-weight:500;color:var(--ink);margin-bottom:0.25rem">Human Unity</p>
+          <div style="background:var(--surface);border-radius:var(--radius);padding:1.5rem;margin-top:1rem">
+            <p style="font-weight:500;color:var(--ink);margin-bottom:0.25rem">Human Unity / Litzenberg &amp; Associates LLC</p>
             <p style="font-size:14px">Email: <a href="mailto:hello@humanunity.us" style="color:var(--teal)">hello@humanunity.us</a></p>
             <p style="font-size:14px">Website: <a href="https://humanunity.us" style="color:var(--teal)">humanunity.us</a></p>
             <p style="font-size:14px">Waterville, Ohio, United States</p>
@@ -156,22 +153,7 @@
 
       </div>
 
-      <!-- SIDEBAR -->
       <div style="position:sticky;top:calc(var(--nav-h) + 2rem);height:fit-content">
-        <div style="background:var(--surface);border-radius:var(--radius);padding:1.75rem;margin-bottom:1rem">
-          <h4 style="margin-bottom:1.25rem">On this page</h4>
-          <div style="display:flex;flex-direction:column;gap:0.6rem">
-            <a href="#" onclick="document.querySelector('h2').scrollIntoView({behavior:'smooth'});return false" style="font-size:14px;color:var(--teal)">The short version</a>
-            <a href="#who-we-are" style="font-size:14px;color:var(--teal)">Who we are</a>
-            <a href="#what-we-collect" style="font-size:14px;color:var(--teal)">What we collect</a>
-            <a href="#how-we-use" style="font-size:14px;color:var(--teal)">How we use it</a>
-            <a href="#who-we-share" style="font-size:14px;color:var(--teal)">Who we share with</a>
-            <a href="#your-rights" style="font-size:14px;color:var(--teal)">Your rights</a>
-            <a href="#cookies" style="font-size:14px;color:var(--teal)">Cookies</a>
-            <a href="#data-security" style="font-size:14px;color:var(--teal)">Data security</a>
-            <a href="#contact-section" style="font-size:14px;color:var(--teal)">Contact</a>
-          </div>
-        </div>
         <div style="background:var(--teal-light);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem">
           <p style="font-weight:500;color:var(--teal-dark);font-size:15px;margin-bottom:0.5rem">The plain truth</p>
           <p style="font-size:13px;color:var(--teal-mid);line-height:1.6">We collect your email to connect you with people building something real. That's it. We are not a data company. We are not funded by advertisers. Your information serves you, not us.</p>
@@ -209,11 +191,10 @@
         <a href="get-involved.html#skills">Offer skills</a>
       </div>
       <div class="footer-col">
-        <h5>Learn</h5>
-        <a href="resources.html">Resources</a>
-        <a href="about.html">About</a>
-        <a href="about.html#philosophy">Philosophy</a>
+        <h5>Legal</h5>
         <a href="privacy.html">Privacy policy</a>
+        <a href="sms-terms.html">SMS terms</a>
+        <a href="mailto:hello@humanunity.us">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
