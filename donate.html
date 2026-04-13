@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Donate — Human Unity</title>
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="description" content="Support Human Unity Trust — funding community construction, conflict resolution, and local leadership across the network.">
+</head>
+<body>
+<nav>
+  <div class="wrap nav-inner">
+    <a href="index.html" class="nav-logo">Human Unity</a>
+    <div class="nav-links">
+      <a href="problem.html">The problem</a>
+      <a href="framework.html">Framework</a>
+      <a href="initiatives.html">Initiatives</a>
+      <a href="get-involved.html">Get involved</a>
+      <a href="resources.html">Resources</a>
+      <a href="vision.html">Vision</a>
+      <a href="about.html">About</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:1rem">
+      <a href="members/login.html" id="nav-member-link" style="font-size:14px;color:var(--ink-light);text-decoration:none;font-weight:500;">Member area</a>
+      <a href="get-involved.html" class="btn btn-primary btn-sm">Join</a>
+      <div class="nav-mobile" onclick="this.closest('nav').querySelector('.nav-links').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="wrap">
+    <div class="section-label">Human Unity Trust</div>
+    <h1>Fund the infrastructure<br>of community renewal.</h1>
+    <p style="max-width:580px">Every dollar goes directly to building the local chapters, training programs, and coordination tools that make Human Unity work. No advertising. No political donations. No overhead bloat.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+
+      <!-- Donate form -->
+      <div>
+        <div style="background:white;border-radius:var(--radius);border:0.5px solid var(--border);overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,0.06)">
+          <div style="background:var(--ink);padding:1.75rem 2rem">
+            <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--teal);font-weight:600;margin-bottom:0.4rem">Anonymous donation</p>
+            <h2 style="color:white;font-size:1.4rem;margin-bottom:0.4rem">Donate to Human Unity Trust</h2>
+            <p style="color:rgba(255,255,255,0.5);font-size:14px">Funds are held in trust and disbursed by member vote to chapters, events, and initiatives across the network.</p>
+          </div>
+          <div style="padding:1.75rem 2rem">
+
+            <!-- Amount selector -->
+            <div style="margin-bottom:1.25rem">
+              <label style="font-size:12px;font-weight:600;color:var(--ink-mid);letter-spacing:0.05em;text-transform:uppercase;display:block;margin-bottom:0.5rem">Select amount</label>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-bottom:0.5rem">
+                <button class="amount-btn" onclick="selectAmount(10, this)">$10</button>
+                <button class="amount-btn" onclick="selectAmount(25, this)">$25</button>
+                <button class="amount-btn active" onclick="selectAmount(50, this)">$50</button>
+                <button class="amount-btn" onclick="selectAmount(100, this)">$100</button>
+              </div>
+              <div style="display:flex;align-items:center;gap:0.5rem">
+                <span style="font-size:15px;color:var(--ink-mid)">$</span>
+                <input type="number" id="custom-amount" placeholder="Custom amount" min="1"
+                  style="flex:1;padding:10px 14px;font-size:14px;font-family:var(--font-body);background:var(--surface);border:0.5px solid var(--border-mid);border-radius:var(--radius-sm);color:var(--ink);outline:none"
+                  oninput="handleCustomAmount(this.value)">
+              </div>
+            </div>
+
+            <!-- Pending notice -->
+            <div style="background:var(--amber-light);border-radius:var(--radius-sm);padding:1rem 1.25rem;margin-bottom:1.25rem;display:flex;gap:10px;align-items:flex-start">
+              <span style="font-size:16px;flex-shrink:0">🔒</span>
+              <div>
+                <p style="font-size:13px;font-weight:600;color:#633806;margin-bottom:0.25rem">Online donations coming soon</p>
+                <p style="font-size:13px;color:#633806;line-height:1.55">Human Unity Trust is in the process of obtaining an EIN as a foreign trust. Secure online donations will be enabled upon completion. <a href="get-involved.html" style="color:var(--amber)">Join the network</a> to be notified.</p>
+              </div>
+            </div>
+
+            <button disabled style="width:100%;padding:13px;background:#CCC;color:white;border:none;border-radius:var(--radius-pill);font-size:15px;font-weight:600;font-family:var(--font-body);cursor:not-allowed">
+              Donate — coming soon
+            </button>
+
+            <p style="font-size:12px;color:var(--ink-light);text-align:center;margin-top:1rem;line-height:1.6">
+              Human Unity Trust is a private trust organized under 8 USC 1101(a)(23). Consult a tax advisor regarding deductibility. <a href="privacy.html" style="color:var(--teal)">Privacy policy</a>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Member giving CTA -->
+        <div style="background:var(--teal-light);border-radius:var(--radius);padding:1.5rem;margin-top:1rem;display:flex;gap:1rem;align-items:center">
+          <div style="flex:1">
+            <p style="font-weight:600;color:var(--teal-dark);font-size:15px;margin-bottom:0.25rem">Member? Donate with your name.</p>
+            <p style="font-size:13px;color:var(--teal-mid);line-height:1.55">Members can donate to specific chapters, events, and projects — and track giving history from their profile.</p>
+          </div>
+          <a href="members/login.html" class="btn btn-primary" style="white-space:nowrap;flex-shrink:0">Sign in →</a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div style="display:flex;flex-direction:column;gap:1.25rem">
+        <div style="background:var(--surface);border-radius:var(--radius);padding:1.75rem">
+          <h4 style="margin-bottom:0.75rem">Where your money goes</h4>
+          <div style="display:flex;flex-direction:column;gap:0.75rem">
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:10px;height:10px;border-radius:2px;background:#1D9E75;flex-shrink:0;margin-top:4px"></div>
+              <div><p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px">Project costs</p><p style="font-size:13px;color:var(--ink-mid)">Community improvement projects run by local chapters.</p></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:10px;height:10px;border-radius:2px;background:#534AB7;flex-shrink:0;margin-top:4px"></div>
+              <div><p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px">Event costs</p><p style="font-size:13px;color:var(--ink-mid)">Venues, materials, and logistics for chapter gatherings.</p></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:10px;height:10px;border-radius:2px;background:#BA7517;flex-shrink:0;margin-top:4px"></div>
+              <div><p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px">General chapter costs</p><p style="font-size:13px;color:var(--ink-mid)">Ongoing operating expenses for active chapters.</p></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:10px;height:10px;border-radius:2px;background:#0C447C;flex-shrink:0;margin-top:4px"></div>
+              <div><p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px">Initiative costs</p><p style="font-size:13px;color:var(--ink-mid)">Conflict Bridge training, Leadership Lab, Common Story, and Coordination Layer development.</p></div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start">
+              <div style="width:10px;height:10px;border-radius:2px;background:#D85A30;flex-shrink:0;margin-top:4px"></div>
+              <div><p style="font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px">Administrative costs</p><p style="font-size:13px;color:var(--ink-mid)">Network infrastructure, legal, and coordination overhead.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Prior year chart -->
+        <div style="background:white;border-radius:var(--radius);border:0.5px solid var(--border);padding:1.75rem">
+          <p style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-light);margin-bottom:0.25rem">Prior fiscal year</p>
+          <div id="public-fund-chart"></div>
+          <p style="font-size:12px;color:var(--ink-light);margin-top:1rem;line-height:1.5">Figures represent actual disbursements from Human Unity Trust for the prior fiscal year as reported in the annual trust report.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">Human Unity</div>
+        <p>A framework for redirecting social energy toward collective construction. Not a political party. Not an ideology. A system.</p>
+      </div>
+      <div class="footer-col">
+        <h5>The work</h5>
+        <a href="problem.html">The problem</a>
+        <a href="framework.html">The framework</a>
+        <a href="initiatives.html">Initiatives</a>
+        <a href="vision.html">Vision</a>
+      </div>
+      <div class="footer-col">
+        <h5>Participate</h5>
+        <a href="get-involved.html">Get involved</a>
+        <a href="get-involved.html#chapters">Find a chapter</a>
+        <a href="start-a-chapter.html">Start a chapter</a>
+        <a href="donate.html">Donate</a>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="sms-terms.html">SMS terms</a>
+        <a href="/cdn-cgi/l/email-protection#375f525b5b58775f425a565942595e434e194244">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Litzenberg &amp; Associates LLC. All rights reserved.</span>
+      <div style="display:flex;gap:1.5rem">
+        <a href="privacy.html">Privacy</a>
+        <a href="sms-terms.html">SMS terms</a>
+        <a href="/cdn-cgi/l/email-protection#89e1ece5e5e6c9e1fce4e8e7fce7e0fdf0a7fcfa">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .amount-btn {
+    padding:10px 8px;background:var(--surface);border:0.5px solid var(--border-mid);
+    border-radius:var(--radius-sm);font-size:14px;font-weight:600;font-family:var(--font-body);
+    color:var(--ink-mid);cursor:pointer;transition:all 0.15s;
+  }
+  .amount-btn:hover { border-color:var(--teal);color:var(--teal); }
+  .amount-btn.active { background:var(--teal);border-color:var(--teal);color:white; }
+</style>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/fund-chart.js"></script>
+<script src="js/main.js"></script>
+<script>
+  var selectedAmount = 50;
+
+  function selectAmount(amount, btn) {
+    selectedAmount = amount;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('custom-amount').value = '';
+  }
+
+  function handleCustomAmount(val) {
+    selectedAmount = parseFloat(val) || 0;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+  }
+
+  // Load prior year report and render chart
+  fetch('/data/annual-report.json')
+    .then(function(r) { return r.json(); })
+    .then(function(report) {
+      if (!report.fiscalYear) {
+        document.getElementById('public-fund-chart').innerHTML =
+          '<p style="font-size:13px;color:var(--ink-light);text-align:center;padding:1rem 0">Annual report not yet published.</p>';
+        return;
+      }
+      HUFundChart.render('public-fund-chart', {
+        breakdown: report.breakdown
+      }, {
+        title: 'FY' + report.fiscalYear + ' disbursements',
+        totalLabel: 'Total raised FY' + report.fiscalYear,
+        showTotal: true
+      });
+    })
+    .catch(function() {
+      document.getElementById('public-fund-chart').innerHTML =
+        '<p style="font-size:13px;color:var(--ink-light);text-align:center;padding:1rem 0">Report unavailable.</p>';
+    });
+</script>
+</body>
+</html>

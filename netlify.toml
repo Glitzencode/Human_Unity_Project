@@ -6,3 +6,9 @@
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
+
+[functions."check-proposal-windows"]
+  schedule = "0 * * * *"
+
+[functions."check-disbursement-windows"]
+  schedule = "0 * * * *"
