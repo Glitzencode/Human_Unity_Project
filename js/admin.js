@@ -1,4 +1,4 @@
-let _user = null;
+  let _user = null;
   let _chapters = [], _chapSha = null;
   let _events = [],   _evtSha  = null;
   let _proposals = [], _propSha = null;
@@ -339,3 +339,63 @@ let _user = null;
     }
     setBtnLoading(btn, false);
   }
+
+  // ── Load year-end report ──
+  async function loadYearEnd() {
+    try {
+      const res = await fetch('/data/annual-report.json');
+      const report = await res.json();
+      const el = document.getElementById('yearend-current');
+      if (!el) return;
+      if (!report.fiscalYear) {
+        el.innerHTML = '<p style="font-size:13px;color:var(--ink-light)">No report published yet.</p>';
+        return;
+      }
+      el.innerHTML =
+        '<p style="font-size:12px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:0.5rem">Current published report</p>' +
+        '<p style="font-size:15px;font-weight:600;color:var(--ink)">FY' + report.fiscalYear + ' — $' + (report.totalRaised || 0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) + ' raised</p>' +
+        (report.narrative ? '<p style="font-size:13px;color:var(--ink-mid);margin-top:0.25rem">' + report.narrative + '</p>' : '') +
+        '<p style="font-size:12px;color:var(--ink-light);margin-top:0.25rem">Published ' + new Date(report.publishedAt).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'}) + '</p>';
+    } catch(e) {
+      const el = document.getElementById('yearend-current');
+      if (el) el.innerHTML = '<p style="font-size:13px;color:var(--ink-light)">Could not load current report.</p>';
+    }
+  }
+
+  // ── Save year-end report ──
+  async function saveYearEnd(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-save-yearend');
+    setBtnLoading(btn, true);
+
+    const report = {
+      fiscalYear:   parseInt(document.getElementById('ye-year').value),
+      totalRaised:  parseFloat(document.getElementById('ye-total').value) || 0,
+      breakdown: {
+        projectCosts:        parseFloat(document.getElementById('ye-project').value)   || 0,
+        eventCosts:          parseFloat(document.getElementById('ye-event').value)     || 0,
+        chapterCosts:        parseFloat(document.getElementById('ye-chapter').value)   || 0,
+        initiativeCosts:     parseFloat(document.getElementById('ye-initiative').value)|| 0,
+        administrativeCosts: parseFloat(document.getElementById('ye-admin').value)     || 0,
+      },
+      narrative:   document.getElementById('ye-narrative').value.trim(),
+      publishedAt: new Date().toISOString(),
+    };
+
+    try {
+      await adminWrite('data/annual-report.json', report, `Publish year-end report: FY${report.fiscalYear}`);
+      showMsg('msg-yearend', '✓ FY' + report.fiscalYear + ' report published to public donate page.', 'success');
+      loadYearEnd();
+    } catch(err) {
+      showMsg('msg-yearend', err.message, 'error');
+    }
+    setBtnLoading(btn, false);
+  }
+
+  // Call loadYearEnd when tab is visible
+  document.addEventListener('DOMContentLoaded', function() {
+    var yearendBtn = document.querySelector('[onclick*="yearend"]');
+    if (yearendBtn) {
+      yearendBtn.addEventListener('click', loadYearEnd);
+    }
+  });
